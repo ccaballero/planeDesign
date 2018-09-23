@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+# Activar RewriteEngine
+
+RewriteEngine on
+
+
+RewriteRule ^usuarios(.*)?$ users.php
+RewriteRule ^publicaciones(.*)?$ posting.php
+RewriteRule ^mensajes(.*)?$ mensajes.php
+RewriteRule ^configuracion(.*)?$ configuracion.php
+
+
+
+
+RewriteRule ^logout(.*)?$ logout.php
+
+
+</IfModule>
