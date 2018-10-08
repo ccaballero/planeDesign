@@ -1,0 +1,53 @@
+version: '3'
+services:
+    mysql:
+        container_name: mysql
+        image: mysql:8.0.12
+        hostname: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        networks:
+            - draft
+        volumes:
+            - ./sql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+            #- mysql-data:/var/lib/mysql
+        env_file:
+            - ./environment
+        ports:
+            - '127.0.0.1:3306:3306'
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin/phpmyadmin:latest
+        hostname: phpmyadmin
+        restart: always
+        networks:
+            - draft
+        depends_on:
+            - mysql
+        env_file:
+            - ./environment
+        ports:
+            - '127.0.0.1:8080:80'
+    php:
+        container_name: php
+        image: draft/php:latest
+        hostname: php
+        restart: always
+        networks:
+            - draft
+        depends_on:
+            - mysql
+            - phpmyadmin
+        env_file:
+            - ./environment
+        ports:
+            - '127.0.0.1:9000:80'
+        volumes:
+            - ./php:/var/www/html
+volumes:
+    mysql-data:
+        external: true
+networks:
+    draft:
+        external: true
+

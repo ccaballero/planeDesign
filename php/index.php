@@ -68,7 +68,6 @@ if (isset($_SESSION['idusuario'])){header("Location: escritorio");}
         <input type="password" class="form-control" placeholder="'.SAULANG19.'" name="saupassword">
       </div>
       <p></p>
-
       <button type="submit" class="btn btn-default btn-block"><i class="fa fa-chevron-right"></i> '.SAULANG17.'</button>            
     </form>';
     }else{
@@ -110,3 +109,4 @@ if (isset($_SESSION['idusuario'])){header("Location: escritorio");}
     <script src="sau-content/js/sau3.js"></script>   
   </body>
 </html>
+

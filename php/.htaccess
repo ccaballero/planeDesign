@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+# Activar RewriteEngine
+RewriteEngine on
+
+
+RewriteRule ^escritorio(.*)?$ sau-panel.php
+RewriteRule ^registrarme(.*)?$ sau-register.php
+RewriteRule ^profile(.*)?$ sau-profile.php?perma=$1
+RewriteRule ^messages(.*)?$ sau-messages.php
+RewriteRule ^config(.*)?$ sau-me.php
+RewriteRule ^registro(.*)?$ sau-register.php
+RewriteRule ^recuperar(.*)?$ sau-recovery.php
+RewriteRule ^search(.*)?$ sau-search.php
+RewriteRule ^mycontacts(.*)?$ sau-contacts.php
+RewriteRule ^sauactive(.*)?$ activar.php
+
+
+
+
+
+# Publicaciones
+RewriteRule ^logout(.*)?$ logout.php
+RewriteRule ^uploadimg(.*)?$ sau-includes/profile-process.php
+RewriteRule ^postcomment(.*)?$ sau-includes/sau-comment-process.php
+RewriteRule ^postpub(.*)?$ sau-includes/sau-post-process.php
+
+</IfModule>

@@ -7,6 +7,8 @@
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.6.8
 
+USE `draft`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `sau3`
+-- Base de datos: `draft`
 --
 
 -- --------------------------------------------------------

@@ -16,10 +16,10 @@
 ////////////////////////////////////////////////////////
 
 // Datos del Hosting para la conexion a la base de datos
-define('HOST', 'localhost');
+define('HOST', '127.0.0.1');
 define('DBUSER', 'root');
-define('DBPASSWORD', '');
-define('DBNAME', 'sau3');
+define('DBPASSWORD', 'asdf');
+define('DBNAME', 'mydatabase');
 
 
 // Nota: Debes de cambiar estos dos, ya que con estos dos generas
@@ -63,4 +63,4 @@ define('SAULANGDEF','1');
 // 3 = SAU Black
 // 4 = SAU Gray
 // 5 = SAU Red
-define('SAUSTYLE','1');
+define('SAUSTYLE','3');
