@@ -1,6 +1,5 @@
 <?php
-
-require_once 'sau-conexion.php';
+require_once __DIR__.'/sau-conexion.php';
 session_start();
 
 class Login {

@@ -1,7 +1,6 @@
 <?php
-
-require_once 'sau-admin/sau-login.php';
-require_once 'sau-admin/phpmailer/PHPMailerAutoload.php'; 
+require_once __DIR__.'/../sau-admin/sau-login.php';
+require_once __DIR__.'/../sau-admin/phpmailer/PHPMailerAutoload.php'; 
 
 // Token del usuario
 function sau3token(){
@@ -183,9 +182,9 @@ function getidperma($permalink){
 
 function saulanger($lang){
     if ($lang == 1){
-        include 'sau-includes/langs/spanish.lang.php';
+        include __DIR__.'/langs/spanish.lang.php';
     }elseif ($lang == 2){
-        include 'sau-includes/langs/english.lang.php';
+        include __DIR__.'/langs/english.lang.php';
     }
 }
 
@@ -790,7 +789,7 @@ function changepermalink(){
     }
 }
 
-function congifurationmail(){
+function configurationmail(){
     $conexion = Conexion::singleton_conexion();
     $SQL = 'SELECT * FROM config WHERE idconfig = 1';
     $sentence = $conexion -> prepare($SQL);
@@ -845,7 +844,7 @@ function register($nombre,$apellido,$email,$password){
         $versentence -> bindParam(':fecha',$regdate,PDO::PARAM_STR);
         $versentence -> execute();
 
-        $dataexplode = congifurationmail();
+        $dataexplode = configurationmail();
         $parsedata = explode("|", $dataexplode);
 
         $htmlhead = '<!DOCTYPE html><html><body>';
@@ -970,7 +969,7 @@ function generateRandomString($length = 6) {
     return $randomString;
 }
 
-function congifurationmailrecover(){
+function configurationmailrecover(){
     $conexion = Conexion::singleton_conexion();
     $SQL = 'SELECT * FROM config WHERE idconfig = 1';
     $sentence = $conexion -> prepare($SQL);
@@ -1010,7 +1009,7 @@ function recoverypass($email){
         $stnpass -> bindParam(':email', $stripemail, PDO::PARAM_STR);
         $stnpass -> execute();
 
-        $dataexplode = congifurationmailrecover();
+        $dataexplode = configurationmailrecover();
         $parsedata = explode("|", $dataexplode);
 
         $htmlhead = '<!DOCTYPE html><html><body>';

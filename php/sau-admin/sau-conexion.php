@@ -1,7 +1,6 @@
 <?php
-
 error_reporting(E_ALL ^ E_NOTICE);
-require_once 'sau-config.php';
+require_once __DIR__.'/../sau-config.php';
 
 class Conexion {
     private static $instancia;
