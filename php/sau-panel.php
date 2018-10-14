@@ -1,9 +1,9 @@
 <?php
     require_once 'sau-includes/sau-functions.php';
     session_start();
-    if (isset($_SESSION['idusuario'])){
-    }else{
-      header("Location: logout");
+
+    if (!isset($_SESSION['idusuario'])) {
+        header('Location: logout');
     }
 ?>
 <!DOCTYPE html>
@@ -14,52 +14,74 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo SITETITLE; ?></title>
 
-        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+        <link rel="stylesheet" href="css/sau.css" />
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/responsive.css" />
+        <?php getpreference($_SESSION['idusuario']); ?>
     </head>
     <body>
-        <div id="preloader">
-            <div class="mosh-preloader"></div>
-        </div>
-
-<!--FROM HERE-->
-        <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <i class="fa fa-chevron-down"></i>
-                        </button>
-                        <a class="navbar-brand" href="escritorio"><i class="fa fa-clone"></i> <?php echo SITETITLE; ?></a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <form class="navbar-form navbar-right" role="search" method="GET" action="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="find" placeholder="<?php echo SAULANG5; ?>">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                                </span>
-                            </div>
-                        </form>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="escritorio"><i class="fa fa-home"></i> <?php echo SAULANG1; ?></a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-envelope-o"></i> <?php echo SAULANG3; ?>
-                                    <?php messagesnoread(); ?>
-                                </a>
-                                <ul id="messagesul" class="dropdown-menu">
-                                    <?php messagelistli(); ?>
-                                </ul>
-                            </li>
-                            <li><a href="config"><i class="fa fa-cog"></i> <?php echo SAULANG4; ?></a></li>
-                            <?php isadmin($_SESSION['ranker']); ?>
-                            <li><a href="logout"><i class="fa fa-sign-out"></i> <?php echo SAULANG2; ?></a></li>
-                        </ul>
+        <header class="header_area">
+            <div class="container-fluid h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="menu_area h-100">
+                            <nav class="navbar h-100 navbar-expand-lg align-items-center">
+                                <a class="navbar-brand" href="index.html"><img src="img/core-img/logo.png"></a>
+                                <button class="navbar-toggler" type="button"
+                                        data-toggle="collapse"
+                                        data-target="#mosh-navbar"
+                                        aria-controls="mosh-navbar"
+                                        aria-expanded="false"
+                                        aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
+                                    <ul class="navbar-nav animated" id="nav">
+                                        <li class="nav-item active"><a class="nav-link" href="escritorio"><?php echo SAULANG1; ?></a></li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle"
+                                               href="#"
+                                               role="button"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"><?php echo SAULANG3; ?><?php messagesnoread(); ?></a>
+                                            <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                                <?php messagelistli(); ?>
+                                            </div>
+                                        </li>
+                                        <?php isadmin($_SESSION['ranker']); ?>
+                                        <li class="nav-item"><a class="nav-link" href="config"><?php echo SAULANG4; ?></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="plane">Graficar Plano</a></li>
+                                    </ul>
+                                    <div class="search-form-area animated">
+                                        <form role="search" action="search" method="get">
+                                            <input type="search" name="search" id="search" placeholder="<?php echo SAULANG5; ?>">
+                                            <button type="submit" class="d-none"><img src="img/core-img/search-icon.png" alt="Search"></button>
+                                        </form>
+                                    </div>
+                                    <div class="search-button">
+                                        <a href="#" id="search-btn"><img src="img/core-img/search-icon.png" alt="Search"></a>
+                                    </div>
+                                    <div class="login-register-btn">
+                                        <a href="logout"><?php echo SAULANG2; ?></a>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </header>
+        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcumb.png);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="container">
             <div id="leftbar" class="col-sm-3">
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-user"></i> <?php thename($_SESSION['idusuario']); ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
@@ -107,29 +129,24 @@
                 </div>
             </div>
         </div>
-<!--TO HERE-->
         <script src="js/jquery-2.2.4.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/active.js"></script>
+        <script src="sau-content/js/jquery.validate.min.js"></script>
+        <script src="sau-content/js/moment-with-locales.js"></script>
+        <script src="sau-content/js/bootstrap-datetimepicker.js"></script>
+        <script src="sau-content/js/additional-methods.min.js"></script>
 
-        <!--<script src="sau-content/js/jquery.min.js"></script>-->
-        <!--<script src="sau-content/js/bootstrap.min.js"></script>-->
-        <!--script src="sau-content/js/jquery.validate.min.js"></script>-->
-        <!--script src="sau-content/js/moment-with-locales.js"></script>-->
-        <!--script src="sau-content/js/bootstrap-datetimepicker.js"></script>-->
-        <!--<script src="sau-content/js/jquery.validate.min.js"></script>-->
-        <!--<script src="sau-content/js/additional-methods.min.js"></script>-->
-
-        <!--<script type="text/javascript">
-            var messageerror1 = "<?php //echo SAULANG15;?>";
-            var messageerror2 = "<?php //echo SAULANG16;?>";
+        <script type="text/javascript">
+            var messageerror1 = "<?php echo SAULANG15;?>";
+            var messageerror2 = "<?php echo SAULANG16;?>";
         </script>
         <script src="sau-content/js/sau3.js"></script>
         <script src="sau-content/js/sau3member.js"></script>
 
-        <?php //sau3token(); ?>-->
+        <?php sau3token(); ?>
     </body>
 </html>
 

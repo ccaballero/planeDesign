@@ -403,13 +403,14 @@ img {
 .menu_area #nav .nav-link:hover,
 .menu_area #nav .nav-item.active .nav-link,
 .menu_area .dropdown-item:hover {
-    color: #4a7aec;
+    color: #09276f;
 }
 
 .login-register-btn a {
-    color: #4a7aec;
+    color: #09276f;
     display: inline-block;
     font-weight: 500;
+    font-size: 15px;
 }
 
 .login-register-btn a:hover {
@@ -454,6 +455,10 @@ img {
     background-color: transparent;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
+}
+
+.search-form-area #search::placeholder {
+    color: white;
 }
 
 /* Sticky CSS */
@@ -1011,10 +1016,11 @@ span.accor-open {
 -------------------- */
 
 .mosh-breadcumb-area {
-    height: 500px;
+    height: 280px;
     width: 100%;
     position: relative;
     z-index: 1;
+    background-position: bottom center;
 }
 
 .bradcumbContent h2 {

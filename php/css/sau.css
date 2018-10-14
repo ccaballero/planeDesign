@@ -1,22 +1,17 @@
-@import url('sau-content/css/bootstrap-datetimepicker.css');
-@import url('sau-content/css/font-awesome.min.css');
-@import url('sau-content/css/bootstrap.min.css');
-@import url('sau-content/css/loaders.min.css');
-@import url('sau-content/css/responsive.css');
-@import url('sau-content/css/hover-min.css');
-@import url('sau-content/css/animate.css');
-
-body{
-    font-family: 'Source Sans Pro', sans-serif;
-    background: #ededed;
-}
+@import url('/sau-content/css/bootstrap-datetimepicker.css');
+@import url('/sau-content/css/font-awesome.min.css');
+@import url('/sau-content/css/bootstrap.min.css');
+@import url('/sau-content/css/loaders.min.css');
+@import url('/sau-content/css/responsive.css');
+@import url('/sau-content/css/hover-min.css');
+@import url('/sau-content/css/animate.css');
 
 a,a:hover,a:focus,a:active{
     text-decoration: none;
 }
 
 a,button{
-	-moz-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
     -webkit-transition: all .2s ease-in;
     transition: all .2s ease-in;
@@ -31,20 +26,17 @@ a,button{
     background: #fff;
     float: left;
     width: 100%; 
-    display: none;       
+    display: none;
 }
-
 
 .profile-image{
     border-radius: 50%;
 }
 
-
-
 #contactos a{
     display: inline-block;
     margin-bottom: 8px;
-    float: left;        
+    float: left;
 }
 
 #contactos a > img{
@@ -52,22 +44,20 @@ a,button{
 }
 
 .message-icon > img {
- min-height: 40px;
- max-height: 40px;
- border-radius: 50%;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 50%;
 }
-
 
 .message-footer a{
     color: #fff;
     margin-right: 10px;
     text-decoration: none;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
-
 .nopadding{
-	padding: 0px;
+    padding: 0px;
 }
 
 .nomargin{
@@ -84,16 +74,14 @@ a,button{
     padding: 15px 10px 0px;
 }
 
-
-/* SAU */
 #sau-container{
-	margin-top: 30px;
+    margin-top: 30px;
 }
 
 .login-link-content{
     padding: 0px;
     margin-top: 5%;
-    text-align: right;	
+    text-align: right;
 }
 
 .login-link-content a{
@@ -104,12 +92,11 @@ a,button{
     font-size: 12px;
 }
 
-
 .bootstrap-datetimepicker-widget *{
-	-moz-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
     -webkit-transition: all .2s ease-in;
-    transition: all .2s ease-in;	
+    transition: all .2s ease-in;
 }
 
 
@@ -426,3 +413,4 @@ a,button{
 .avisodisable i{
     display: block;
 }
+

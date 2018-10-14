@@ -2,6 +2,7 @@
 
 require_once 'sau-conexion.php';
 session_start();
+
 class Login {
     private static $instancia;
     private $dbh;
