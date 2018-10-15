@@ -64,3 +64,6 @@ define('SAULANGDEF','1');
 // 4 = SAU Gray
 // 5 = SAU Red
 define('SAUSTYLE','3');
+
+define('BASE','http://localhost/bass/');
+

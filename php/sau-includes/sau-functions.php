@@ -150,15 +150,15 @@ function getpreference($iduser){
 
 function getstyle($style){
     if($style == 1){
-        echo'<link href="sau-content/sau-default.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-default.css" rel="stylesheet">';
     }elseif ($style == 2) {
-        echo'<link href="sau-content/sau-blue.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-blue.css" rel="stylesheet">';
     }elseif ($style == 3) {
-        echo'<link href="sau-content/sau-black.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-black.css" rel="stylesheet">';
     }elseif ($style == 4) {
-        echo'<link href="sau-content/sau-gray.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-gray.css" rel="stylesheet">';
     }elseif ($style == 5) {
-        echo'<link href="sau-content/sau-red.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-red.css" rel="stylesheet">';
     }
 }
 
@@ -199,7 +199,7 @@ function getprofileimg($iduser){
     if (!empty($results)) {
         foreach ($results as $key){
             if($key['profile'] == 1){
-                echo'<img class="profile-image" src="sau-content/images/profile-normal.png">';
+                echo'<img class="profile-image" src="img/profile-normal.png">';
             }else{
                 echo'<img class="profile-image" src="'.$key['profile'].'">';
             }
@@ -218,10 +218,10 @@ function isadmin($ranker){
                aria-haspopup="true"
                aria-expanded="false">'.SAULANGA.'</a>
             <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                <a class="dropdown-item" href="/admin/usuarios">Usuarios</a>
-                <a class="dropdown-item" href="/admin/publicaciones">Publicaciones</a>
-                <a class="dropdown-item" href="/admin/mensajes">Mensajes</a>
-                <a class="dropdown-item" href="/admin/configuracion">Configuración</a>
+                <a class="dropdown-item" href="admin/usuarios">Usuarios</a>
+                <a class="dropdown-item" href="admin/publicaciones">Publicaciones</a>
+                <a class="dropdown-item" href="admin/mensajes">Mensajes</a>
+                <a class="dropdown-item" href="admin/configuracion">Configuración</a>
             </div>
         </li>';
     }
@@ -298,7 +298,7 @@ function getmyposts($iduser){
             <div class="message-icon pull-left">';
 
             if ($key['picture'] == 1) {
-                echo '<img src="sau-content/images/profile-small.png">';
+                echo '<img src="img/profile-small.png">';
             }else{
                 $finalprofile = str_replace('normal-', 'small-', $key['picture']);
                 echo'<img src="'.$finalprofile.'">';
@@ -377,7 +377,7 @@ function comments($post){
             <div class="message-icon pull-left">';
 
             if ($key['picture'] == 1) {
-                echo '<img src="sau-content/images/profile-small.png">';
+                echo '<img src="img/profile-small.png">';
             }else{
                 $finalprofile = str_replace('normal-', 'small-', $key['picture']);
                 echo'<img src="'.$finalprofile.'">';
@@ -461,7 +461,7 @@ function mycontacs($iduser){
     }else{
         foreach($resultado as $key){
             if($key['profile'] == 1){
-                $profile = '<img src="sau-content/images/profile-small.png">';
+                $profile = '<img src="img/profile-small.png">';
             }else{
                 $profileparse = str_replace('normal-', 'small-', $key['profile']);
                 $profile = '<img src="'.$profileparse.'">';
@@ -500,7 +500,7 @@ function follow($iduser){
     }else{
         foreach($resultado as $key){
             if($key['profile'] == 1){
-                $profile = '<img src="sau-content/images/profile-small.png">';
+                $profile = '<img src="img/profile-small.png">';
             }else{
                 $profileparse = str_replace('normal-', 'small-', $key['profile']);
                 $profile = '<img src="'.$profileparse.'">';
@@ -531,7 +531,7 @@ function followers($iduser){
     }else{
         foreach($resultado as $key){
             if($key['profile'] == 1){
-                $profile = '<img src="sau-content/images/profile-small.png">';
+                $profile = '<img src="img/profile-small.png">';
             }else{
                 $profileparse = str_replace('normal-', 'small-', $key['profile']);
                 $profile = '<img src="'.$profileparse.'">';
@@ -575,7 +575,7 @@ function messagelistli(){
     }else{
         foreach ($resultados as $key){
             if($key['profile'] == 1){
-                $profile = '<img class="messageprofileradius" src="sau-content/images/profile-small.png">';
+                $profile = '<img class="messageprofileradius" src="img/profile-small.png">';
             }else{
                 $profileparse = str_replace('normal-', 'small-', $key['profile']);
                 $profile = '<img class="messageprofileradius" src="'.$profileparse.'">';
@@ -905,7 +905,7 @@ function finder($var,$page){
     }else{
         foreach ($resultados as $key){
             if ($key['profile'] == 1){
-                $imagen = '<img class="borderimgsearch" src="sau-content/images/profile-small.png">';
+                $imagen = '<img class="borderimgsearch" src="img/profile-small.png">';
             }else{
                 $finalprofile = str_replace('normal-', 'small-', $key['profile']);
                 $imagen = '<img class="borderimgsearch" src="'.$finalprofile.'">';

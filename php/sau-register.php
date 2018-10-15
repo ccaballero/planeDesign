@@ -128,21 +128,15 @@ if (isset($_SESSION['idusuario'])){header("Location: escritorio");}
 <!-- ## CONTAINER ## -->
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="sau-content/js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="sau-content/js/bootstrap.min.js"></script>
-    <!-- Validation -->
-    <script src="sau-content/js/jquery.validate.min.js"></script>
-    <!-- DateTimePicker -->
-    <script src="sau-content/js/moment-with-locales.js"></script>
-    <script src="sau-content/js/bootstrap-datetimepicker.js"></script>
-    <!-- Script Mesagges -->
+    <script src="js/sau/jquery.min.js"></script>
+    <script src="js/sau/bootstrap.min.js"></script>
+    <script src="js/sau/jquery.validate.min.js"></script>
+    <script src="js/sau/moment-with-locales.js"></script>
+    <script src="js/sau/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript">
          var messageerror1 = "<?php echo SAULANG15;?>";
          var messageerror2 = "<?php echo SAULANG16;?>";
     </script> 
-    <!-- SAU 3 -->
-    <script src="sau-content/js/sau3.js"></script>   
+    <script src="js/sau/sau3.js"></script>   
   </body>
 </html>

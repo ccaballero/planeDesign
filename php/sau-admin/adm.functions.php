@@ -71,15 +71,15 @@ function saulanger($lang){
 
 function getstyle($style){
     if($style == 1){
-        echo'<link href="sau-content/sau-default.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-default.css" rel="stylesheet">';
     }elseif ($style == 2) {
-        echo'<link href="sau-content/sau-blue.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-blue.css" rel="stylesheet">';
     }elseif ($style == 3) {
-        echo'<link href="sau-content/sau-black.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-black.css" rel="stylesheet">';
     }elseif ($style == 4) {
-        echo'<link href="sau-content/sau-gray.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-gray.css" rel="stylesheet">';
     }elseif ($style == 5) {
-        echo'<link href="sau-content/sau-red.css" rel="stylesheet">';
+        echo'<link href="css/custom/sau-red.css" rel="stylesheet">';
     }
 }
 
@@ -94,10 +94,10 @@ function isadmin($ranker){
                aria-haspopup="true"
                aria-expanded="false">'.SAULANGA.'</a>
             <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                <a class="dropdown-item" href="/admin/usuarios">Usuarios</a>
-                <a class="dropdown-item" href="/admin/publicaciones">Publicaciones</a>
-                <a class="dropdown-item" href="/admin/mensajes">Mensajes</a>
-                <a class="dropdown-item" href="/admin/configuracion">Configuración</a>
+                <a class="dropdown-item" href="admin/usuarios">Usuarios</a>
+                <a class="dropdown-item" href="admin/publicaciones">Publicaciones</a>
+                <a class="dropdown-item" href="admin/mensajes">Mensajes</a>
+                <a class="dropdown-item" href="admin/configuracion">Configuración</a>
             </div>
         </li>';
     }
@@ -129,7 +129,7 @@ function messagelistli(){
     }else{
         foreach ($resultados as $key){
             if($key['profile'] == 1){
-                $profile = '<img class="messageprofileradius" src="sau-content/images/profile-small.png">';
+                $profile = '<img class="messageprofileradius" src="img/profile-small.png">';
             }else{
                 $profileparse = str_replace('normal-', 'small-', $key['profile']);
                 $profile = '<img class="messageprofileradius" src="'.$profileparse.'">';
@@ -438,7 +438,7 @@ if(empty($resultado)){
 foreach($resultado as $key){
 
 if($key['profile'] == 1){
-$profile = '<img src="sau-content/images/profile-small.png">';
+$profile = '<img src="img/profile-small.png">';
 }else{
 $profileparse = str_replace('normal-', 'small-', $key['profile']);
 $profile = '<img src="'.$profileparse.'">';
@@ -508,7 +508,7 @@ function userstableadm($page){
             $fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['registro'])));
 
             if ($key['profile'] == 1){
-                $profile = '<img class="profileimgtableadmin" src="../sau-content/images/profile-small.png" >';
+                $profile = '<img class="profileimgtableadmin" src="img/profile-small.png" >';
             }else{
                 $profile = '<img class="profileimgtableadmin" src="../'.str_replace('normal', 'small', $key['profile']).'" >';
             }
@@ -609,13 +609,13 @@ unlink('../'.$twoimg);
 
 
 //comprobamos si el archivo ha subido y lo movemos a una ruta temporal
-if ($archive && move_uploaded_file($_FILES['imageprofile']['tmp_name'],"../sau-content/images/members/".$archive)){
+if ($archive && move_uploaded_file($_FILES['imageprofile']['tmp_name'],"img/members/".$archive)){
 
 
 }  
 
 // Creamos ruta del temporal
-$temporal = '../sau-content/images/members/'.$archive;
+$temporal = 'img/members/'.$archive;
 
 // Creamos un alfanumerico aleatorio.
 $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -628,12 +628,12 @@ $string .= $characters[rand(0, strlen($characters) - 1)];
 $date = date("Y-m-d");
 
 // Asignamos una ruta para el proceso de imagen 
-$ruta = '../sau-content/images/members/'.$string.$date.'.jpg';
-$rutasmall = '../sau-content/images/members/small-'.$string.$date.'.jpg';
-$small = '../sau-content/images/members/normal-'.$string.$date.'.jpg';
+$ruta = 'img/members/'.$string.$date.'.jpg';
+$rutasmall = 'img/members/small-'.$string.$date.'.jpg';
+$small = 'img/members/normal-'.$string.$date.'.jpg';
 
 // Asignamos una ruta para la base de datos
-$finalruta = 'sau-content/images/members/normal-'.$string.$date.'.jpg';
+$finalruta = 'img/members/normal-'.$string.$date.'.jpg';
 
 // Procesamos archivo para redimensionar
 smart_resize_image($temporal, null, 200, 200, false , $ruta, true , false ,100);

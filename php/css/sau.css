@@ -1,10 +1,10 @@
-@import url('/sau-content/css/bootstrap-datetimepicker.css');
-@import url('/sau-content/css/font-awesome.min.css');
-@import url('/sau-content/css/bootstrap.min.css');
-@import url('/sau-content/css/loaders.min.css');
-@import url('/sau-content/css/responsive.css');
-@import url('/sau-content/css/hover-min.css');
-@import url('/sau-content/css/animate.css');
+@import url('sau/bootstrap-datetimepicker.css');
+@import url('sau/font-awesome.min.css');
+@import url('sau/bootstrap.min.css');
+@import url('sau/loaders.min.css');
+@import url('sau/responsive.css');
+@import url('sau/hover-min.css');
+@import url('sau/animate.css');
 
 a,a:hover,a:focus,a:active{
     text-decoration: none;
