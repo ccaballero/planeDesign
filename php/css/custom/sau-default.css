@@ -1,4 +1,6 @@
-
+html {
+    font-size: 14px;
+}
 
 .navbar-default {
     background-color: #3c454f;

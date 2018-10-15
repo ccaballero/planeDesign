@@ -84,7 +84,11 @@ if (!isset($_SESSION['idusuario'])){
         <div class="container">
             <div id="leftbar" class="col-sm-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-user"></i> <?php thename($_SESSION['idusuario']); ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
+                    <div class="panel-heading">
+                        <i class="fa fa-user"></i>
+                        <?php thename($_SESSION['idusuario']); ?>
+                        <a class="collapse-block"><i class="fa fa-chevron-up"></i></a>
+                    </div>
                     <div class="panel-body text-center">
                         <div id="alertimg"><i class="fa fa-times"></i> <?php echo SAULANG22; ?></div>
                         <?php getprofileimg($_SESSION['idusuario']); ?>
@@ -134,10 +138,10 @@ if (!isset($_SESSION['idusuario'])){
         <script src="js/bootstrap.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/active.js"></script>
-        <script src="js/sau//jquery.validate.min.js"></script>
-        <script src="js/sau//moment-with-locales.js"></script>
-        <script src="js/sau//bootstrap-datetimepicker.js"></script>
-        <script src="js/sau//additional-methods.min.js"></script>
+        <script src="js/sau/jquery.validate.min.js"></script>
+        <script src="js/sau/moment-with-locales.js"></script>
+        <script src="js/sau/bootstrap-datetimepicker.js"></script>
+        <script src="js/sau/additional-methods.min.js"></script>
 
         <script type="text/javascript">
             var messageerror1 = "<?php echo SAULANG15;?>";

@@ -89,7 +89,7 @@ a,button{
     width: 100%;
     margin-bottom: 2px;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .bootstrap-datetimepicker-widget *{
@@ -121,7 +121,7 @@ a,button{
     padding: 2px 5px;
     color: #fff;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;    
 }
 
@@ -140,7 +140,7 @@ a,button{
     padding: 2px 5px;
     color: #fff;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;    
 }
 
@@ -228,7 +228,7 @@ a,button{
     padding: 1px 5px;
     margin-top: 4px;
     margin-bottom: 4px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     text-align: center;   
 }
@@ -407,7 +407,7 @@ a,button{
     border-radius: 4px;
     padding-top: 3%;
     padding-bottom: 3%;
-    font-size: 14px;    
+    font-size: 14px;
 }
 
 .avisodisable i{

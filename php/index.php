@@ -19,94 +19,101 @@ if (isset($_SESSION['idusuario'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title><?php echo SITETITLE.' - '.SAULANG17; ?></title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><?php echo SITETITLE.' - '.SAULANG17; ?></title>
+        <base href="<?php echo BASE; ?>"/>
 
-<!-- Bootstrap -->
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
-<link href="style.css" rel="stylesheet">
-<?php getstyle(SAUSTYLE); ?>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
+        <link rel="stylesheet" href="css/sau.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+        <?php getstyle(SAUSTYLE); ?>
+    </head>
+    <body>
+        <header class="header_area">
+            <div class="container-fluid h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="menu_area h-100">
+                            <nav class="navbar h-100 navbar-expand-lg align-items-center">
+                                <a class="navbar-brand" href="/"><img src="img/core-img/logo.png"></a>
+                                <button class="navbar-toggler" type="button"
+                                        data-toggle="collapse"
+                                        data-target="#mosh-navbar"
+                                        aria-controls="mosh-navbar"
+                                        aria-expanded="false"
+                                        aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
+                                    <div class="login-register-btn">
+                                        <a href="/"><?php echo SAULANG17; ?></a>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcumb.png);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                </div>
+            </div>
+        </div>
+        <section class="contact-area section_padding_100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-4 col-md-6">
+                    <?php $active = loginactive(); ?>
+                    <?php if ($active == 1) { ?>
+                        <div class="contact-form-area">
+                            <h2><?php echo SAULANG17; ?></h2>
+                            <form id="loginform" action="" method="post">
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="<?php echo SAULANG18; ?>" name="saumail" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control" placeholder="<?php echo SAULANG19; ?>" name="saupassword" />
+                                    </div>
+                                    <button class="btn mosh-btn mt-50" type="submit"><?php echo SAULANG17; ?></button>
+                                </div>
+                                <div class="btn-group-vertical col-sm-6 offset-md-6 login-link-content" role="group">
+                                    <a class="btn" href="registro"><?php echo SAULANG20; ?></a>
+                                    <a class="btn" href="recuperar"><?php echo SAULANG21; ?></a>
+                                </div>
+                            </form>
+                        </div>
+                    <?php }else{ ?>
+                        <div class="avisodisable col-sm-12">
+                            <i class="fa fa-ban fa-4x animated infinite flash" aria-hidden="true"></i>
+                            <?php echo SAULANG79; ?>
+                        </div>
+                    <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/active.js"></script>
+        <script src="js/sau/jquery.validate.min.js"></script>
+        <script src="js/sau/moment-with-locales.js"></script>
+        <script src="js/sau/bootstrap-datetimepicker.js"></script>
+        <script src="js/sau/additional-methods.min.js"></script>
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
-<body>
-
-
-<!-- ## CONTAINER ## -->
-<div id="sau-container" class="container">
-
-
-<div id="loginbox">
-<!--
-<div class="text-center">
-<img src="img/sauv3-logo.png">
-</div>
--->
-<!-- ## LOGIN ## -->
-<div class="panel panel-default">
-<div class="panel-heading"><i class="fa fa-angle-double-right"></i> <?php echo SAULANG17; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
-<div class="panel-body">
-
-
-<?php
-$active = loginactive();
-if ($active == 1){
-echo'
-<form id="loginform" method="POST" action="">
-<div class="input-group input-group-sm">
-<span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user"></i></span>
-<input type="text" class="form-control" placeholder="'.SAULANG18.'" name="saumail">
-</div>
-<p></p>    
-
-<div class="input-group input-group-sm">
-<span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-cog"></i></span>
-<input type="password" class="form-control" placeholder="'.SAULANG19.'" name="saupassword">
-</div>
-<p></p>
-<button type="submit" class="btn btn-default btn-block"><i class="fa fa-chevron-right"></i> '.SAULANG17.'</button>            
-</form>';
-}else{
-echo'
-<div class="avisodisable col-sm-12"><i class="fa fa-ban fa-4x animated infinite flash" aria-hidden="true"></i>'.SAULANG79.'</div>
-';
-}
-?>
-
-<div class="col-sm-12 login-link-content">
-<a href="registro"><?php echo SAULANG20; ?></a>
-<a href="recuperar"><?php echo SAULANG21; ?></a>
-</div> 
-
-</div>
-</div>
-<!-- ## LOGIN ## -->  
-</div>
-
-</div>
-<!-- ## CONTAINER ## -->
-
-
-<script src="js/sau/jquery.min.js"></script>
-<script src="js/sau/bootstrap.min.js"></script>
-<script src="js/sau/jquery.validate.min.js"></script>
-<script src="js/sau/moment-with-locales.js"></script>
-<script src="js/sau/bootstrap-datetimepicker.js"></script>    
-<script type="text/javascript">
-var messageerror1 = "<?php echo SAULANG15;?>";
-var messageerror2 = "<?php echo SAULANG16;?>";
-</script> 
-<!-- SAU 3 -->
-<script src="js/sau/sau3.js"></script>   
-</body>
+        <script type="text/javascript">
+            var messageerror1 = "<?php echo SAULANG15;?>";
+            var messageerror2 = "<?php echo SAULANG16;?>";
+        </script>
+        <script src="js/sau/sau3.js"></script>
+    </body>
 </html>
 
