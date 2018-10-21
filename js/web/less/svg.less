@@ -1,0 +1,306 @@
+.handle {
+    fill: #ffffff;
+    stroke: #ff0000;
+
+    &.axis {
+        stroke-dasharray: 3,2;
+        stroke-width: 1;
+    }
+    &.translate, &.centre, &.rotate, &.vertex {
+        stroke-width: 2;
+    }
+    &.translate {cursor: move;}
+    &.centre {cursor: cell;}
+    &.vertex {cursor: pointer;}
+    &.rotate {cursor: copy;}
+}
+
+.base {
+    opacity: 0;
+    cursor: crosshair;
+}
+
+.line1, .polyline1 {
+    stroke: #000000;
+    stroke-width: 5;
+    fill: none;
+}
+
+.line2, .polyline2 {
+    stroke: #000000;
+    stroke-width: 5;
+    stroke-dasharray: 10,8;
+    fill: none;
+}
+
+.rect1, .polygon1, .arc1 {
+    fill: #000000;
+    fill-opacity: 0.05;
+    stroke: #000000;
+    stroke-width: 0.25;
+}
+
+.rect2, .polygon2, .arc2 {
+    fill: #000000;
+    fill-opacity: 0.05;
+    stroke: #000000;
+    stroke-width: 5;
+}
+
+.door1, .door2, .door3, .door4 {
+    &>:nth-child(1) {
+        stroke: #ffffff;
+        stroke-width: 5;
+        fill: #ffffff;
+    }
+    &>:nth-child(2) {
+        stroke: #000000;
+        stroke-width: 5;
+        fill: #ffffff;
+    }
+    &>:nth-child(3) {
+        stroke: #000000;
+        stroke-width: 2;
+        stroke-dasharray: 1,5;
+        fill: none;
+    }
+}
+
+.door5 {
+    &>:nth-child(1) {
+        stroke: #ffffff;
+        stroke-width: 10;
+        fill: #ffffff;
+    }
+    &>:nth-child(2), &>:nth-child(3) {
+        stroke: #000000;
+        stroke-width: 1;
+        fill: #ffffff;
+    }
+}
+
+.door6 {
+    &>:nth-child(1) {
+        stroke: #ffffff;
+        stroke-width: 10;
+        fill: #ffffff;
+    }
+    &>:nth-child(2), &>:nth-child(3) {
+        stroke: #000000;
+        stroke-width: 5;
+        fill: #ffffff;
+    }
+}
+
+.door7 {
+    &>:nth-child(1) {
+        stroke: #ffffff;
+        stroke-width: 5;
+        fill: #ffffff;
+    }
+    &>:nth-child(2), &>:nth-child(3) {
+        stroke: #000000;
+        stroke-width: 5;
+        fill: #ffffff;
+    }
+    &>:nth-child(4) {
+        stroke: #000000;
+        stroke-width: 2;
+        stroke-dasharray: 1,5;
+        fill: none;
+    }
+}
+
+.window1 {
+    &>:nth-child(1) {
+        stroke: #ffffff;
+        stroke-width: 10;
+        fill: #ffffff;
+    }
+    &>:nth-child(2), &>:nth-child(3), &>:nth-child(4) {
+        stroke: #000000;
+        stroke-width: 1;
+        fill: #ffffff;
+    }
+}
+
+.table1, .table2, .table3, .table4, .chair1, .stool1, .couch1, .couch2, .couch3,
+.bookcase1, .desktop1, .bed1, .bed2, .stand1, .sink1, .sink2, .toilet1,
+.bathtub1, .bathtub2, .bathtub3, .shower1, .shower2, .shower3, .basin1, .basin2,
+.cooker1, .cooker2, .counter1, .fridge1, .fridge2 {
+    &>:nth-child(1) {
+        stroke: none;
+        fill: none;
+    }
+}
+
+.room1, .room2, .room3, .room4, .room5 {
+    &>:nth-child(1) {
+        fill: #000000;
+        fill-opacity: 0.05;
+        stroke: #000000;
+        stroke-width: 5;
+    }
+}
+
+.meter {
+    &>:nth-child(1) {
+        stroke: #000000;
+        stroke-width: 2;
+        fill: #ffffff;
+    }
+    &>:nth-child(2) {
+        text-align: center;
+    }
+}
+
+.gasline1 {
+    stroke: #00ff00;
+    stroke-width: 2;
+    fill: none;
+}
+
+.gasline2 {
+    stroke: #00ff00;
+    stroke-width: 2;
+    stroke-dasharray: 10,8;
+    fill: none;
+}
+
+.piston1, .piston2 {
+    &>:nth-child(1) {
+        stroke: #909090;
+        stroke-width: 2;
+    }
+    &>:nth-child(2) {
+        stroke: none;
+        fill: #ffffff;
+    }
+    &>:nth-child(3) {
+        stroke: #000000;
+        stroke-width: 1;
+        fill: none;
+    }
+    &>:nth-child(4) {
+        stroke: #909090;
+        stroke-width: 1;
+        fill: #ffffff;
+    }
+    &>:nth-child(5) {
+        font-size: 15px;
+    }
+}
+
+.input {
+    &>:nth-child(1) {
+        stroke: #909090;
+        stroke-width: 2;
+    }
+    &>:nth-child(2) {
+        fill: #ffffff;
+        fill-opacity: 0.5;
+    }
+    &>:nth-child(4) {
+        stroke: #909090;
+        stroke-width: 1;
+        fill: #ffffff;
+    }
+    &>:nth-child(5) {
+        font-size: 15px;
+    }
+}
+
+.output {
+    &>:nth-child(1) {
+        stroke: #909090;
+        stroke-width: 2;
+    }
+    &>:nth-child(2) {
+        fill: #ffffff;
+        fill-opacity: 0.5;
+    }
+    &>:nth-child(4) {
+        stroke: #909090;
+        stroke-width: 1;
+        fill: #ffffff;
+    }
+    &>:nth-child(5) {
+        font-size: 15px;
+    }
+    &>:nth-child(6) {
+        font-size: 15px;
+    }
+}
+
+.heater {
+    &>:nth-child(1) {
+        stroke: #909090;
+        stroke-width: 2;
+    }
+    &>:nth-child(2) {
+        fill: #ffffff;
+        fill-opacity: 0.5;
+    }
+    &>:nth-child(4) {
+        stroke: #909090;
+        stroke-width: 1;
+        fill: #ffffff;
+    }
+}
+
+.aeration {
+    &>:nth-child(1) {
+        fill: #ffffff;
+        fill-opacity: 0.15;
+        stroke: #ffffff;
+        stroke-opacity: 0.15;
+        stroke-width: 5px;
+    }
+    &>:nth-child(2) {
+        fill: none;
+        stroke: #000000;
+        stroke-width: 1px;
+    }
+    &>:nth-child(3) {
+        fill: none;
+        stroke: #909090;
+        stroke-width: 3px;
+    }
+    &>:nth-child(4) {
+        font-size: 15px;
+    }
+    &>:nth-child(5) {
+        font-size: 15px;
+    }
+}
+
+.text1 {
+    font-size: 24px;
+    font-weight: bold;
+
+    tspan {
+        font-size: 18px;
+        font-style:italic;
+    }
+}
+
+.text2 {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.text3 {
+    font-size: 17px;
+    font-weight: lighter;
+}
+
+.text4 {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.text5 {
+    font-size: 14px;
+    font-weight: lighter;
+}
+

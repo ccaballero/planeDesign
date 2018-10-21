@@ -78,20 +78,20 @@ if(isset($_SESSION['ranker'])){
                 </div>
             </div>
         </header>
-        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcumb.png);">
+        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcrumb.svg);">
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
                 </div>
             </div>
         </div>
-        <br/>
-        <br/>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-12 main">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#NewUserModal">
                         <i class="fa fa-user"></i> Nuevo Usuario
                     </button>
+                    <br />
+                    <br />
                     <div class="modal fade" id="NewUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">

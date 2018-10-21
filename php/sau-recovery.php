@@ -57,13 +57,12 @@ if (isset($_SESSION['idusuario'])){header("Location: escritorio");}
                 </div>
             </div>
         </header>
-        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcumb.png);">
+        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcrumb.svg);">
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
                 </div>
             </div>
         </div>
-
         <div id="sau-container" class="container">
             <div id="loginbox">
                 <div class="panel panel-default">

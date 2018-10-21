@@ -1,0 +1,131 @@
+doctype html
+html(lang='en')
+    head
+        title Nuevo Plano
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width,initial-scale=1,maximum-scale=1')
+        block link
+    body
+        #wrapper
+            #menu
+                .section
+                    h1 Archivo
+                    button.files.open(title='Abrir plano')
+                    button.files.close(title='Cerrar plano')
+                    button.files.save(title='Guardar plano')
+                    button.files.svg(title='Ver plano vectorial')
+                    button.files.png(title='Ver plano como imagen')
+                .section
+                    h1 Selección
+                    button.selector.picked(title='Activar modo selección (F1)')
+                    button.remove(title='Eliminar componente seleccionado (Supr)')
+                .section
+                    h1 Localización
+                    button.map(title='Mostrar/Ocultar Mapa')
+                    button.controls(title='Mostrar/Ocultar Controles de Mapa')
+                .section
+                    h1 Ordenar
+                    button.order.first(title='Traer al frente (Inicio)')
+                    button.order.up(title='Elevar (Re Pág)')
+                    button.order.down(title='Bajar (Av Pág)')
+                    button.order.last(title='Bajar al fondo (Fin)')
+                .section
+                    h1 Etiquetas
+                    button.draw.text1(title='Etiqueta 1 (t)')
+                    button.draw.text2(title='Etiqueta 2')
+                    button.draw.text3(title='Etiqueta 3')
+                    button.draw.text4(title='Etiqueta 4')
+                    button.draw.text5(title='Etiqueta 5')
+                .section
+                    h1 Muros
+                    button.draw.line1(title='Trazo lineal (l)')
+                    button.draw.polyline1(title='Trazo polilineal (L)')
+                    button.draw.line2(title='Trazo discontinuo')
+                    button.draw.polyline2(title='Trazo polilineal discontinuo')
+                .section
+                    h1 Superficies
+                    button.draw.rect1(title='Superficie rectangular (r)')
+                    button.draw.polygon1(title='Superficie poligonal (p)')
+                    button.draw.arc1(title='Arco de 90° (a)')
+                    button.draw.rect2(title='Superficie rectangular con delimitador')
+                    button.draw.polygon2(title='Superficie poligonal con delimitador')
+                    button.draw.arc2(title='Arco de 90° con delimitador')
+                .section
+                    h1 Habitaciones
+                    button.draw.room1(title='Dormitorio')
+                    button.draw.room2(title='Cocina')
+                    button.draw.room3(title='Baño')
+                    button.draw.room4(title='Tienda')
+                    button.draw.room5(title='Patio')
+                .section
+                    h1 Puertas
+                    button.draw.door1(title='Puerta derecha')
+                    button.draw.door2(title='Puerta izquierda')
+                    button.draw.door3(title='Puerta vaivén derecha')
+                    button.draw.door4(title='Puerta vaivén izquierda')
+                    button.draw.door5(title='Puerta corrediza')
+                    button.draw.door7(title='Puerta principal')
+                .section
+                    h1 Ventanas
+                    button.draw.window1(title='Ventana baja')
+                .section
+                    h1 Comedor
+                    button.draw.table1(title='Mesa cuadrada')
+                    button.draw.table2(title='Mesa cuadrada grande')
+                    button.draw.table3(title='Mesa circular')
+                    button.draw.table4(title='Mesa circular grande')
+                .section
+                    h1 Sala
+                    button.draw.chair1(title='Silla')
+                    button.draw.stool1(title='Taburete')
+                    button.draw.couch1(title='Sofa Simple')
+                    button.draw.couch2(title='Sofa Doble')
+                    button.draw.couch3(title='Sofa Triple')
+                    button.draw.bookcase1(title='Librero')
+                    button.draw.desktop1(title='Escritorio')
+                .section
+                    h1 Dormitorio
+                    button.draw.bed1(title='Cama Simple')
+                    button.draw.bed2(title='Cama Doble')
+                    button.draw.stand1(title='Mesa de Noche')
+                .section
+                    h1 Baño
+                    button.draw.sink1(title='Lavamanos Rectangular')
+                    button.draw.sink2(title='Lavamanos Circular')
+                    button.draw.toilet1(title='Retrete')
+                    button.draw.bathtub1(title='Tina Rectangular')
+                    button.draw.bathtub2(title='Tina Ovalada')
+                    button.draw.bathtub3(title='Tina Redondeada')
+                    button.draw.shower1(title='Ducha simple')
+                    button.draw.shower2(title='Ducha redonda')
+                    button.draw.shower3(title='Ducha esquinada')
+                .section
+                    h1 Cocina
+                    button.draw.basin1(title='Lavaplatos Simple')
+                    button.draw.basin2(title='Lavaplatos Doble')
+                    button.draw.cooker1(title='Estufa de 4 Hornillas')
+                    button.draw.cooker2(title='Estufa de 2 Hornillas')
+                    button.draw.fridge1(title='Refrigerador Ovalado')
+                    button.draw.fridge2(title='Refrigerador Rectangular')
+                    button.draw.counter1(title='Mesón')
+                .section
+                    h1 Instalaciones
+                    button.draw.meter(title='Medidor de Gas')
+                    button.draw.piston1(title='Cocina-Horno Horizontal')
+                    button.draw.piston2(title='Cocina-Horno Vertical')
+                    button.draw.input(title='Entrada de aire')
+                    button.draw.output(title='Salida de gases de combustión')
+                    button.draw.aeration(title='Aireación Rapida')
+                    button.draw.heater(title='Previsto calefón')
+                    button.draw.gasline1(title='Tuberia de Gas')
+                    button.draw.gasline2(title='Tuberia de Gas enterrada')
+            #files
+                .section
+                    h1 Archivos
+                    ul.list
+                    a.cancel(title='Cancelar') Cerrar
+                    .clearfix
+            #map
+            #canvas.nogrid
+        block script
+

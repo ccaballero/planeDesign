@@ -1732,3 +1732,14 @@ span.accor-open {
 /* --------------------------------
 ============= The End =============
 ---------------------------------*/
+
+#embed {
+    background-color: #364f91;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 120px 12px 12px 12px;
+}
+

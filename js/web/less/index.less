@@ -1,0 +1,218 @@
+@import 'normalize-less/normalize.less';
+@import 'fonts.less';
+
+@color1: #000000;
+@color2: #ffffff;
+
+.clearfix {
+    clear: both;
+}
+
+#wrapper {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: flex-start;
+}
+
+#menu {
+    background-color: lighten(@color1,90%);
+}
+
+#files {
+    background-color: lighten(@color1,95%);
+    transition: all 1s ease 0s;
+}
+
+#menu,#files {
+    border-right: 1px solid lighten(@color1,80%);
+    width: 182px;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+    overflow: auto;
+
+    .section {
+        border-bottom: 1px solid lighten(@color1,80%);
+        padding: 5px 0;
+
+        h1 {
+            .font1;
+            margin: 0 0 5px 0;
+            padding: 5px;
+            background-color: lighten(@color1,75%);
+        }
+
+        ul {
+            float: left;
+            box-sizing: border-box;
+            border: 1px solid lighten(@color1,80%);
+            margin: 5px 10px;
+            padding: 0;
+            width: 160px;
+            background-color: @color2;
+            list-style: none;
+
+            li {
+                float: left;
+                box-sizing: border-box;
+                width: 100%;
+                padding: 2px 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: lighten(@color1,85%);
+                }
+
+                a {
+                    .font2;
+                }
+            }
+        }
+
+        a.cancel{
+            float: left;
+            padding: 5px 10px;
+            margin: 0 0 0 119px;
+            background-color: lighten(@color1,75%);
+            cursor: pointer;
+            .font2;
+        }
+
+        button {
+            margin-left: 2px;
+            margin-bottom: 4px;
+            border: none;
+            box-sizing: border-box;
+            width: 25px;
+            height: 25px;
+            background-image: url('svg/buttons.svg');
+            background-size: 150px 400px;
+            background-repeat: repeat;
+            outline: none;
+
+            &.picked {
+                box-shadow: 1px 1px 2px lighten(@color1,20%) inset;
+                border-radius: 4px;
+            }
+
+            &.selector  { background-position:    0px  25px; }
+            &.remove    { background-position:  -25px  25px; }
+            &.open      { background-position:  -50px  25px; }
+            &.close     { background-position:  -75px  25px; }
+            &.save      { background-position: -100px  25px; }
+            &.text1     { background-position: -125px  25px; }
+
+            &.line1     { background-position:    0px  50px; }
+            &.polyline1 { background-position:  -25px  50px; }
+            &.line2     { background-position:  -50px  50px; }
+            &.polyline2 { background-position:  -75px  50px; }
+            &.text2     { background-position: -100px  50px; }
+            &.text3     { background-position: -125px  50px; }
+
+            &.rect1     { background-position:    0px  75px; }
+            &.polygon1  { background-position:  -25px  75px; }
+            &.arc1      { background-position:  -50px  75px; }
+            &.rect2     { background-position:  -75px  75px; }
+            &.polygon2  { background-position: -100px  75px; }
+            &.arc2      { background-position: -125px  75px; }
+
+            &.door1     { background-position:    0px 100px; }
+            &.door2     { background-position:  -25px 100px; }
+            &.door3     { background-position:  -50px 100px; }
+            &.door4     { background-position:  -75px 100px; }
+            &.door5     { background-position: -100px 100px; }
+            &.door6     { background-position: -125px 100px; }
+
+            &.window1   { background-position:    0px 125px; }
+            &.room1     { background-position:  -25px 125px; }
+            &.room2     { background-position:  -50px 125px; }
+            &.room3     { background-position:  -75px 125px; }
+            &.room4     { background-position: -100px 125px; }
+            &.room5     { background-position: -125px 125px; }
+
+            &.last      { background-position:    0px 150px; }
+            &.first     { background-position:  -25px 150px; }
+            &.down      { background-position:  -50px 150px; }
+            &.up        { background-position:  -75px 150px; }
+            &.text4     { background-position: -100px 150px; }
+            &.text5     { background-position: -125px 150px; }
+
+            &.table1    { background-position:    0px 175px; }
+            &.table2    { background-position:  -25px 175px; }
+            &.table3    { background-position:  -50px 175px; }
+            &.table4    { background-position:  -75px 175px; }
+            &.chair1    { background-position: -100px 175px; }
+            &.stand1    { background-position: -125px 175px; }
+
+            &.stool1    { background-position:    0px 200px; }
+            &.couch1    { background-position:  -25px 200px; }
+            &.couch2    { background-position:  -50px 200px; }
+            &.couch3    { background-position:  -75px 200px; }
+            &.bookcase1 { background-position: -100px 200px; }
+            &.desktop1  { background-position: -125px 200px; }
+
+            &.bathtub1  { background-position:    0px 225px; }
+            &.bathtub2  { background-position:  -25px 225px; }
+            &.bathtub3  { background-position:  -50px 225px; }
+            &.shower1   { background-position:  -75px 225px; }
+            &.shower2   { background-position: -100px 225px; }
+            &.shower3   { background-position: -125px 225px; }
+
+            &.bed1      { background-position:    0px 250px; }
+            &.bed2      { background-position:  -25px 250px; }
+            &.meter     { background-position:  -50px 250px; }
+            &.piston1   { background-position:  -75px 250px; }
+            &.output    { background-position: -100px 250px; }
+            &.input     { background-position: -125px 250px; }
+
+            &.sink1     { background-position:    0px 275px; }
+            &.sink2     { background-position:  -25px 275px; }
+            &.toilet1   { background-position:  -50px 275px; }
+            &.basin1    { background-position:  -75px 275px; }
+            &.basin2    { background-position: -100px 275px; }
+            &.aeration  { background-position: -125px 275px; }
+
+            &.cooker1   { background-position:    0px 300px; }
+            &.cooker2   { background-position:  -25px 300px; }
+            &.fridge1   { background-position:  -50px 300px; }
+            &.fridge2   { background-position:  -75px 300px; }
+            &.counter1  { background-position: -100px 300px; }
+            &.heater    { background-position: -125px 300px; }
+
+            &.gasline1  { background-position:    0px 325px; }
+            &.gasline2  { background-position:  -25px 325px; }
+            &.door7     { background-position:  -50px 325px; }
+            &.piston2   { background-position:  -75px 325px; }
+            &.svg       { background-position: -100px 325px; }
+            &.png       { background-position: -125px 325px; }
+
+            &.map       { background-position:    0px 350px; }
+            &.controls  { background-position:  -50px 350px; }
+        }
+    }
+}
+
+#map {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 185px;
+    right: 0px;
+    z-index: -100;
+    background-color: white;
+}
+
+#canvas {
+    overflow: hidden;
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+}
+
+@import 'svg.less';
+

@@ -73,16 +73,8 @@ if (!isset($_SESSION['idusuario'])){
                 </div>
             </div>
         </header>
-        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcumb.png);">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                </div>
-            </div>
-        </div>
-        <br/>
-        <br/>
-        <div class="container">
-
+        <div id="embed">
+            <iframe src="draft" style="width:100%; height:100%; background-color: #ffffff;"></iframe>
         </div>
         <script src="js/jquery-2.2.4.min.js"></script>
         <script src="js/popper.min.js"></script>
