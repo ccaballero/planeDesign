@@ -1,22 +1,6 @@
 <?php
 
-/* file mode
-$dir = realpath(dirname(__FILE__) . '/../data/');
-$list = array();
-
-if ($handle = opendir($dir)) {
-    while (false !== ($entry = readdir($handle))) {
-        if ($entry != "." && $entry != "..") {
-            $list[] = $entry;
-        }
-    }
-    closedir($handle);
-}
-
-sort($list);
-*/
-
-/* database mode */
+session_start();
 include 'config.php';
 
 $crud = new CRUD();

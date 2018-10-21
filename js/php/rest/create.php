@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include 'config.php';
 
 if(!$_POST['file'] || !$_POST['content']){

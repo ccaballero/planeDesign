@@ -853,18 +853,21 @@ function register($nombre,$apellido,$email,$password){
         $activationlink = '<p><label>'.SAULANG69.'</label><p></p><a href="'.$parsedata[5].'sauactive?token='.$mailtoken.'&email='.$regemail.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$regemail.'</a></p>';
 
         // Envio de Correo 
-        $mail = new PHPMailer;
-        $mail->isSMTP();                                      
-        $mail->Host = $parsedata[0];   // especiificar el servidor smtp
-        $mail->SMTPAuth = true;                           
-        $mail->Username = $parsedata[3];   // correo desde el que se enviara
-        $mail->Password = $parsedata[4];  // password del correo
-        $mail->Port = $parsedata[1];     // el puerto por defecto para SMTP es 587 pero puede ser otro
-        $mail->setFrom($parsedata[3], $parsedata[2]);  // remitente, el segundo paramtero es el nombre
-        $mail->addAddress($regemail);   // destino
-        $mail->isHTML(true);    
-        $mail->Subject = SAULANG68.' - '.SITETITLE;   // Asunto
-        $mail->Body    = $htmlhead.$messageone.$activationlink.$htmlfooter;
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Charset = 'UTF-8';
+        $mail->SMTPSecure = 'tls';
+        $mail->Host = $parsedata[0];
+        $mail->Port = $parsedata[1];
+        $mail->Username = $parsedata[3];
+        $mail->Password = $parsedata[4];
+        $mail->SMTPAuth = true;
+
+        $mail->setFrom($parsedata[3], $parsedata[2]);
+        $mail->addAddress($regemail);
+        $mail->isHTML(true);
+        $mail->Subject = SAULANG68.' - '.SITETITLE;
+        $mail->Body = $htmlhead.$messageone.$activationlink.$htmlfooter;
         $mail->send(); 
     }else{
         return 1;

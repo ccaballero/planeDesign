@@ -1,14 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.3.11
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2016 a las 05:18:37
--- Versión del servidor: 5.6.24
--- Versión de PHP: 5.6.8
-
-USE `draft`;
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -28,6 +17,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `comentarios`
 --
 
+DROP TABLE `comentarios`;
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `idcomentario` int(11) NOT NULL,
   `comentario` text,
@@ -42,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 -- Estructura de tabla para la tabla `config`
 --
 
+DROP TABLE `config`;
 CREATE TABLE IF NOT EXISTS `config` (
   `idconfig` int(11) NOT NULL,
   `login` int(11) DEFAULT NULL,
@@ -63,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `config` (
 --
 
 INSERT INTO `config` (`idconfig`, `login`, `register`, `forgot`, `smtp`, `port`, `fromname`, `mail`, `password`, `url`, `messagemail`, `messagechange`, `renewmessage`) VALUES
-(1, 1, 1, 1, 'mail.mydoamin.com', 587, 'Webmaster SAU', 'noreply@mail.com', 'desarrollo', 'http://www.mydoamin.com/', 'Hola! muchas gracias por registrarte, ahora solo debes de registrar tu cuenta usando el siguiente link', 'Has cambiado de correo electronico! usa el siguiente link para confirmar tu correo electronico', 'Has pedido recuperar tu cuenta, tu nueva contraseña es:');
+(1, 1, 1, 1, 'smtp.gmail.com',587,'Webmaster SAU','pruebaplanoalcanos@gmail.com','carlos1A','http://localhost','Hola! muchas gracias por registrarte, ahora solo debes de registrar tu cuenta usando el siguiente link', 'Has cambiado de correo electronico! usa el siguiente link para confirmar tu correo electronico', 'Has pedido recuperar tu cuenta, tu nueva contraseña es:');
 
 -- --------------------------------------------------------
 
@@ -71,6 +62,7 @@ INSERT INTO `config` (`idconfig`, `login`, `register`, `forgot`, `smtp`, `port`,
 -- Estructura de tabla para la tabla `contacts`
 --
 
+DROP TABLE `contacts`;
 CREATE TABLE IF NOT EXISTS `contacts` (
   `idcontacts` int(11) NOT NULL,
   `contact` int(11) DEFAULT NULL,
@@ -84,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 -- Estructura de tabla para la tabla `likepost`
 --
 
+DROP TABLE `likepost`;
 CREATE TABLE IF NOT EXISTS `likepost` (
   `idlike` int(11) NOT NULL,
   `post` int(11) DEFAULT NULL,
@@ -96,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `likepost` (
 -- Estructura de tabla para la tabla `messages`
 --
 
+DROP TABLE `messages`;
 CREATE TABLE IF NOT EXISTS `messages` (
   `idmessage` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL,
@@ -119,6 +113,7 @@ INSERT INTO `messages` (`idmessage`, `fecha`, `de`, `para`, `asunto`, `mensaje`,
 -- Estructura de tabla para la tabla `preferiences`
 --
 
+DROP TABLE `preferiences`;
 CREATE TABLE IF NOT EXISTS `preferiences` (
   `idpreference` int(11) NOT NULL,
   `theme` int(11) DEFAULT NULL,
@@ -139,6 +134,7 @@ INSERT INTO `preferiences` (`idpreference`, `theme`, `lang`, `usuario`) VALUES
 -- Estructura de tabla para la tabla `publicaciones`
 --
 
+DROP TABLE `publicaciones`;
 CREATE TABLE IF NOT EXISTS `publicaciones` (
   `idpublicacion` int(11) NOT NULL,
   `publicacion` text,
@@ -152,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `idusuario` int(11) NOT NULL,
   `nombre` varchar(250) DEFAULT NULL,
@@ -178,6 +175,7 @@ INSERT INTO `usuarios` (`idusuario`, `nombre`, `apellido`, `profile`, `email`, `
 -- Estructura de tabla para la tabla `verify`
 --
 
+DROP TABLE `verify`;
 CREATE TABLE IF NOT EXISTS `verify` (
   `idactive` int(11) NOT NULL,
   `token` varchar(250) DEFAULT NULL,

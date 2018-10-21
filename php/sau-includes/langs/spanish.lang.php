@@ -79,7 +79,7 @@ define('SAULANG64', 'No hay Resultados..');
 define('SAULANG65', 'Ingresa tu nuevo correo electronico');
 define('SAULANG66', 'Ingresa tu nuevo permalink');
 define('SAULANG67', 'El permalink que deseas ya se encuentra en uso, por favor intenta con otro.');
-define('SAULANG68', 'Activación de Cuenta');
+define('SAULANG68', 'Activacion de Cuenta');
 define('SAULANG69', 'Activar mi cuenta:');
 define('SAULANG70', 'Lista de Contactos');
 define('SAULANG71', 'Este correo electronico ya esta siendo usado por ti.');

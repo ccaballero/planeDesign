@@ -1,20 +1,19 @@
 'use strict';
 
-var base='http://draft.local'
-  , set_view=false
+var set_view=false
   , show_map=false
   , map=L.map('map',{
         zoomControl:false
     })
   , zoom=16
   , rest={
-        list:   base+'/rest/list.php'
-      , get:    base+'/rest/get.php'
-      , check:  base+'/rest/check.php'
-      , create: base+'/rest/create.php'
-      , update: base+'/rest/update.php'
-      , svg:    base+'/rest/svg.php'
-      , png:    base+'/rest/png.php'
+        list:   'rest/list.php'
+      , get:    'rest/get.php'
+      , check:  'rest/check.php'
+      , create: 'rest/create.php'
+      , update: 'rest/update.php'
+      , svg:    'rest/svg.php'
+      , png:    'rest/png.php'
     }
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?'

@@ -1,12 +1,11 @@
 <?php
-
 // CREATE DATABASE draft CHARACTER SET utf8;
 // GRANT all PRIVILEGES ON draft.* TO 'jacobian'@'localhost' IDENTIFIED BY 'asdf';
 
 class CRUD {
     private $host = '127.0.0.1';
-    private $user = 'jacobian';
-    private $db = 'draft';
+    private $user = 'root';
+    private $db = 'mydatabase';
     private $pass = 'asdf';
     private $conn;
 
@@ -17,7 +16,7 @@ class CRUD {
     }
 
     public function index() {
-        $sql = 'SELECT name,data FROM draw ORDER BY name ASC';
+        $sql = 'SELECT name,data FROM draw WHERE usuario='.$_SESSION['idusuario'].' ORDER BY name ASC';
         $q = $this->conn->query($sql) or die('failed!');
         $data = array();
 
@@ -29,9 +28,12 @@ class CRUD {
     }
 
     public function get($name) {
-        $sql = 'SELECT * FROM draw WHERE name = :name';
+        $sql = 'SELECT * FROM draw WHERE usuario=:usuario AND name=:name';
         $q = $this->conn->prepare($sql);
-        $q->execute(array(':name' => $name));
+        $q->execute(array(
+            ':usuario'=>$_SESSION['idusuario'],
+            ':name' => $name
+        ));
         $data = $q->fetch(PDO::FETCH_ASSOC);
 
         if($data) {
@@ -42,9 +44,10 @@ class CRUD {
     }
 
     public function update($name, $data) {
-        $sql = 'UPDATE draw SET data=:data WHERE name=:name';
+        $sql = 'UPDATE draw SET data=:data WHERE usuario=:usuario AND name=:name';
         $q = $this->conn->prepare($sql);
         $q->execute(array(
+            ':usuario'=>$_SESSION['idusuario'],
             ':name'=>$name,
             ':data'=>$data
         ));
@@ -53,9 +56,10 @@ class CRUD {
     }
 
     public function create($name, $data){
-        $sql = 'INSERT INTO draw (name,data) VALUE (:name, :data)';
+        $sql = 'INSERT INTO draw (usuario,name,data) VALUE (:usuario,:name,:data)';
         $q = $this->conn->prepare($sql);
         $q->execute(array(
+            ':usuario'=>$_SESSION['idusuario'],
             ':name'=>$name,
             ':data'=>$data
         ));
@@ -64,9 +68,10 @@ class CRUD {
     }
 
     public function delete($name) {
-        $sql='DELETE FROM draw WHERE name=:name';
+        $sql='DELETE FROM draw WHERE usuario=:usuario AND name=:name';
         $q = $this->conn->prepare($sql);
         $q->execute(array(
+            ':usuario'=>$_SESSION['idusuario'],
             ':name'=>$name
         ));
 

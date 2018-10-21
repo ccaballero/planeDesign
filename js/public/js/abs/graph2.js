@@ -48,7 +48,7 @@ blueprint.abs.graph2.draw=function(x1,y1,x2,y2,img){
             .attr('width',X-x)
             .attr('height',Y-y)
             .attr('transform','rotate(0,'+cx+','+cy+')')
-            .attr('xlink:href','/svg/obj/'+img+'.svg');
+            .attr('xlink:href','svg/obj/'+img+'.svg');
     }else{
         blueprint.selected.select('image')
             .attr('x',x)
@@ -56,7 +56,7 @@ blueprint.abs.graph2.draw=function(x1,y1,x2,y2,img){
             .attr('width',X-x)
             .attr('height',Y-y)
             .attr('transform','rotate(0,'+cx+','+cy+')')
-            .attr('xlink:href','/svg/obj/'+img+'.svg');
+            .attr('xlink:href','svg/obj/'+img+'.svg');
     }
 };
 
@@ -88,7 +88,7 @@ blueprint.abs.graph2.add=function(c,d,e){
         .attr('width',e[2])
         .attr('height',e[3])
         .attr('transform',e[4])
-        .attr('xlink:href','/svg/obj/'+c[0]+'.svg');
+        .attr('xlink:href','svg/obj/'+c[0]+'.svg');
     blueprint.abs.simple.next();
 };
 blueprint.abs.graph2.select=function(target){
