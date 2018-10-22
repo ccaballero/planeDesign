@@ -207,26 +207,6 @@ function getprofileimg($iduser){
     }
 }
 
-function isadmin($ranker){
-    if ($ranker <> 1) {
-        echo 
-        '<li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"
-               href="sau-admin"
-               role="button"
-               data-toggle="dropdown"
-               aria-haspopup="true"
-               aria-expanded="false">'.SAULANGA.'</a>
-            <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                <a class="dropdown-item" href="admin/usuarios">Usuarios</a>
-                <a class="dropdown-item" href="admin/publicaciones">Publicaciones</a>
-                <a class="dropdown-item" href="admin/mensajes">Mensajes</a>
-                <a class="dropdown-item" href="admin/configuracion">Configuración</a>
-            </div>
-        </li>';
-    }
-}
-
 function thename($iduser){
     $conexion = Conexion::singleton_conexion();
     $SQL = "SELECT * FROM usuarios WHERE idusuario = :idusuario";

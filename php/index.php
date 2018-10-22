@@ -39,7 +39,7 @@ if (isset($_SESSION['idusuario'])){
                     <div class="col-12 h-100">
                         <div class="menu_area h-100">
                             <nav class="navbar h-100 navbar-expand-lg align-items-center">
-                                <a class="navbar-brand" href="/"><img src="img/core-img/logo.png"></a>
+                                <a class="navbar-brand" href="/"><img src="img/core-img/logo.svg"></a>
                                 <button class="navbar-toggler" type="button"
                                         data-toggle="collapse"
                                         data-target="#mosh-navbar"

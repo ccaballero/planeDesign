@@ -403,11 +403,15 @@ img {
 .menu_area #nav .nav-link:hover,
 .menu_area #nav .nav-item.active .nav-link,
 .menu_area .dropdown-item:hover {
-    color: #09276f;
+    color: #71B1D1;
+}
+
+.login-register-btn {
+    margin-top: 10px;
 }
 
 .login-register-btn a {
-    color: #09276f;
+    color: #71B1D1;
     display: inline-block;
     font-weight: 500;
     font-size: 15px;
@@ -1016,7 +1020,7 @@ span.accor-open {
 -------------------- */
 
 .mosh-breadcumb-area {
-    height: 280px;
+    height: 180px;
     width: 100%;
     position: relative;
     z-index: 1;
@@ -1643,7 +1647,7 @@ span.accor-open {
 }
 
 .contact-form-area .form-control {
-    font-size: 12px;
+    font-size: 18px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -1740,6 +1744,6 @@ span.accor-open {
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 120px 12px 12px 12px;
+    padding: 100px 12px 12px 12px;
 }
 

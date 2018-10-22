@@ -27,7 +27,7 @@ if (!isset($_SESSION['idusuario'])){
                     <div class="col-12 h-100">
                         <div class="menu_area h-100">
                             <nav class="navbar h-100 navbar-expand-lg align-items-center">
-                                <a class="navbar-brand" href="/"><img src="img/core-img/logo.png"></a>
+                                <a class="navbar-brand" href="/"><img src="img/core-img/logo.svg"></a>
                                 <button class="navbar-toggler" type="button"
                                         data-toggle="collapse"
                                         data-target="#mosh-navbar"
@@ -50,7 +50,22 @@ if (!isset($_SESSION['idusuario'])){
                                                 <?php messagelistli(); ?>
                                             </div>
                                         </li>
-                                        <?php isadmin($_SESSION['ranker']); ?>
+                                    <?php if($_SESSION['ranker']<>1){ ?>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle"
+                                               href="sau-admin"
+                                               role="button"
+                                               data-toggle="dropdown"
+                                               aria-haspopup="true"
+                                               aria-expanded="false"><?php echo SAULANGA; ?></a>
+                                            <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                                <a class="dropdown-item" href="admin/usuarios">Usuarios</a>
+                                                <a class="dropdown-item" href="admin/publicaciones">Publicaciones</a>
+                                                <a class="dropdown-item" href="admin/mensajes">Mensajes</a>
+                                                <a class="dropdown-item" href="admin/configuracion">Configuración</a>
+                                            </div>
+                                        </li>
+                                    <?php } ?>
                                         <li class="nav-item active"><a class="nav-link" href="config"><?php echo SAULANG4; ?></a></li>
                                         <li class="nav-item"><a class="nav-link" href="plane">Graficar Plano</a></li>
                                     </ul>
