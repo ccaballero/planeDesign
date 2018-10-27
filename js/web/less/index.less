@@ -196,10 +196,10 @@
 
             &.zoomin   { background-position:    0px 375px; }
             &.zoomout  { background-position:  -25px 375px; }
-            &.left     { background-position:  -50px 375px; }
-            &.up       { background-position:  -75px 375px; }
-            &.bottom   { background-position: -100px 375px; }
-            &.right    { background-position: -125px 375px; }
+            &.west     { background-position:  -50px 375px; }
+            &.north    { background-position:  -75px 375px; }
+            &.south    { background-position: -100px 375px; }
+            &.east     { background-position: -125px 375px; }
         }
     }
 }
@@ -223,13 +223,14 @@
 
 #controls {
     position: absolute;
-    left: 40%;
+    left: 50%;
     width: 290px;
     height: 100px;
     background-color: buttonface;
     border: none;
     border-radius: 0 0 12px 12px;
     box-shadow: 2px 2px 6px #606060;
+    margin-left: -145px;
 
     .section {
         border: none;
@@ -245,10 +246,10 @@
 
             &.zoomin  { top: 10px; left: 18px; }
             &.zoomout { top: 68px; left: 18px; }
-            &.up      { top: 10px; left: 220px; }
-            &.bottom  { top: 68px; left: 220px; }
-            &.left    { top: 39px; left: 250px; }
-            &.right   { top: 39px; left: 190px; }
+            &.west    { top: 39px; left: 250px; }
+            &.north   { top: 10px; left: 220px; }
+            &.south   { top: 68px; left: 220px; }
+            &.east    { top: 39px; left: 190px; }
         }
     }
 }

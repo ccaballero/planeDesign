@@ -2,6 +2,26 @@
 
 var set_view=false
   , show_map=false
+  , show_controls=false
+  , pane=undefined
+  , zoomLat=[
+        0.1
+      , 0.1
+      , 0.1
+      , 0.1
+      , 0.1
+      , 0.1
+      , 0.1
+    ]
+  , zoomLng=[
+        0.1
+      , 0.1
+      , 0.1
+      , 0.1
+      , 0.1
+      , 0.1
+      , 0.1
+    ]
   , map=L.map('map',{
         zoomControl:false
     })
@@ -22,7 +42,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?'
         +'OpenStreetMap</a> contributors, '
         +'<a href="https://creativecommons.org/licenses/by-sa/2.0/">'
         +'CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-  , maxZoom:21
+  , minZoom:16
+  , maxZoom:22
   , id:'mapbox.streets'
   , accessToken:'pk.eyJ1IjoiamFjb2JpYW4iLCJhIjoiQWFfMjJxYyJ9.'
         +'O50MgJ-QqbTAQjn6bIstfg'
@@ -276,6 +297,7 @@ $(function(){
                         position.coords.latitude
                       , position.coords.longitude
                     ],zoom);
+                    pane=map.getCenter();
                 });
                 set_view=true;
             }
@@ -285,7 +307,50 @@ $(function(){
             $(this).removeClass('picked');
             $('#map').hide();
             show_map=false;
+
+            $('.controls').removeClass('picked');
+            $('#controls').hide();
+            show_controls=false;
         }
+    });
+
+    $('.controls').click(function(){
+        if(show_map){
+            if(!show_controls){
+                $(this).addClass('picked');
+                $('#controls').show();
+                show_controls=true;
+            }else{
+                $(this).removeClass('picked');
+                $('#controls').hide();
+                show_controls=false;
+            }
+        }
+    });
+
+    $('.zoomin').click(function(){
+        map.setZoom(map.getZoom()+1)
+    });
+
+    $('.zoomout').click(function(){
+        map.setZoom(map.getZoom()-1)
+    });
+
+    $('.north').click(function(){
+        pane.lat+=zoomLat[map.getZoom()-16];
+        map.setView([pane.lat,pane.lng]);
+    });
+    $('.south').click(function(){
+        pane.lat-=zoomLat[map.getZoom()-16];
+        map.setView([pane.lat,pane.lng]);
+    });
+    $('.west').click(function(){
+        pane.lng+=zoomLng[map.getZoom()-16];
+        map.setView([pane.lat,pane.lng]);
+    });
+    $('.east').click(function(){
+        pane.lng-=zoomLng[map.getZoom()-16];
+        map.setView([pane.lat,pane.lng]);
     });
 });
 
