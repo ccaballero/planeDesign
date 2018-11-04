@@ -42,7 +42,7 @@ var blueprint=new(function(){
             .attr('refY','6')
             .append('svg:path')
             .attr('d','M 2 6 L 8 10 L 8 2 Z')
-            .attr('fill','#909090');
+            .attr('fill','#009090');
 
         defs.append('svg:marker')
             .attr('id','tail')
@@ -53,7 +53,7 @@ var blueprint=new(function(){
             .attr('refY','6')
             .append('svg:path')
             .attr('d','M 2 2 L 2 10 L 9 6 Z')
-            .attr('fill','#909090');
+            .attr('fill','#009090');
 
         this.layers.push(this.base.append('svg:rect')
             .attr('x',0)

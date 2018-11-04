@@ -5,22 +5,24 @@ var set_view=false
   , show_controls=false
   , pane=undefined
   , zoomLat=[
-        0.1
-      , 0.1
-      , 0.1
-      , 0.1
-      , 0.1
-      , 0.1
-      , 0.1
+        0.01
+      , 0.005
+      , 0.0025
+      , 0.00125
+      , 0.000625
+      , 0.0003125
+      , 0.00015625
+      , 0.000078125
     ]
   , zoomLng=[
-        0.1
-      , 0.1
-      , 0.1
-      , 0.1
-      , 0.1
-      , 0.1
-      , 0.1
+        0.01
+      , 0.005
+      , 0.0025
+      , 0.00125
+      , 0.000625
+      , 0.0003125
+      , 0.00015625
+      , 0.000078125
     ]
   , map=L.map('map',{
         zoomControl:false
@@ -43,7 +45,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?'
         +'<a href="https://creativecommons.org/licenses/by-sa/2.0/">'
         +'CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
   , minZoom:16
-  , maxZoom:22
+  , maxZoom:23
   , id:'mapbox.streets'
   , accessToken:'pk.eyJ1IjoiamFjb2JpYW4iLCJhIjoiQWFfMjJxYyJ9.'
         +'O50MgJ-QqbTAQjn6bIstfg'
