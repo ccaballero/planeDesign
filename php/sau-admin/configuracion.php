@@ -32,7 +32,7 @@ if(isset($_SESSION['ranker'])){
                     <div class="col-12 h-100">
                         <div class="menu_area h-100">
                             <nav class="navbar h-100 navbar-expand-lg align-items-center">
-                                <a class="navbar-brand" href="/"><img src="img/core-img/logo.svg"></a>
+                                <a class="navbar-brand" href="escritorio"><img src="img/core-img/logo.svg"></a>
                                 <button class="navbar-toggler" type="button"
                                         data-toggle="collapse"
                                         data-target="#mosh-navbar"
@@ -64,10 +64,11 @@ if(isset($_SESSION['ranker'])){
                                                aria-haspopup="true"
                                                aria-expanded="false"><?php echo SAULANGA; ?></a>
                                             <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                                <a class="dropdown-item" href="admin/reportes">Reportes</a>
                                                 <a class="dropdown-item" href="admin/usuarios">Usuarios</a>
                                                 <a class="dropdown-item" href="admin/publicaciones">Publicaciones</a>
                                                 <a class="dropdown-item" href="admin/mensajes">Mensajes</a>
-                                                <a class="dropdown-item" href="admin/configuracion">Configuración</a>
+                                                <a class="dropdown-item active" href="admin/configuracion">Configuración</a>
                                             </div>
                                         </li>
                                     <?php } ?>

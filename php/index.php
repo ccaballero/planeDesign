@@ -39,7 +39,7 @@ if (isset($_SESSION['idusuario'])){
                     <div class="col-12 h-100">
                         <div class="menu_area h-100">
                             <nav class="navbar h-100 navbar-expand-lg align-items-center">
-                                <a class="navbar-brand" href="/"><img src="img/core-img/logo.svg"></a>
+                                <a class="navbar-brand" href="escritorio"><img src="img/core-img/logo.svg"></a>
                                 <button class="navbar-toggler" type="button"
                                         data-toggle="collapse"
                                         data-target="#mosh-navbar"
@@ -48,11 +48,6 @@ if (isset($_SESSION['idusuario'])){
                                         aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
-                                <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
-                                    <div class="login-register-btn">
-                                        <a href="/"><?php echo SAULANG17; ?></a>
-                                    </div>
-                                </div>
                             </nav>
                         </div>
                     </div>

@@ -510,7 +510,7 @@ function userstableadm($page){
             if ($key['profile'] == 1){
                 $profile = '<img class="profileimgtableadmin" src="img/profile-small.png" >';
             }else{
-                $profile = '<img class="profileimgtableadmin" src="../'.str_replace('normal', 'small', $key['profile']).'" >';
+                $profile = '<img class="profileimgtableadmin" src="'.str_replace('normal', 'small', $key['profile']).'" >';
             }
 
             if ($key['ranker'] == 1){

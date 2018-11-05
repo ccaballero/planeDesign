@@ -1,35 +1,28 @@
 <?php
-
-// agregamos las funciones del admin
 require_once 'adm.functions.php';
 
-// conexion de base de datos
 $conexion = Conexion::singleton_conexion();
 
 if (isset($_POST['process'])){
-#/////////////////////////////////////////////////////////////////////////////////////////////////	
-$process = $_POST['process'];
-#/////////////////////////////////////////////////////////////////////////////////////////////////
-if ($process == 1){
-#.................................................................................................
+    $process = $_POST['process'];
+    if ($process == 1){
+        checkranker();
 
-checkranker();
+        $id = $_POST['usuario'];
+        $SQL = 'SELECT * FROM usuarios WHERE idusuario = :id LIMIT 1';
+        $sentence = $conexion -> prepare($SQL);
+        $sentence -> bindParam(':id', $id , PDO::PARAM_INT);
+        $sentence -> execute();
+        $resultados = $sentence -> fetchAll();
 
-$id = $_POST['usuario'];
-$SQL = 'SELECT * FROM usuarios WHERE idusuario = :id LIMIT 1';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> bindParam(':id', $id , PDO::PARAM_INT);
-$sentence -> execute();
-$resultados = $sentence -> fetchAll();
-if (empty($resultados)){
-}else{
-  foreach ($resultados as $key){
-
-    if ($key['profile'] == 1){
-    	$imageprofile = '<img id="imageprofilechange" src="../sau-content/images/profile-normal.png" >';
-    }else{
-        $imageprofile = '<img id="imageprofilechange" src="../'.$key['profile'].'" >';
-    }
+        if (empty($resultados)){
+        }else{
+            foreach ($resultados as $key){
+                if ($key['profile'] == 1){
+                    $imageprofile = '<img id="imageprofilechange" src="img/profile-normal.png" >';
+                }else{
+                    $imageprofile = '<img id="imageprofilechange" src="'.$key['profile'].'" >';
+                }
 
     if ($key['ranker'] == 1){
       $rango = 'Usuario';
@@ -259,16 +252,10 @@ if (empty($resultados)){
 
     //comprobamos si existe un directorio para subir el archivo
     //si no es así, lo creamos
-    if(!is_dir("../sau-content/images/members/")) 
-        mkdir("../sau-content/images/members/", 0777);
+    if(!is_dir("../images/members/")) {
+        mkdir("../images/members/", 0777);
+    }
 
-
-    //comprobamos si existe un directorio para subir el archivot emporal
-    //si no es así, lo creamos
-    if(!is_dir("../sau-content/images/members/tmp")) 
-        mkdir("../sau-content/images/members/tmp", 0777);
-
- 
     //obtenemos el archivo a subir
     $file = $_FILES['imageprofile']['name'];
 

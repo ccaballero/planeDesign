@@ -23,6 +23,7 @@
     RewriteRule ^plane(.*)?$ sau-graficar.php
 
     # Administracion
+    RewriteRule ^admin/reportes(.*)?$ sau-admin/index.php
     RewriteRule ^admin/usuarios(.*)?$ sau-admin/users.php
     RewriteRule ^admin/publicaciones(.*)?$ sau-admin/posting.php
     RewriteRule ^admin/mensajes(.*)?$ sau-admin/mensajes.php
