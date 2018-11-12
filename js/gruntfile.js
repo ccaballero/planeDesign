@@ -29,6 +29,7 @@ module.exports=function(grunt){
                 }
               , files:{
                     '.tmp/index.html':'web/jade/index-dev.jade'
+                  , '.tmp/map.html':'web/jade/map.jade'
                 }
             }
           , dist:{
@@ -101,6 +102,7 @@ module.exports=function(grunt){
                 }
               , files:[
                     '.tmp/index.html'
+                  , '.tmp/map.html'
                   , '.tmp/style.css'
                 ]
             }
@@ -186,6 +188,11 @@ module.exports=function(grunt){
                   , dest:'../php/draft/svg/obj/'
                   , flatten:true
                   , expand:true
+                },{
+                    src:'bower_components/leaflet/dist/images/*.png'
+                  , dest:'../php/draft/images'
+                  , expand:true
+                  , flatten:true
                 },{
                     src:'bower_components/leaflet/dist/leaflet.js'
                   , dest:'../php/draft/js/leaflet.min.js'

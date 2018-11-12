@@ -3,7 +3,8 @@
 var set_view=false
   , show_map=false
   , show_controls=false
-  , pane=undefined
+  , pane_marker=undefined
+  , pane_map=undefined
   , zoomLat=[
         0.01
       , 0.005
@@ -25,8 +26,9 @@ var set_view=false
       , 0.000078125
     ]
   , map=L.map('map',{
-        zoomControl:false
+        zoomControl:true
     })
+  , marker=L.marker().addTo(map)
   , zoom=16
   , rest={
         list:   'rest/list.php'
@@ -50,6 +52,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?'
   , accessToken:'pk.eyJ1IjoiamFjb2JpYW4iLCJhIjoiQWFfMjJxYyJ9.'
         +'O50MgJ-QqbTAQjn6bIstfg'
 }).addTo(map);
+map.doubleClickZoom.disable();
 
 $(function(){
     var file=null
@@ -61,6 +64,10 @@ $(function(){
     $('#files').hide();
 
     $('.open').click(function(){
+        if(show_controls){
+            $('.controls').trigger('click');
+        }
+
         $.get(rest.list,function(data){
             $('#files').toggle();
 
@@ -91,6 +98,12 @@ $(function(){
                                         if(c[0] in blueprint.obj
                                             && 'add' in blueprint.obj[c[0]]){
                                             blueprint.obj[c[0]].add(c,d,e);
+                                        }else if(c[0]=='map'){
+                                            pane_marker=[+d[0],+d[1]];
+                                            pane_map=[+d[2],+d[3]];
+                                            zoom=+d[4];
+
+                                            $('.map').trigger('click');
                                         }
                                     }
                                 });
@@ -157,6 +170,16 @@ $(function(){
                             break;
                     }
                 })
+
+                if(set_view){
+                    contents.push('map :: '+
+                        marker.getLatLng().lat+' '+
+                        marker.getLatLng().lng+' '+
+                        map.getCenter().lat+' '+
+                        map.getCenter().lng+' '+
+                        map.getZoom()
+                    );
+                }
 
                 return contents;
             }
@@ -294,13 +317,30 @@ $(function(){
         if(!show_map){
             $(this).addClass('picked');
             if(!set_view){
-                navigator.geolocation.getCurrentPosition(function(position){
-                    map.setView([
-                        position.coords.latitude
-                      , position.coords.longitude
-                    ],zoom);
-                    pane=map.getCenter();
-                });
+                if(!pane_map){
+                    navigator.geolocation.getCurrentPosition(function(position){
+                        marker.setLatLng([
+                            position.coords.latitude
+                          , position.coords.longitude
+                        ]);
+                        map.setView([
+                            position.coords.latitude
+                          , position.coords.longitude
+                        ],zoom);
+
+                        map.on('dblclick',function(e){
+                            marker.setLatLng(e.latlng);
+                        });
+                    });
+                }else{
+                    marker.setLatLng([pane_marker[0],pane_marker[1]]);
+                    map.setView([pane_map[0],pane_map[1]],zoom);
+
+                    map.on('dblclick',function(e){
+                        marker.setLatLng(e.latlng);
+                    });
+                }
+
                 set_view=true;
             }
             $('#map').show();
@@ -311,7 +351,7 @@ $(function(){
             show_map=false;
 
             $('.controls').removeClass('picked');
-            $('#controls').hide();
+            $('#map').css('z-index','-1');
             show_controls=false;
         }
     });
@@ -320,11 +360,11 @@ $(function(){
         if(show_map){
             if(!show_controls){
                 $(this).addClass('picked');
-                $('#controls').show();
+                $('#map').css('z-index','1');
                 show_controls=true;
             }else{
                 $(this).removeClass('picked');
-                $('#controls').hide();
+                $('#map').css('z-index','-1');
                 show_controls=false;
             }
         }
@@ -339,18 +379,22 @@ $(function(){
     });
 
     $('.north').click(function(){
+        var pane=map.getCenter();
         pane.lat+=zoomLat[map.getZoom()-16];
         map.setView([pane.lat,pane.lng]);
     });
     $('.south').click(function(){
+        var pane=map.getCenter();
         pane.lat-=zoomLat[map.getZoom()-16];
         map.setView([pane.lat,pane.lng]);
     });
     $('.west').click(function(){
+        var pane=map.getCenter();
         pane.lng+=zoomLng[map.getZoom()-16];
         map.setView([pane.lat,pane.lng]);
     });
     $('.east').click(function(){
+        var pane=map.getCenter();
         pane.lng-=zoomLng[map.getZoom()-16];
         map.setView([pane.lat,pane.lng]);
     });
