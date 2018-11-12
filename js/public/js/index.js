@@ -129,6 +129,15 @@ $(function(){
         file=null;
         modified=false;
         blueprint.counter=0;
+
+        pane_marker=undefined;
+        pane_map=undefined;
+        zoom=16;
+        set_view=false;
+
+        if(show_map){
+            $('.map').trigger('click');
+        }
     });
 
     $('.save').click(function(){
