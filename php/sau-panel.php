@@ -46,9 +46,7 @@ if (!isset($_SESSION['idusuario'])){
                                                data-toggle="dropdown"
                                                aria-haspopup="true"
                                                aria-expanded="false"><?php echo SAULANG3; ?><?php messagesnoread(); ?></a>
-                                            <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                                                <?php messagelistli(); ?>
-                                            </div>
+                                            <?php messagelistli(); ?>
                                         </li>
                                     <?php if($_SESSION['ranker']<>1){ ?>
                                         <li class="nav-item dropdown">
@@ -119,22 +117,22 @@ if (!isset($_SESSION['idusuario'])){
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-users"></i> <?php echo SAULANG8; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
-                        <div id="contactos" class="panel-body">
-                            <?php mycontacs($_SESSION['idusuario']); ?>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-calendar"></i> <?php echo SAULANG9; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
-                        <div class="panel-body nopadding">
-                            <p></p>
-                            <div id="calendar-now"></div>
-                        </div>
+                    <div id="contactos" class="panel-body">
+                        <?php mycontacs($_SESSION['idusuario']); ?>
                     </div>
                 </div>
-                <div id="sidebar" class="col-sm-9">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-comment-o"></i> <?php echo SAULANG6; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
-                        <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-calendar"></i> <?php echo SAULANG9; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
+                    <div class="panel-body nopadding">
+                        <p></p>
+                        <div id="calendar-now"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar" class="col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-comment-o"></i> <?php echo SAULANG6; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
+                    <div class="panel-body">
                         <form id="poster">
                             <textarea  name="posttext" class="form-control" rows="2"></textarea>
                         </form>

@@ -415,14 +415,14 @@ function checkmycontact($usuario,$sausession){
 
     if(empty($resultado)){
         echo'
-        <button data-contact="'.$usuario.'" class="addcontact btn btn-default btn-sm"><i class="fa fa-user-plus"></i> '.SAULANG23.'</button>
-        <button data-contact="'.$usuario.'" class="delcontact hidebtncontact btn btn-danger btn-sm"><i class="fa fa-user-times"></i> '.SAULANG24.'</button>
+        <button type="button" data-contact="'.$usuario.'" class="addcontact btn btn-default btn-block"><i class="fa fa-user-plus"></i> '.SAULANG23.'</button>
+        <button data-contact="'.$usuario.'" class="delcontact hidebtncontact btn btn-danger btn-block"><i class="fa fa-user-times"></i> '.SAULANG24.'</button>
         ';
     }else{
         foreach($resultado as $key){
             echo'
-            <button data-contact="'.$usuario.'" class="addcontact hidebtncontact btn btn-default btn-sm"><i class="fa fa-user-plus"></i> '.SAULANG23.'</button>
-            <button data-contact="'.$usuario.'" class="delcontact btn btn-danger btn-sm"><i class="fa fa-user-times"></i> '.SAULANG24.'</button>
+            <button data-contact="'.$usuario.'" class="addcontact hidebtncontact btn btn-default btn-block"><i class="fa fa-user-plus"></i> '.SAULANG23.'</button>
+            <button data-contact="'.$usuario.'" class="delcontact btn btn-danger btn-block"><i class="fa fa-user-times"></i> '.SAULANG24.'</button>
             ';
         }
     }
@@ -550,9 +550,9 @@ function messagelistli(){
     $sentence -> execute();
     $resultados = $sentence -> fetchAll();
 
-    if(empty($resultados)){
-        echo '<a class="dropdown-item text-center" href="messages">'.SAULANG31.'</a>';
-    }else{
+    echo '<div class="dropdown-menu" aria-labelledby="moshDropdown">';
+
+    if(!empty($resultados)){
         foreach ($resultados as $key){
             if($key['profile'] == 1){
                 $profile = '<img class="messageprofileradius" src="img/profile-small.png">';
@@ -570,14 +570,21 @@ function messagelistli(){
                 $leido = '';
             }
 
-            //<div class="col-sm-2 col-xs-2 nopadding text-center '.$leido.'">'.$profile.'</div>
-            //<div class="col-sm-10 col-xs-10"><p>'.$mensaje.'</p><p class="ptimemessage">'.$fecha.'</p></div>
-
-            echo '<a class="dropdown-item" href="messages"></a>';
+            echo '
+            <a class="dropdown-item" href="messages">
+                <div style="float:left;" class="nopadding text-center '.$leido.'">'.$profile.'</div>
+                <div style="padding-left:60px;">
+                    <strong>'.$mensaje.'</strong><br/>
+                    <p class="ptimemessage">'.$fecha.'</p>
+                </div>
+                <div style="clear: both"></div>
+            </a>';
         }
 
-        echo '<a class="dropdown-item" href="messages">'.SAULANG31.'</a>';
+        echo '<div class="dropdown-divider"></div>';
     }
+
+    echo '<a class="dropdown-item text-center" href="messages">'.SAULANG31.'</a></div>';
 }
 
 function messagestable(){

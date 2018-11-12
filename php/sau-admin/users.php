@@ -51,9 +51,7 @@ if(isset($_SESSION['ranker'])){
                                                data-toggle="dropdown"
                                                aria-haspopup="true"
                                                aria-expanded="false"><?php echo SAULANG3; ?><?php messagesnoread(); ?></a>
-                                            <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                                                <?php messagelistli(); ?>
-                                            </div>
+                                            <?php messagelistli(); ?>
                                         </li>
                                     <?php if($_SESSION['ranker']<>1){ ?>
                                         <li class="nav-item active dropdown">
