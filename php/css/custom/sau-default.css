@@ -121,12 +121,10 @@ html {
 .error{
     color: #D40A0A;
     z-index: 2;
-    width: 170px;
     padding: 2px 10px;
     border-radius: 4px;
     float: left;
     display: block;
-    width: 100%;
 }
 
 
