@@ -26,7 +26,7 @@ define('SAULANG11', 'Comentar');
 define('SAULANG12', 'Ya no me Gusta');
 define('SAULANG13', 'Borrar');
 define('SAULANG14', 'Comentarios...');
-define('SAULANG15', 'No puedes dejar esto en blanco.');
+define('SAULANG15', 'No puedes dejar esto invalido.');
 define('SAULANG16', 'Debes de comentar algo, no puedes dejar esto en blanco');
 define('SAULANG17', 'Iniciar Sesión');
 define('SAULANG18', 'Correo Electronico');
@@ -92,3 +92,4 @@ define('SAULANG77', 'El email que has proporcionado no existe en nuestra base de
 define('SAULANG78', 'Listo! se ha enviado un correo con tu nueva contraseña.');
 define('SAULANG79', 'Este modulo esta deshabilitado momentaneamente.');
 define('SAULANG80', 'Graficar plano');
+define('SAULANG81', 'Credenciales incorrectas');

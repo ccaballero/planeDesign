@@ -26,7 +26,7 @@ define ( 'SAULANG11', 'Comment');
 define ( 'SAULANG12', 'Dislike');
 define ( 'SAULANG13', 'Delete');
 define ( 'SAULANG14', 'Comments ...');
-define ( 'SAULANG15', 'You can not leave this blank.');
+define ( 'SAULANG15', 'You can not leave this invalid.');
 define ( 'SAULANG16', 'You must say something, you can not leave this blank');
 define ( 'SAULANG17', 'Login');
 define ( 'SAULANG18', 'E-mail');
@@ -92,4 +92,5 @@ define ( 'SAULANG77', 'The email you provided does not exist in our database');
 define ( 'SAULANG78', 'Ready sent an email with your new password!.');
 define(  'SAULANG79', 'This module is temporarily disabled.');
 //aumentando la opcion de graficas plano en el idioma ingles
-define(  'SAULNAG80','Graffic Plain');
+define(  'SAULANG80', 'Draw Plain');
+define(  'SAULANG81', 'Incorrect credentials');

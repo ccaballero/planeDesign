@@ -1,19 +1,21 @@
 <?php
-require_once'sau-admin/sau-login.php';
-require_once'sau-includes/sau-functions.php';
+require_once 'sau-admin/sau-login.php';
+require_once 'sau-includes/sau-functions.php';
 
 saulanger(SAULANGDEF);
 
 if (isset($_POST['nombre'])) {
     $what = register($_POST['nombre'],$_POST['apellido'],$_POST['mail'],$_POST['password']);
     if ($what == 1) {
-      header('Location: registro?mailuse');
+        header('Location: registro?mailuse');
     }else{
-      header('Location: registro?success');
+        header('Location: registro?success');
     }
 }
 
-if (isset($_SESSION['idusuario'])){header("Location: escritorio");}
+if (isset($_SESSION['idusuario'])){
+    header('Location: escritorio');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,49 +60,59 @@ if (isset($_SESSION['idusuario'])){header("Location: escritorio");}
                 </div>
             </div>
         </div>
-        <div id="sau-container" class="container">
-            <div id="loginbox">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-angle-double-right"></i> <?php echo SAULANG59; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
-                    <div class="panel-body">
+        <section class="contact-area section_padding_100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-4 col-md-6">
                     <?php $active = registeractive(); ?>
-                    <?php if ($active == 1){ ?>
-                        <form id="register" method="POST" action="">
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" placeholder="<?php echo SAULANG46; ?>" name="nombre">
-                            </div>
-                            <p></p> 
-                            <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" placeholder="<?php echo SAULANG47; ?>" name="apellido">
-                            </div>
-                            <p></p> 
-                            <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" placeholder="<?php echo SAULANG18; ?>" name="mail">
-                            </div>
-                            <p></p>                
-                            <div class="input-group input-group-sm">
-                            <input type="password" class="form-control" placeholder="<?php echo SAULANG19; ?>" name="password">
-                            </div>
-                            <p></p>
-                            <button type="submit" class="btn btn-default btn-block"><i class="fa fa-plus"></i><?php echo SAULANG60; ?></button>
-                        </form>
+                    <?php if ($active == 1) { ?>
+                        <div class="contact-form-area">
+                            <h2><?php echo SAULANG59; ?></h2>
+                            <?php if (isset($_GET['success'])) { ?>
+                                <div class="alert alert-success alert-dismissible fade in animated bounce" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <strong><?php echo SAULANG61; ?></strong>
+                                </div>
+                            <?php } ?>
+                            <?php if (isset($_GET['mailuse'])) { ?>
+                                <div class="alert alert-danger alert-dismissible fade in animated bounce" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <strong><?php echo SAULANG62; ?></strong>
+                                </div>
+                            <?php } ?>
+                            <form id="register" action="" method="post">
+                                <div class="row">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="<?php echo SAULANG46; ?>" name="nombre" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="<?php echo SAULANG47; ?>" name="apellido" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="<?php echo SAULANG18; ?>" name="mail" />
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control" placeholder="<?php echo SAULANG19; ?>" name="password" />
+                                    </div>
+                                    <button class="btn mosh-btn mt-50" type="submit"><?php echo SAULANG60; ?></button>
+                                </div>
+                                <div class="btn-group-vertical col-sm-6 offset-md-6 login-link-content" role="group">
+                                    <a class="btn" href="index.php"><?php echo SAULANG17; ?></a>
+                                    <a class="btn" href="recuperar"><?php echo SAULANG21; ?></a>
+                                </div>
+                            </form>
+                        </div>
                     <?php }else{ ?>
-                        <div class="avisodisable col-sm-12"><i class="fa fa-ban fa-4x animated infinite flash" aria-hidden="true"></i><?php echo SAULANG79; ?></div>
+                        <div class="avisodisable col-sm-12">
+                            <i class="fa fa-ban fa-4x animated infinite flash" aria-hidden="true"></i>
+                            <?php echo SAULANG79; ?>
+                        </div>
                     <?php } ?>
-                        <div class="col-sm-12 login-link-content">
-                            <a href="index.php"><?php echo SAULANG17; ?></a>
-                            <a href="recuperar"><?php echo SAULANG21; ?></a>
-                        </div> 
                     </div>
                 </div>
-            <?php if (isset($_GET['success'])) { ?>
-                <div class="alert alert-success alert-dismissible fade in animated bounce" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <strong><?php echo SAULANG61; ?></strong></div>
-            <?php } ?>
-            <?php if (isset($_GET['mailuse'])) { ?>
-                <div class="alert alert-danger alert-dismissible fade in animated bounce" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <strong><?php echo SAULANG62; ?></strong></div>
-            <?php } ?>
             </div>
-        </div>
+        </section>
+
         <script src="js/jquery-2.2.4.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

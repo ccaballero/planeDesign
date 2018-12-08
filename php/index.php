@@ -1,6 +1,6 @@
 <?php
-require_once'sau-admin/sau-login.php';
-require_once'sau-includes/sau-functions.php';
+require_once 'sau-admin/sau-login.php';
+require_once 'sau-includes/sau-functions.php';
 
 saulanger(SAULANGDEF);
 $singleton = Login::singleton_login();
@@ -9,12 +9,17 @@ if(isset($_POST['saumail'])){
     $mail = $_POST['saumail'];
     $password = $_POST['saupassword'];
     $usuario = $singleton->login_users($mail,$password);
-    if($usuario == TRUE){header("Location: escritorio");}
-    if($usuario == FALSE){header("Location: index.php?error");}
+
+    if($usuario == TRUE){
+        header('Location: escritorio');
+    }
+    if($usuario == FALSE){
+        header('Location: index.php?error');
+    }
 }
 
 if (isset($_SESSION['idusuario'])){
-    header("Location: escritorio");
+    header('Location: escritorio');
 }
 ?>
 <!DOCTYPE html>
@@ -68,6 +73,9 @@ if (isset($_SESSION['idusuario'])){
                     <?php if ($active == 1) { ?>
                         <div class="contact-form-area">
                             <h2><?php echo SAULANG17; ?></h2>
+                            <?php if (isset($_GET['error'])) { ?>
+                                <div class="alert alert-danger" role="alert"><?php echo SAULANG81; ?></div>
+                            <?php } ?>
                             <form id="loginform" action="" method="post">
                                 <div class="row">
                                     <div class="input-group mb-3">
@@ -94,6 +102,7 @@ if (isset($_SESSION['idusuario'])){
                 </div>
             </div>
         </section>
+
         <script src="js/jquery-2.2.4.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -106,7 +115,6 @@ if (isset($_SESSION['idusuario'])){
 
         <script type="text/javascript">
             var messageerror1 = "<?php echo SAULANG15;?>";
-            var messageerror2 = "<?php echo SAULANG16;?>";
         </script>
         <script src="js/sau/sau3.js"></script>
     </body>
