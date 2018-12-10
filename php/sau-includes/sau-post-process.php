@@ -131,7 +131,7 @@ function comments($post) {
                             <div class="message-icon pull-left">';
 
             if ($key['picture'] == 1) {
-                echo '<img src="sau-content/images/profile-small.png">';
+                echo '<img src="img/profile-small.png">';
             }else{
                 $finalprofile = str_replace('normal-', 'small-', $key['picture']);
                 echo'<img src="'.$finalprofile.'">';
@@ -194,7 +194,7 @@ if (isset($_POST['process'])) {
                     <div class="message-icon pull-left">';
 
         if ($profilepicture == 1) {
-            echo '<img src="sau-content/images/profile-small.png">';
+            echo '<img src="img/profile-small.png">';
         }else{
             $finalprofile = str_replace('normal-', 'small-', $profilepicture);
             echo '<img src="'.$finalprofile.'">';
@@ -454,7 +454,7 @@ if (isset($_POST['process'])) {
                             <div class="message-icon pull-left">';
 
                 if ($key['picture'] == 1) {
-                    echo '<img src="sau-content/images/profile-small.png">';
+                    echo '<img src="img/profile-small.png">';
                 }else{
                     $finalprofile = str_replace('normal-', 'small-', $key['picture']);
                     echo'<img src="'.$finalprofile.'">';
@@ -544,7 +544,7 @@ if (isset($_POST['process'])) {
                             <div class="message-icon pull-left">';
 
                 if ($key['picture'] == 1) {
-                    echo '<img src="sau-content/images/profile-small.png">';
+                    echo '<img src="img/profile-small.png">';
                 }else{
                     $finalprofile = str_replace('normal-', 'small-', $key['picture']);
                     echo'<img src="'.$finalprofile.'">';

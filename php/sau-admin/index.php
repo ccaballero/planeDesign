@@ -117,7 +117,7 @@ if(isset($_SESSION['ranker'])){
                     <div class="col-sm-3 col-xs-6 paddingone">
                         <div class="data-cubes data-cubes-3">
                             <div class="col-sm-6"><i class="fa fa-commenting fa-4x"></i></div>
-                            <div class="col-sm-6"><h1><?php cuantoscomment(); ?></h1><small>Comentarios Totales</small></div>
+                            <div class="col-sm-6"><h1><?php cuantoscomment(); ?></h1><small>Comentarios Totales&nbsp;</small></div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6 paddingone">

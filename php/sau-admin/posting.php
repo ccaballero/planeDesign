@@ -102,7 +102,7 @@ if(isset($_SESSION['ranker'])){
             <div class="row">
                 <div class="col-sm-12 col-md-12 main">
                     <div id="panel-usuarios" class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-files-o"></i> Publicaciones </div>
+                        <div class="panel-heading"><i class="fa fa-files-o"></i>&nbsp;Publicaciones</div>
                             <div class="panel-body nopadding">
                         <?php 
                             if (isset($_GET['page'])){

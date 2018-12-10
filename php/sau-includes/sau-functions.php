@@ -873,7 +873,7 @@ function register($nombre,$apellido,$email,$password){
         $mail->isHTML(true);
         $mail->Subject = SAULANG68.' - '.SITETITLE;
         $mail->Body = $htmlhead.$messageone.$activationlink.$htmlfooter;
-        $mail->send(); 
+        $mail->send();
     }else{
         return 1;
     }
@@ -1026,8 +1026,8 @@ function recoverypass($email){
         $activationlink = '<p><label>'.SAULANG76.' <strong>'.$passgenerated.'</strong></label></p>';
 
         // Envio de Correo 
-        $mail = new PHPMailer;
-        $mail->isSMTP();                                      
+        $mail = new PHPMailer();
+        $mail->isSMTP();
         $mail->Host = $parsedata[0]; // especiificar el servidor smtp
         $mail->SMTPAuth = true;                           
         $mail->Username = $parsedata[3]; // correo desde el que se enviara
@@ -1038,7 +1038,7 @@ function recoverypass($email){
         $mail->isHTML(true);    
         $mail->Subject = SAULANG75.' - '.SITETITLE;   // Asunto
         $mail->Body = $htmlhead.$messageone.$activationlink.$htmlfooter;
-        $mail->send(); 
+        $mail->send();
     }
 }
 

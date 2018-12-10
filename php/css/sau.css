@@ -133,9 +133,6 @@ a,button{
 
 
 .deletecomment{
-    position: absolute;
-    right: 15px;
-    top: 10px;
     background: #CE1F1F;
     padding: 2px 5px;
     color: #fff;

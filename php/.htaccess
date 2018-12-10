@@ -11,7 +11,7 @@
     RewriteRule ^recuperar(.*)?$ sau-recovery.php
     RewriteRule ^search(.*)?$ sau-search.php
     RewriteRule ^mycontacts(.*)?$ sau-contacts.php
-    RewriteRule ^sauactive(.*)?$ activar.php
+    RewriteRule ^active(.*)?$ activar.php
 
     # Publicaciones
     RewriteRule ^logout(.*)?$ logout.php

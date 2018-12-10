@@ -45,11 +45,10 @@ $('.edituser').on('click',function(){
                             d.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
                         }
                       , success:function(){
-                            $('#loadingloader').remove();
+                            /*$('#loadingloader').remove();
                             d.show();
-                            b.show();
-
-                            window.location.reload(false);
+                            b.show();*/
+                            location.reload(false);
                         },
                         error:function(){}
                     });
@@ -68,11 +67,10 @@ $('.edituser').on('click',function(){
                         $('#imageprofilechange').parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
                     }
                   , success:function(a){
-                        $('#loadingloader').remove();
+                        /*$('#loadingloader').remove();
                         $('#imageprofilechange').attr('src', 'img/profile-normal.png');
-                        $('#imageprofilechange').removeClass('opacityimgload');
-
-                        window.location.reload(false);
+                        $('#imageprofilechange').removeClass('opacityimgload');*/
+                        location.reload(false);
                     }
                   , error:function(){}
                 })
@@ -102,12 +100,11 @@ $('.edituser').on('click',function(){
                             $('#imageprofilechange').parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
                         }
                       , success:function(a){
-                            1 == a ? ($('#alertimg').show(), setTimeout(function() {
+                            /*1 == a ? ($('#alertimg').show(), setTimeout(function() {
                                 $('#alertimg').fadeOut(1E3)
                             }, 3E3)) : ($('#imageprofilechange').attr('src', a), $('#imageprofilechange').removeClass('opacityimg'), $('#loadingloader').remove());
-                            $(this).val('');
-
-                            window.location.reload(false);
+                            $(this).val('');*/
+                            location.reload(false);
                         }
                       , error:function(){}
                     })
@@ -146,10 +143,11 @@ $('.edituser').on('click',function(){
                             a.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
                         }
                       , success:function(b){
-                            $('#loadingloader').remove();
+                            /*$('#loadingloader').remove();
                             $('#userchangepass')[0].reset();
                             c.show();
-                            a.show();
+                            a.show();*/
+                            location.reload(false);
                         }
                       , error:function(){}
                     });
@@ -188,9 +186,10 @@ $('.edituser').on('click',function(){
                             b.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
                         }
                       , success:function(a){
-                            $('#loadingloader').remove();
+                            /*$('#loadingloader').remove();
                             b.show();
-                            c.show();
+                            c.show();*/
+                            location.reload(false);
                         }
                       , error:function(){}
                     });
@@ -201,7 +200,7 @@ $('.edituser').on('click',function(){
     });
 });
 
-$('.crearnuevousuario').on('click', function() {
+$('.crearnuevousuario').on('click',function(){
     jQuery.validator.setDefaults({
         debug:!0
       , success:'valid'
@@ -235,101 +234,118 @@ $('.crearnuevousuario').on('click', function() {
                 b.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
             }
           , success:function(){
-                $('#loadingloader').remove();
+                /*$('#loadingloader').remove();
                 b.show();
                 e.show();
                 $('#NewUserModal').modal('toggle');
-                b[0].reset();
-                location.reload()
+                b[0].reset();*/
+                location.reload(false)
             }
           , error:function(){}
         });
     }
 });
 
-$(".deleteuser").on("click", function() {
-    var a = $(this).attr("data-id");
-    $.ajax({
-        type: "POST",
-        url: "sau-admin/admin.process.php",
-        data: "process=7&usuario=" + a,
-        beforeSend: function() {
-            $("#trusuario" + a).addClass("opacityimgload")
-        },
-        success: function(b) {
-            $("#trusuario" + a).remove()
-        },
-        error: function() {}
-    })
+$('.deleteuser').on('click',function(){
+    var a=$(this).attr('data-id')
+      , yes=confirm('Esta seguro que desea eliminar el elemento?')
+
+    if(yes){
+        $.ajax({
+            type:'POST'
+          , url:'sau-admin/admin.process.php'
+          , data:'process=7&usuario='+a
+          , beforeSend:function(){
+                $('#trusuario'+a).addClass('opacityimgload');
+            }
+          , success:function(b){
+                $('#trusuario'+a).remove();
+            }
+          , error:function(){}
+        });
+    }
 });
-$(".editpublicacion").on("click", function() {
-    var a = $(this).attr("data-id");
+
+$('.editpublicacion').on('click',function(){
+    var a=$(this).attr('data-id')
+
     $.ajax({
-        type: "POST",
-        url: "sau-admin/admin.process.php",
-        data: "process=8&publicacion=" + a,
-        beforeSend: function() {
-            $("#data-append").html(" ");
-            $("#trpublicacion" + a).addClass("opacityimgload")
-        },
-        success: function(b) {
-            $("#data-append").html(" ");
-            $("#trpublicacion" + a).removeClass("opacityimgload");
-            $("#data-append").append(b);
-            $("#myModal").modal("show");
-            $(".savepublicacion").on("click", function() {
+        type:'POST'
+      , url:'sau-admin/admin.process.php'
+      , data:'process=8&publicacion='+a
+      , beforeSend:function(){
+            $('#data-append').html(' ');
+            $('#trpublicacion'+a).addClass('opacityimgload');
+        }
+      , success:function(b){
+            $('#data-append').html(' ');
+            $('#trpublicacion'+a).removeClass('opacityimgload');
+            $('#data-append').append(b);
+            $('#myModal').modal('show');
+            $('.savepublicacion').on('click',function(){
                 jQuery.validator.setDefaults({
-                    debug: !0,
-                    success: "valid"
+                    debug:!0,
+                    success:'valid'
                 });
-                var a = $("#publicacioneditfrm");
+
+                var a=$('#publicacioneditfrm')
+
                 a.validate({
-                    rules: {
-                        publicacion: "required"
+                    rules:{
+                        publicacion:'required'
                     }
                 });
-                if (1 == a.valid()) {
-                    var b = $("#publicacioneditfrm"),
-                        a = "process=9&" + b.serialize(),
-                        c = $(this);
+
+                if(1==a.valid()){
+                    var b=$('#publicacioneditfrm')
+                      , a='process=9&'+b.serialize()
+                      , c=$(this)
+
                     $.ajax({
-                        type: "POST",
-                        url: "sau-admin/admin.process.php",
-                        data: a,
-                        beforeSend: function() {
+                        type:'POST'
+                      , url:'sau-admin/admin.process.php'
+                      , data:a
+                      , beforeSend:function(){
                             b.hide();
                             c.hide();
                             b.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
-                        },
-                        success: function() {
-                            $("#loadingloader").remove();
+                        }
+                      , success:function(){
+                            /*$('#loadingloader').remove();
                             b.show();
                             c.show();
-                            $("#myModal").modal("toggle")
-                        },
-                        error: function() {}
+                            $('#myModal').modal('toggle');*/
+                            location.reload(false);
+                        }
+                      , error:function(){}
                     })
                 }
             })
-        },
-        error: function() {}
+        }
+      , error:function(){}
     })
 });
-$(".deleteaplicacion").on("click", function() {
-    var a = $(this).attr("data-id");
-    $.ajax({
-        type: "POST",
-        url: "sau-admin/admin.process.php",
-        data: "process=10&publicacion=" + a,
-        beforeSend: function() {
-            $("#trpublicacion" + a).addClass("opacityimgload")
-        },
-        success: function(b) {
-            $("#trpublicacion" + a).remove()
-        },
-        error: function() {}
-    })
+
+$('.deleteaplicacion').on('click',function(){
+    var a=$(this).attr('data-id')
+      , yes=confirm('Esta seguro que desea eliminar el elemento?');
+
+    if(yes){
+        $.ajax({
+            type:'POST'
+          , url:'sau-admin/admin.process.php'
+          , data:'process=10&publicacion='+a
+          , beforeSend:function(){
+                $('#trpublicacion'+a).addClass('opacityimgload');
+            }
+          , success:function(b){
+                $('#trpublicacion'+a).remove();
+            }
+          , error:function(){}
+        })
+    }
 });
+
 $(".enviarmensajetodosbtn").on("click", function() {
     jQuery.validator.setDefaults({
         debug: !0,
@@ -439,44 +455,51 @@ $(".guardarconfiguracion").on("click", function() {
         })
     }
 });
-$(".vercomentarios").on("click", function() {
-    var a = $(this).attr("data-id");
+
+$('.vercomentarios').on('click',function(){
+    var a = $(this).attr('data-id')
+
     $.ajax({
-        type: "POST",
-        url: "sau-admin/admin.process.php",
-        data: "process=14&publicacion=" + a,
-        beforeSend: function() {
-            $("#data-append").html(" ");
-            $("#trpublicacion" + a).addClass("opacityimgload")
-        },
-        success: function(b) {
-            $("#data-append").append(b);
-            $("#trpublicacion" + a).removeClass("opacityimgload");
-            $("#myModal").modal("show");
-            $(".deletecomment").on("click", function() {
-                var a = $(this).attr("data-comment"),
-                    b = $("#time-comment-" + a);
-                $(this).addClass("animated zoomOut");
-                $.ajax({
-                    type: "POST",
-                    url: "sau-admin/admin.process.php",
-                    data: "process=15&delete=" + a,
-                    beforeSend: function() {
-                        b.prepend('<div id="loaders"><div class="loader-inner line-scale-pulse-out-rapid"><div></div><div></div><div></div><div></div><div></div></div></div>')
-                    },
-                    success: function() {
-                        b.addClass("animated bounceOut").fadeOut(1E3);
-                        setTimeout(function() {
-                            b.remove()
-                        }, 2E3)
-                    },
-                    error: function() {}
-                })
+        type:'POST'
+      , url:'sau-admin/admin.process.php'
+      , data:'process=14&publicacion='+a
+      , beforeSend:function(){
+            $('#data-append').html(' ');
+            $('#trpublicacion'+a).addClass('opacityimgload');
+        }
+      , success:function(b){
+            $('#data-append').append(b);
+            $('#trpublicacion'+a).removeClass('opacityimgload');
+            $('#myModal').modal('show');
+            $('.deletecomment').on('click',function(){
+                var a=$(this).attr('data-comment')
+                  , b=$('#time-comment-'+a)
+                  , yes=confirm('Esta seguro que desea eliminar el elemento?')
+
+                if(yes){
+                    $(this).addClass('animated zoomOut');
+                    $.ajax({
+                        type:'POST'
+                      , url:'sau-admin/admin.process.php'
+                      , data:'process=15&delete='+a
+                      , beforeSend:function(){
+                            b.prepend('<div id="loaders"><div class="loader-inner line-scale-pulse-out-rapid"><div></div><div></div><div></div><div></div><div></div></div></div>');
+                        }
+                      , success:function(){
+                            b.addClass('animated bounceOut').fadeOut(1E3);
+                            setTimeout(function(){
+                                b.remove()
+                            },2E3);
+                        }
+                      , error:function(){}
+                    });
+                }
             })
-        },
-        error: function() {}
+        }
+      , error:function(){}
     })
 });
+
 $(".deleteusuariosnoactivos").on("click", function() {
     var a = $(this);
     $.ajax({

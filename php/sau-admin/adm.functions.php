@@ -118,7 +118,16 @@ function messagesnoread(){
 
 function messagelistli(){
     $conexion = Conexion::singleton_conexion();
-    $SQL = 'SELECT usuarios.nombre AS nombre, usuarios.apellido as apellido, usuarios.profile, messages.mensaje, messages.fecha, messages.leido FROM messages INNER JOIN usuarios ON usuarios.idusuario = messages.de WHERE messages.para = :para ORDER BY messages.idmessage DESC LIMIT 5';
+    $SQL = 'SELECT usuarios.nombre AS nombre,
+                   usuarios.apellido as apellido,
+                   usuarios.profile,
+                   messages.mensaje,
+                   messages.fecha,
+                   messages.leido
+            FROM messages
+            INNER JOIN usuarios ON usuarios.idusuario = messages.de
+            WHERE messages.para = :para
+            ORDER BY messages.idmessage DESC LIMIT 5';
     $sentence = $conexion -> prepare($SQL);
     $sentence -> bindParam(':para',$_SESSION['idusuario'], PDO::PARAM_INT);
     $sentence -> execute();
@@ -173,249 +182,232 @@ function checkranker(){
 }
 
 function seisultimosactivos(){
-// conexion de base de datos
-$conexion = Conexion::singleton_conexion();
+    // conexion de base de datos
+    $conexion = Conexion::singleton_conexion();
 
-$SQL = 'SELECT * FROM usuarios WHERE activo = 2 ORDER BY idusuario DESC LIMIT 6';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$resultados = $sentence -> fetchAll();
-if (empty($resultados)){
-}else{
-foreach ($resultados as $key){
-$fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['registro'])));
-echo'
-<tr>
-<td>'.$key['nombre'].'</td>
-<td>'.$fecha.'</td>
-<td>'.$key['email'].'</td>
-</tr>
-';
-}
-}
-}
+    $SQL = 'SELECT * FROM usuarios WHERE activo = 2 ORDER BY idusuario DESC LIMIT 6';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $resultados = $sentence -> fetchAll();
 
+    if (empty($resultados)){
+    }else{
+        foreach ($resultados as $key){
+            $fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['registro'])));
+            echo'
+            <tr>
+            <td>'.$key['nombre'].'</td>
+            <td>'.$fecha.'</td>
+            <td>'.$key['email'].'</td>
+            </tr>
+            ';
+        }
+    }
+}
 
 function seisultimaspublicaciones(){
-// conexion de base de datos
-$conexion = Conexion::singleton_conexion();
+    // conexion de base de datos
+    $conexion = Conexion::singleton_conexion();
 
-$SQL = 'SELECT publicaciones.publicacion, publicaciones.fecha, usuarios.nombre, usuarios.apellido FROM publicaciones INNER JOIN usuarios ON usuarios.idusuario = publicaciones.usuario ORDER BY publicaciones.idpublicacion DESC LIMIT 6';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$resultados = $sentence -> fetchAll();
-if (empty($resultados)){
-}else{
-foreach ($resultados as $key){
-$fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['fecha'])));
-echo'
-<tr>
-<td>'.$key['nombre'].' </td>
-<td>'.$fecha.'</td>
-<td>'.substr($key['publicacion'], 0,30).'...</td>
-</tr>
-';
-}
-}
-}
+    $SQL = 'SELECT publicaciones.publicacion,
+                   publicaciones.fecha,
+                   usuarios.nombre,
+                   usuarios.apellido
+            FROM publicaciones
+            INNER JOIN usuarios ON usuarios.idusuario = publicaciones.usuario
+            ORDER BY publicaciones.idpublicacion DESC LIMIT 6';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $resultados = $sentence -> fetchAll();
 
+    if (empty($resultados)){
+    }else{
+        foreach ($resultados as $key){
+            $fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['fecha'])));
+            echo'
+            <tr>
+            <td>'.$key['nombre'].' </td>
+            <td>'.$fecha.'</td>
+            <td>'.substr($key['publicacion'], 0,30).'...</td>
+            </tr>
+            ';
+        }
+    }
+}
 
 function seisultimoscomentarios(){
-// conexion de base de datos
-$conexion = Conexion::singleton_conexion();
+    // conexion de base de datos
+    $conexion = Conexion::singleton_conexion();
 
-$SQL = 'SELECT comentarios.comentario, comentarios.fecha, usuarios.nombre, usuarios.apellido FROM comentarios INNER JOIN usuarios ON usuarios.idusuario = comentarios.usuario ORDER BY comentarios.idcomentario DESC LIMIT 6';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$resultados = $sentence -> fetchAll();
-if (empty($resultados)){
-}else{
-foreach ($resultados as $key){
-$fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['fecha'])));
-echo'
-<tr>
-<td>'.$key['nombre'].'</td>
-<td>'.$fecha.'</td>
-<td>'.substr($key['comentario'], 0,30).'...</td>
-</tr>
-';
-}
-}
-}
+    $SQL = 'SELECT comentarios.comentario,
+                   comentarios.fecha,
+                   usuarios.nombre,
+                   usuarios.apellido
+            FROM comentarios
+            INNER JOIN usuarios ON usuarios.idusuario = comentarios.usuario
+            ORDER BY comentarios.idcomentario DESC LIMIT 6';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $resultados = $sentence -> fetchAll();
 
-
+    if (empty($resultados)){
+    }else{
+        foreach ($resultados as $key){
+            $fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['fecha'])));
+            echo'
+            <tr>
+            <td>'.$key['nombre'].'</td>
+            <td>'.$fecha.'</td>
+            <td>'.substr($key['comentario'], 0,30).'...</td>
+            </tr>
+            ';
+        }
+    }
+}
 
 function mailconfig(){
+    // conexion de base de datos
+    $conexion = Conexion::singleton_conexion();
 
-// conexion de base de datos
-$conexion = Conexion::singleton_conexion();
+    $SQL = 'SELECT * FROM config WHERE idconfig = 1';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $resultados = $sentence -> fetchAll();
 
-$SQL = 'SELECT * FROM config WHERE idconfig = 1';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$resultados = $sentence -> fetchAll();
-if (empty($resultados)){
-# code...
-}else{
-foreach ($resultados as $key){
+    if (empty($resultados)){
+    }else{
+        foreach ($resultados as $key){
+            if ($key['login'] == 1){
+                $login = '<option value="'.$key['login'].'">Activo</option>';
+            }else{
+                $login = '<option value="'.$key['login'].'">Inactivo</option>';
+            }
 
-if ($key['login'] == 1){
-$login = '<option value="'.$key['login'].'">Activo</option>';
-}else{
-$login = '<option value="'.$key['login'].'">Inactivo</option>';
+            if ($key['register'] == 1){
+                $register = '<option value="'.$key['register'].'">Activo</option>';
+            }else{
+                $register = '<option value="'.$key['register'].'">Inactivo</option>';
+            }
+
+            if ($key['forgot'] == 1){
+                $forgot = '<option value="'.$key['forgot'].'">Activo</option>';
+            }else{
+                $forgot = '<option value="'.$key['forgot'].'">Inactivo</option>';
+            }
+
+            echo'
+            <div class="col-sm-6">
+            <label>Login:</label>
+            <select class="form-control" name="login">
+            <optgroup>
+            '.$login.'
+            </optgroup>
+            <optgroup>
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+            </optgroup>
+            </select>
+            <label>Registro:</label>
+            <select class="form-control" name="register">
+            <optgroup>
+            '.$register.'
+            </optgroup>
+            <optgroup>
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+            </optgroup>
+            </select>
+            <label>Recovery Password:</label>
+            <select class="form-control" name="forgot">
+            <optgroup>
+            '.$forgot.'
+            </optgroup>
+            <optgroup>
+            <option value="1">Activo</option>
+            <option value="2">Inactivo</option>
+            </optgroup>
+            </select>
+            <label>Mensaje Registro:</label>
+            <textarea class="form-control" rows="3" name="messagemail">'.$key['messagemail'].'</textarea>
+            <label>Mensaje Cambio de Correo:</label>
+            <textarea class="form-control" rows="3" name="messagechange">'.$key['messagechange'].'</textarea>
+            <label>Mensaje de Recuperacion de Correo:</label>
+            <textarea class="form-control" rows="3" name="renewmessage">'.$key['renewmessage'].'</textarea>
+            </div>
+            <div class="col-sm-6">
+            <label>SMTP:</label>
+            <input class="form-control" type="" name="smtp" value="'.$key['smtp'].'" >
+            <label>Puerto:</label>
+            <input class="form-control" type="" name="port" value="'.$key['port'].'" >
+            <label>Nombre:</label>
+            <input class="form-control" type="" name="fromname" value="'.$key['fromname'].'" >
+            <label>Mail:</label>
+            <input class="form-control" type="" name="mail" value="'.$key['mail'].'" >
+            <label>Contraseña:</label>
+            <input class="form-control" type="" name="password" value="'.$key['password'].'" >
+            <label>URL:</label>
+            <input class="form-control" type="" name="url" value="'.$key['url'].'" >
+            </div>';
+        }
+    }
 }
-
-if ($key['register'] == 1){
-$register = '<option value="'.$key['register'].'">Activo</option>';
-}else{
-$register = '<option value="'.$key['register'].'">Inactivo</option>';
-}
-
-if ($key['forgot'] == 1){
-$forgot = '<option value="'.$key['forgot'].'">Activo</option>';
-}else{
-$forgot = '<option value="'.$key['forgot'].'">Inactivo</option>';
-}    
-
-
-
-echo'
-<div class="col-sm-6">
-
-<label>Login:</label>
-<select class="form-control" name="login">
-<optgroup>
-'.$login.'
-</optgroup>
-<optgroup>
-<option value="1">Activo</option>
-<option value="2">Inactivo</option>
-</optgroup>
-</select>
-<label>Registro:</label>
-<select class="form-control" name="register">
-<optgroup>
-'.$register.'
-</optgroup>
-<optgroup>
-<option value="1">Activo</option>
-<option value="2">Inactivo</option>
-</optgroup>
-</select>
-<label>Recovery Password:</label>
-<select class="form-control" name="forgot">
-<optgroup>
-'.$forgot.'
-</optgroup>
-<optgroup>
-<option value="1">Activo</option>
-<option value="2">Inactivo</option>
-</optgroup>
-</select>
-<label>Mensaje Registro:</label>
-<textarea class="form-control" rows="3" name="messagemail">'.$key['messagemail'].'</textarea>
-<label>Mensaje Cambio de Correo:</label>
-<textarea class="form-control" rows="3" name="messagechange">'.$key['messagechange'].'</textarea>
-<label>Mensaje de Recuperacion de Correo:</label>
-<textarea class="form-control" rows="3" name="renewmessage">'.$key['renewmessage'].'</textarea>
-
-
-</div>
-
-<div class="col-sm-6">
-
-<label>SMTP:</label>
-<input class="form-control" type="" name="smtp" value="'.$key['smtp'].'" >
-<label>Puerto:</label>
-<input class="form-control" type="" name="port" value="'.$key['port'].'" >
-<label>Nombre:</label>
-<input class="form-control" type="" name="fromname" value="'.$key['fromname'].'" >
-<label>Mail:</label>
-<input class="form-control" type="" name="mail" value="'.$key['mail'].'" >
-<label>Contraseña:</label>
-<input class="form-control" type="" name="password" value="'.$key['password'].'" >
-<label>URL:</label>
-<input class="form-control" type="" name="url" value="'.$key['url'].'" >
-
-</div>
-
-
-';
-}
-}
-
-
-
-}
-
-
 
 function getusuariosoptionmessage(){
+    // conexion de base de datos
+    $conexion = Conexion::singleton_conexion();
 
-// conexion de base de datos
-$conexion = Conexion::singleton_conexion();
+    $SQL = "SELECT * FROM usuarios";
+    $sentence = $conexion -> prepare($SQL);
+    $sentence ->execute();
+    $results = $sentence -> fetchAll();
 
-$SQL = "SELECT * FROM usuarios";
-$sentence = $conexion -> prepare($SQL);
-$sentence ->execute();
-$results = $sentence -> fetchAll();
-if (empty($results)) {
-}else{
-foreach ($results as $key){
-
-echo'<option value="'.$key['idusuario'].'">'.$key['nombre'].' '.$key['apellido'].'</option>';
-
+    if (empty($results)) {
+    }else{
+        foreach ($results as $key){
+            echo'<option value="'.$key['idusuario'].'">'.$key['nombre'].' '.$key['apellido'].'</option>';
+        }
+    }
 }
-}
-}
-
 
 function cuantosusers(){
+    $conexion = Conexion::singleton_conexion();
 
-$conexion = Conexion::singleton_conexion();
-
-$SQL = 'SELECT * FROM usuarios';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$cuantos = $sentence -> rowCount();
-echo $cuantos;
+    $SQL = 'SELECT * FROM usuarios';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $cuantos = $sentence -> rowCount();
+    echo $cuantos;
 }
 
 function cuantospublic(){
+    $conexion = Conexion::singleton_conexion();
 
-$conexion = Conexion::singleton_conexion();
-
-$SQL = 'SELECT * FROM publicaciones';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$cuantos = $sentence -> rowCount();
-echo $cuantos;
+    $SQL = 'SELECT * FROM publicaciones';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $cuantos = $sentence -> rowCount();
+    echo $cuantos;
 }
-
 
 function cuantoscomment(){
+    $conexion = Conexion::singleton_conexion();
 
-$conexion = Conexion::singleton_conexion();
-
-$SQL = 'SELECT * FROM comentarios';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$cuantos = $sentence -> rowCount();
-echo $cuantos;
+    $SQL = 'SELECT * FROM comentarios';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $cuantos = $sentence -> rowCount();
+    echo $cuantos;
 }
-
 
 function cuantoscontact(){
+    $conexion = Conexion::singleton_conexion();
 
-$conexion = Conexion::singleton_conexion();
-
-$SQL = 'SELECT * FROM contacts';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$cuantos = $sentence -> rowCount();
-echo $cuantos;
+    $SQL = 'SELECT * FROM contacts';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $cuantos = $sentence -> rowCount();
+    echo $cuantos;
 }
-
 
 function configurationmail(){
     $conexion = Conexion::singleton_conexion();
@@ -433,37 +425,39 @@ function configurationmail(){
 }
 
 function displayusers(){
-$conexion = Conexion::singleton_conexion();
+    $conexion = Conexion::singleton_conexion();
 
-$SQL = 'SELECT usuarios.profile AS profile, usuarios.nombre AS nombre, usuarios.apellido AS apellido, usuarios.permalink FROM usuarios';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> execute();
-$resultado = $sentence -> fetchAll();
-if(empty($resultado)){
-}else{
-foreach($resultado as $key){
+    $SQL = 'SELECT usuarios.profile AS profile,
+                usuarios.nombre AS nombre,
+                usuarios.apellido AS apellido,
+                usuarios.permalink
+            FROM usuarios';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $resultado = $sentence -> fetchAll();
 
-if($key['profile'] == 1){
-$profile = '<img src="img/profile-small.png">';
-}else{
-$profileparse = str_replace('normal-', 'small-', $key['profile']);
-$profile = '<img src="'.$profileparse.'">';
-}
+    if(empty($resultado)){
+    }else{
+        foreach($resultado as $key){
+            if($key['profile'] == 1){
+                $profile = '<img src="img/profile-small.png">';
+            }else{
+                $profileparse = str_replace('normal-', 'small-', $key['profile']);
+                $profile = '<img src="'.$profileparse.'">';
+            }
 
-echo'
-<div class="col-sm-2 col-xs-6 text-center useradmcube">
-<a href="profile!'.$key['permalink'].'" >
-'.$profile.'
-<p>'.$key['nombre'].' '.$key['apellido'].'</p>
-</a>
-<button class="btn btn-block btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</button>
-<button class="btn btn-block btn-xs btn-danger"><i class="fa fa-times"></i> Eliminar</button>
-</div>
-';
-
-}
-
-}
+            echo '
+            <div class="col-sm-2 col-xs-6 text-center useradmcube">
+            <a href="profile!'.$key['permalink'].'" >
+            '.$profile.'
+            <p>'.$key['nombre'].' '.$key['apellido'].'</p>
+            </a>
+            <button class="btn btn-block btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</button>
+            <button class="btn btn-block btn-xs btn-danger"><i class="fa fa-times"></i> Eliminar</button>
+            </div>
+            ';
+        }
+    }
 }
 
 function userstableadm($page){
@@ -650,54 +644,61 @@ function processfile($archive,$profile){
     echo $finalruta;
 }
 
-
-
 function changeuserpassword($usuario, $pass1){
+    // conexion de la base de datos
+    $conexion = Conexion::singleton_conexion();
 
-// conexion de la base de datos
-$conexion = Conexion::singleton_conexion();
-
-// Actualizar Password
-$cryptupda = sha1(SALT.$pass1.PEPER);
-$updatepass = 'UPDATE usuarios SET password = :password WHERE idusuario = :idusuario';
-$senteceupda = $conexion -> prepare($updatepass);
-$senteceupda -> bindParam(':password',$cryptupda, PDO::PARAM_STR);
-$senteceupda -> bindParam(':idusuario',$usuario, PDO::PARAM_INT);
-$senteceupda -> execute();
-
-
+    // Actualizar Password
+    $cryptupda = sha1(SALT.$pass1.PEPER);
+    $updatepass = 'UPDATE usuarios SET password = :password WHERE idusuario = :idusuario';
+    $senteceupda = $conexion -> prepare($updatepass);
+    $senteceupda -> bindParam(':password',$cryptupda, PDO::PARAM_STR);
+    $senteceupda -> bindParam(':idusuario',$usuario, PDO::PARAM_INT);
+    $senteceupda -> execute();
 }
 
-
 function commentscount($posting){
+    // conexion de la base de datos
+    $conexion = Conexion::singleton_conexion();
 
-// conexion de la base de datos
-$conexion = Conexion::singleton_conexion();
-
-$SQL = 'SELECT * FROM comentarios WHERE publicacion = :publicacion';
-$sentence = $conexion -> prepare($SQL);
-$sentence -> bindParam(':publicacion', $posting, PDO::PARAM_INT);
-$sentence -> execute();
-$cuantos = $sentence -> rowCount();
-return $cuantos;
+    $SQL = 'SELECT * FROM comentarios WHERE publicacion = :publicacion';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> bindParam(':publicacion', $posting, PDO::PARAM_INT);
+    $sentence -> execute();
+    $cuantos = $sentence -> rowCount();
+    return $cuantos;
 }
 
 function fechastring($fecha){
     $fechatitle = str_replace('-', '/', date("d-m-Y h:i:s", strtotime($fecha)));
-    $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
     $meses = array(" ","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
     $year = substr($fecha,0,4);
     $month = substr($fecha, 5, 2);
     $day = substr($fecha, 8, 2);
     $time = date('h:i A',strtotime(substr($fecha, 11,8)));
-    $complete = '<i class="glyphicon glyphicon-time"></i> '.$dias[$day]." ".$day." de ".$meses[(int)$month]. " del ".$year.'';
+    $complete = '<i class="glyphicon glyphicon-time"></i>&nbsp;'.$day." de ".$meses[(int)$month]. " del ".$year.'';
 
     return $complete;
 }
 
 function comments($post){
     $conexion = Conexion::singleton_conexion();
-    $SQL = "SELECT usuarios.permalink, publicaciones.usuario AS posteruser,comentarios.idcomentario,comentarios.fecha,comentarios.comentario, usuarios.idusuario, usuarios.nombre AS nombre, usuarios.apellido AS apellido,usuarios.profile AS picture FROM comentarios INNER JOIN usuarios ON usuarios.idusuario = comentarios.usuario INNER JOIN publicaciones ON publicaciones.idpublicacion = comentarios.publicacion WHERE comentarios.publicacion = :post ORDER BY comentarios.idcomentario DESC";
+    $SQL = 'SELECT usuarios.permalink,
+                publicaciones.usuario AS posteruser,
+                comentarios.idcomentario,
+                comentarios.fecha,
+                comentarios.comentario,
+                usuarios.idusuario,
+                usuarios.nombre AS nombre,
+                usuarios.apellido AS apellido,
+                usuarios.profile AS picture
+            FROM comentarios
+            INNER JOIN usuarios
+            ON usuarios.idusuario = comentarios.usuario
+            INNER JOIN publicaciones
+            ON publicaciones.idpublicacion = comentarios.publicacion
+            WHERE comentarios.publicacion = :post
+            ORDER BY comentarios.idcomentario DESC';
     $sentence = $conexion -> prepare($SQL);
     $sentence -> bindParam(':post',$post, PDO::PARAM_INT);
     $sentence ->execute();
@@ -705,129 +706,145 @@ function comments($post){
 
     if (!empty($results)) {
         foreach ($results as $key){
-            echo'
+            echo '
             <tr id="time-comment-'.$key['idcomentario'].'">
-            <td><a class="btn btn-block btn-xs btn-success" href="../profile!'.$key['permalink'].'">'.$key['nombre'].' '.$key['apellido'].'</a></td>
-            <td>'.fechastring($key['fecha']).'</td>
-            <td>'.utf8_decode($key['comentario']).'</td>
-            <td><a data-comment="'.$key['idcomentario'].'" class="deletecomment btn btn-xs btn-danger"><i class="fa fa-times"></i> Eliminar</a></td>
+                <td><a class="btn btn-block btn-xs btn-success" href="../profile!'.$key['permalink'].'">'.$key['nombre'].' '.$key['apellido'].'</a></td>
+                <td>'.fechastring($key['fecha']).'</td>
+                <td>'.utf8_decode($key['comentario']).'</td>
+                <td>
+                    <a data-comment="'.$key['idcomentario'].'" class="deletecomment btn btn-xs btn-danger">
+                        <i class="fa fa-times"></i>&nbsp;Eliminar
+                    </a>
+                </td>
             </tr>';
         }
     }
 }
 
-
 function publishtableadm($page){
+    // conexion de la base de datos
+    $conexion = Conexion::singleton_conexion();
 
-// conexion de la base de datos
-$conexion = Conexion::singleton_conexion();
+    $RowCount = "SELECT * FROM publicaciones";
+    $counsentence = $conexion -> prepare($RowCount);
+    $counsentence -> execute();
+    $cuantos = $counsentence -> rowCount();
 
-$RowCount = "SELECT * FROM publicaciones";
-$counsentence = $conexion -> prepare($RowCount);
-$counsentence -> execute();
-$cuantos = $counsentence -> rowCount();
+    // Tamaño de pagina
+    $resultados = 10;
+    // total parginado
+    $totalpaginas = ceil($cuantos / $resultados);
+    // articulo inicial
+    $articuloInicial = ($page - 1) * $resultados;
 
-// Tamaño de pagina
-$resultados = 10;
-// total parginado
-$totalpaginas = ceil($cuantos / $resultados);
-// articulo inicial
-$articuloInicial = ($page - 1) * $resultados;
+    if ($page == 1) {
+        $SQL = "SELECT publicaciones.idpublicacion,
+                    usuarios.nombre,
+                    usuarios.apellido,
+                    publicaciones.publicacion,
+                    publicaciones.fecha,
+                    publicaciones.usuario
+                FROM publicaciones
+                INNER JOIN usuarios
+                ON usuarios.idusuario = publicaciones.usuario
+                LIMIT 10";
+        $paginaActual = 1;
+    }else{
+        $SQL = "SELECT publicaciones.idpublicacion,
+                    usuarios.nombre,
+                    usuarios.apellido,
+                    publicaciones.publicacion,
+                    publicaciones.fecha,
+                    publicaciones.usuario
+                FROM publicaciones
+                INNER JOIN usuarios
+                ON usuarios.idusuario = publicaciones.usuario
+                LIMIT ".$articuloInicial.", ".$resultados."";
+        $paginaActual = $page;
+    }
 
-if ($page == 1) {
-$SQL = "SELECT publicaciones.idpublicacion, usuarios.nombre, usuarios.apellido, publicaciones.publicacion, publicaciones.fecha, publicaciones.usuario FROM publicaciones INNER JOIN usuarios ON usuarios.idusuario = publicaciones.usuario LIMIT 10";
-$paginaActual = 1;
-}else{
-$SQL = "SELECT publicaciones.idpublicacion, usuarios.nombre, usuarios.apellido, publicaciones.publicacion, publicaciones.fecha, publicaciones.usuario FROM publicaciones INNER JOIN usuarios ON usuarios.idusuario = publicaciones.usuario LIMIT ".$articuloInicial.", ".$resultados."";
-$paginaActual = $page;
-}
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> bindParam(':estado', $estadoid, PDO::PARAM_INT);
+    $sentence -> execute();
+    $results = $sentence -> fetchAll();
 
-$sentence = $conexion -> prepare($SQL);
-$sentence -> bindParam(':estado', $estadoid, PDO::PARAM_INT);
-$sentence -> execute();
-$results = $sentence -> fetchAll();
-if (empty($results)){
-# code...
-}else{
+    if (empty($results)){
+        echo '<p>Ninguna publicación encontrada</p>';
+    }else{
+        echo'
+        <table class="table table-striped">
+        <thead class="messages-table-header">
+        <tr>
+        <th><i class="fa fa-angle-double-right"></i> Usuario</th>
+        <th><i class="fa fa-angle-double-right"></i> Publicacion</th>
+        <th><i class="fa fa-angle-double-right"></i> Fecha</th>
+        <th><i class="fa fa-angle-double-right"></i> Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        ';
 
-echo'
-<table class="table table-striped">
-<thead class="messages-table-header">
-<tr>
-<th><i class="fa fa-angle-double-right"></i> Usuario</th>
-<th><i class="fa fa-angle-double-right"></i> Publicacion</th>
-<th><i class="fa fa-angle-double-right"></i> Fecha</th>
-<th><i class="fa fa-angle-double-right"></i> Acciones</th>
-</tr>
-</thead>
-<tbody>
-';
+        foreach ($results as $key){
+            $comments = commentscount($key['idpublicacion']);
+            $fecha = str_replace('-', '/', date("d-m-Y h:i:s", strtotime($key['fecha'])));
 
-foreach ($results as $key){
+            echo '
+            <tr id="trpublicacion'.$key['idpublicacion'].'">
+            <td>'.$key['nombre'].' '.$key['apellido'].'</td>
+            <td>'.substr($key['publicacion'], 0,100).'</td>
+            <td>'.$fecha.'</td>
+            <td>
+            <button data-id="'.$key['idpublicacion'].'" class="vercomentarios btn btn-block btn-warning btn-xs">'.$comments.' Comentarios</button>
+            <button data-id="'.$key['idpublicacion'].'" class="editpublicacion btn btn-block btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</button>
+            <button data-id="'.$key['idpublicacion'].'" class="deleteaplicacion btn btn-block btn-xs btn-danger"><i class="fa fa-times"></i> Eliminar</button>
+            </td>
+            </tr>
+            ';
+        }
 
-$comments = commentscount($key['idpublicacion']);
-$fecha = str_replace('-', '/', date("d-m-Y h:i:s", strtotime($key['fecha'])));
+        echo'
+        </tbody>
+        </table>
+        ';
+    }
 
-echo '
-<tr id="trpublicacion'.$key['idpublicacion'].'">
-<td>'.$key['nombre'].' '.$key['apellido'].'</td>
-<td>'.substr($key['publicacion'], 0,100).'</td>
-<td>'.$fecha.'</td>
-<td>
-<button data-id="'.$key['idpublicacion'].'" class="vercomentarios btn btn-block btn-warning btn-xs">'.$comments.' Comentarios</button>
-<button data-id="'.$key['idpublicacion'].'" class="editpublicacion btn btn-block btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</button>
-<button data-id="'.$key['idpublicacion'].'" class="deleteaplicacion btn btn-block btn-xs btn-danger"><i class="fa fa-times"></i> Eliminar</button>
-</td>
-</tr>
-';
-}
+    echo'
+    <p></p>
+    <div class="col-md-12 text-right" style="margin-top: 0px;margin-bottom: 10px;padding: 0px 5px;">
+    <div class="btn-group" role="group" >
+    ';
 
-echo'
-</tbody>
-</table>
-';
+    // mostramos la paginación
+    for ($i=1; $i <= $totalpaginas; $i++) { 
+        // para identificar la página actual, le agregamos una clase
+        // para darle un estilo diferente 
+        if($i == $paginaActual){
+            echo '<a class="btn btn-warning active">'.$i.'</a>';
+        }
+        // sólo vamos a mostrar los enlaces de la primer página,
+        // las dos siguientes, las dos anteriores
+        // y la última
+        else if($i == 1){
+            echo '<a class="btn btn-warning" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i><i class="glyphicon glyphicon-chevron-left"></i> </a>';
+        }elseif ($i == $totalpaginas) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i><i class="glyphicon glyphicon-chevron-right"></i> </a>';
+        }elseif ($i >= $paginaActual && $i <= $paginaActual + 2) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
+        }elseif ($i >= $paginaActual && $i <= $paginaActual + 3) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
+        }elseif ($i >= $paginaActual && $i <= $paginaActual + 4) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
+        }elseif ($i == $paginaActual - 1 ){
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i></a>';
+        }elseif ($i == $paginaActual + 5 ){
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i></a>';
+        }
+    }
 
-
-}
-echo'
-<p></p>
-<div class="col-md-12 text-right" style="margin-top: 0px;margin-bottom: 10px;padding: 0px 5px;">
-<div class="btn-group" role="group" >
-';
-
-// mostramos la paginación
-for ($i=1; $i <= $totalpaginas; $i++) { 
-
-// para identificar la página actual, le agregamos una clase
-// para darle un estilo diferente 
-if($i == $paginaActual){
-echo '<a class="btn btn-warning active">'.$i.'</a>';
-}
-// sólo vamos a mostrar los enlaces de la primer página,
-// las dos siguientes, las dos anteriores
-// y la última
-else if($i == 1){
-echo '<a class="btn btn-warning" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i><i class="glyphicon glyphicon-chevron-left"></i> </a>';
-}elseif ($i == $totalpaginas) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i><i class="glyphicon glyphicon-chevron-right"></i> </a>';
-}elseif ($i >= $paginaActual && $i <= $paginaActual + 2) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
-}elseif ($i >= $paginaActual && $i <= $paginaActual + 3) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
-}elseif ($i >= $paginaActual && $i <= $paginaActual + 4) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
-}elseif ($i == $paginaActual - 1 ){
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i></a>';
-}elseif ($i == $paginaActual + 5 ){
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i></a>';
-}
-}
-
-echo'
-</div>
-</div>
-';
-
+    echo'
+    </div>
+    </div>
+    ';
 }
 
 function newuserfunction($nombre,$apellido,$email,$password,$activo,$rango){
@@ -856,40 +873,38 @@ function newuserfunction($nombre,$apellido,$email,$password,$activo,$rango){
         $sentence -> bindParam(9,$_POST['rango'],PDO::PARAM_INT);
         $sentence -> execute();
 
-        if ($_POST['activo'] == 1) {
-            // Insertar para Verificar
-            $mailtoken = sha1($email.TOKENMAIL);
-            $ver = 'INSERT INTO verify (token,email,fecha) VALUES (:token,:email,:fecha)';
-            $versentence = $conexion -> prepare($ver);
-            $versentence -> bindParam(':token',$mailtoken,PDO::PARAM_STR);
-            $versentence -> bindParam(':email',$email,PDO::PARAM_STR);
-            $versentence -> bindParam(':fecha',$date,PDO::PARAM_STR);
-            $versentence -> execute();
+        // Insertar para Verificar
+        $mailtoken = sha1($email.TOKENMAIL);
+        $ver = 'INSERT INTO verify (token,email,fecha) VALUES (:token,:email,:fecha)';
+        $versentence = $conexion -> prepare($ver);
+        $versentence -> bindParam(':token',$mailtoken,PDO::PARAM_STR);
+        $versentence -> bindParam(':email',$email,PDO::PARAM_STR);
+        $versentence -> bindParam(':fecha',$date,PDO::PARAM_STR);
+        $versentence -> execute();
 
-            // Email
-            $dataexplode = configurationmail();
-            $parsedata = explode("|", $dataexplode);
+        // Email
+        $dataexplode = configurationmail();
+        $parsedata = explode("|", $dataexplode);
 
-            $htmlhead = '<!DOCTYPE html><html><body>';
-            $htmlfooter = '</body></html>';
-            $messageone = '<p>'.$parsedata[6].'</p></p><p></p>';
-            $activationlink = '<p><label>Activar Mi Cuenta: </label><p></p><a href="'.$parsedata[5].'active?token='.$mailtoken.'&email='.$email.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$email.'</a></p>';
+        $htmlhead = '<!DOCTYPE html><html><body>';
+        $htmlfooter = '</body></html>';
+        $messageone = '<p>'.$parsedata[6].'</p></p><p></p>';
+        $activationlink = '<p><label>Activar Mi Cuenta: </label><p></p><a href="'.$parsedata[5].'active?token='.$mailtoken.'&email='.$email.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$email.'</a></p>';
 
-            // Envio de Correo 
-            $mail = new PHPMailer;
-            $mail->isSMTP();                                      
-            $mail->Host = $parsedata[0];   // especiificar el servidor smtp
-            $mail->SMTPAuth = true;                           
-            $mail->Username = $parsedata[3];   // correo desde el que se enviara
-            $mail->Password = $parsedata[4];  // password del correo
-            $mail->Port = $parsedata[1];     // el puerto por defecto para SMTP es 587 pero puede ser otro
-            $mail->setFrom($parsedata[3], $parsedata[2]);  // remitente, el segundo paramtero es el nombre
-            $mail->addAddress($email);   // destino
-            $mail->isHTML(true);    
-            $mail->Subject = 'Activacion de Cuenta -'.SITETITLE;   // Asunto
-            $mail->Body    = $htmlhead.$messageone.$activationlink.$htmlfooter;
-            $mail->send();
-        }
+        // Envio de Correo 
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = $parsedata[0];   // especiificar el servidor smtp
+        $mail->SMTPAuth = true;
+        $mail->Username = $parsedata[3];   // correo desde el que se enviara
+        $mail->Password = $parsedata[4];  // password del correo
+        $mail->Port = $parsedata[1];     // el puerto por defecto para SMTP es 587 pero puede ser otro
+        $mail->setFrom($parsedata[3], $parsedata[2]);  // remitente, el segundo paramtero es el nombre
+        $mail->addAddress($email);   // destino
+        $mail->isHTML(true);
+        $mail->Subject = 'Activacion de Cuenta -'.SITETITLE;   // Asunto
+        $mail->Body    = $htmlhead.$messageone.$activationlink.$htmlfooter;
+        $mail->send();
     }else{
         foreach ($resultados as $key){
         }
@@ -897,114 +912,125 @@ function newuserfunction($nombre,$apellido,$email,$password,$activo,$rango){
 }
 
 function mensajesadmin($page){
+    // conexion de la base de datos
+    $conexion = Conexion::singleton_conexion();
 
-// conexion de la base de datos
-$conexion = Conexion::singleton_conexion();
+    $RowCount = "SELECT * FROM publicaciones";
+    $counsentence = $conexion -> prepare($RowCount);
+    $counsentence -> execute();
+    $cuantos = $counsentence -> rowCount();
 
-$RowCount = "SELECT * FROM publicaciones";
-$counsentence = $conexion -> prepare($RowCount);
-$counsentence -> execute();
-$cuantos = $counsentence -> rowCount();
+    // Tamaño de pagina
+    $resultados = 10;
+    // total parginado
+    $totalpaginas = ceil($cuantos / $resultados);
+    // articulo inicial
+    $articuloInicial = ($page - 1) * $resultados;
 
-// Tamaño de pagina
-$resultados = 10;
-// total parginado
-$totalpaginas = ceil($cuantos / $resultados);
-// articulo inicial
-$articuloInicial = ($page - 1) * $resultados;
+    if ($page == 1) {
+        $SQL = "SELECT publicaciones.idpublicacion,
+                    usuarios.nombre,
+                    usuarios.apellido,
+                    publicaciones.publicacion,
+                    publicaciones.fecha,
+                    publicaciones.usuario
+                FROM publicaciones
+                INNER JOIN usuarios
+                ON usuarios.idusuario = publicaciones.usuario
+                LIMIT 10";
+        $paginaActual = 1;
+    }else{
+        $SQL = "SELECT publicaciones.idpublicacion,
+                    usuarios.nombre,
+                    usuarios.apellido,
+                    publicaciones.publicacion,
+                    publicaciones.fecha,
+                    publicaciones.usuario
+                FROM publicaciones
+                INNER JOIN usuarios
+                ON usuarios.idusuario = publicaciones.usuario
+                LIMIT ".$articuloInicial.", ".$resultados."";
+        $paginaActual = $page;
+    }
 
-if ($page == 1) {
-$SQL = "SELECT publicaciones.idpublicacion, usuarios.nombre, usuarios.apellido, publicaciones.publicacion, publicaciones.fecha, publicaciones.usuario FROM publicaciones INNER JOIN usuarios ON usuarios.idusuario = publicaciones.usuario LIMIT 10";
-$paginaActual = 1;
-}else{
-$SQL = "SELECT publicaciones.idpublicacion, usuarios.nombre, usuarios.apellido, publicaciones.publicacion, publicaciones.fecha, publicaciones.usuario FROM publicaciones INNER JOIN usuarios ON usuarios.idusuario = publicaciones.usuario LIMIT ".$articuloInicial.", ".$resultados."";
-$paginaActual = $page;
-}
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> bindParam(':estado', $estadoid, PDO::PARAM_INT);
+    $sentence -> execute();
+    $results = $sentence -> fetchAll();
 
-$sentence = $conexion -> prepare($SQL);
-$sentence -> bindParam(':estado', $estadoid, PDO::PARAM_INT);
-$sentence -> execute();
-$results = $sentence -> fetchAll();
-if (empty($results)){
-# code...
-}else{
+    if (empty($results)){
+    }else{
+        echo'
+        <table class="table table-striped">
+        <thead class="messages-table-header">
+        <tr>
+        <th><i class="fa fa-angle-double-right"></i> Usuario</th>
+        <th><i class="fa fa-angle-double-right"></i> Publicacion</th>
+        <th><i class="fa fa-angle-double-right"></i> Fecha</th>
+        <th><i class="fa fa-angle-double-right"></i> Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        ';
 
-echo'
-<table class="table table-striped">
-<thead class="messages-table-header">
-<tr>
-<th><i class="fa fa-angle-double-right"></i> Usuario</th>
-<th><i class="fa fa-angle-double-right"></i> Publicacion</th>
-<th><i class="fa fa-angle-double-right"></i> Fecha</th>
-<th><i class="fa fa-angle-double-right"></i> Acciones</th>
-</tr>
-</thead>
-<tbody>
-';
+        foreach ($results as $key){
+            $fecha = str_replace('-', '/', date("d-m-Y h:i:s", strtotime($key['fecha'])));
 
-foreach ($results as $key){
+            echo '
+            <tr id="trpublicacion'.$key['idpublicacion'].'">
+            <td>'.$key['nombre'].' '.$key['apellido'].'</td>
+            <td>'.substr($key['publicacion'], 0,100).'</td>
+            <td>'.$fecha.'</td>
+            <td>
+            <button data-id="'.$key['idpublicacion'].'" class="editpublicacion btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</button>
+            <button data-id="'.$key['idpublicacion'].'" class="deleteaplicacion btn btn-xs btn-danger"><i class="fa fa-times"></i> Eliminar</button>
+            </td>
+            </tr>
+            ';
+        }
 
+        echo'
+        </tbody>
+        </table>
+        ';
+    }
 
-$fecha = str_replace('-', '/', date("d-m-Y h:i:s", strtotime($key['fecha'])));
+    echo'
+    <p></p>
+    <div class="col-md-12 text-right" style="margin-top: 0px;margin-bottom: 10px;padding: 0px 5px;">
+    <div class="btn-group" role="group" >
+    ';
 
-echo '
-<tr id="trpublicacion'.$key['idpublicacion'].'">
-<td>'.$key['nombre'].' '.$key['apellido'].'</td>
-<td>'.substr($key['publicacion'], 0,100).'</td>
-<td>'.$fecha.'</td>
-<td>
-<button data-id="'.$key['idpublicacion'].'" class="editpublicacion btn btn-xs btn-primary"><i class="fa fa-pencil-square-o"></i> Editar</button>
-<button data-id="'.$key['idpublicacion'].'" class="deleteaplicacion btn btn-xs btn-danger"><i class="fa fa-times"></i> Eliminar</button>
-</td>
-</tr>
-';
-}
+    // mostramos la paginación
+    for ($i=1; $i <= $totalpaginas; $i++) { 
+        // para identificar la página actual, le agregamos una clase
+        // para darle un estilo diferente 
+        if($i == $paginaActual){
+            echo '<a class="btn btn-warning active">'.$i.'</a>';
+        }
+        // sólo vamos a mostrar los enlaces de la primer página,
+        // las dos siguientes, las dos anteriores
+        // y la última
+        else if($i == 1){
+            echo '<a class="btn btn-warning" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i><i class="glyphicon glyphicon-chevron-left"></i> </a>';
+        }elseif ($i == $totalpaginas) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i><i class="glyphicon glyphicon-chevron-right"></i> </a>';
+        }elseif ($i >= $paginaActual && $i <= $paginaActual + 2) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
+        }elseif ($i >= $paginaActual && $i <= $paginaActual + 3) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
+        }elseif ($i >= $paginaActual && $i <= $paginaActual + 4) {
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
+        }elseif ($i == $paginaActual - 1 ){
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i></a>';
+        }elseif ($i == $paginaActual + 5 ){
+            echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i></a>';
+        }
+    }
 
-echo'
-</tbody>
-</table>
-';
-
-
-}
-echo'
-<p></p>
-<div class="col-md-12 text-right" style="margin-top: 0px;margin-bottom: 10px;padding: 0px 5px;">
-<div class="btn-group" role="group" >
-';
-
-// mostramos la paginación
-for ($i=1; $i <= $totalpaginas; $i++) { 
-
-// para identificar la página actual, le agregamos una clase
-// para darle un estilo diferente 
-if($i == $paginaActual){
-echo '<a class="btn btn-warning active">'.$i.'</a>';
-}
-// sólo vamos a mostrar los enlaces de la primer página,
-// las dos siguientes, las dos anteriores
-// y la última
-else if($i == 1){
-echo '<a class="btn btn-warning" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i><i class="glyphicon glyphicon-chevron-left"></i> </a>';
-}elseif ($i == $totalpaginas) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i><i class="glyphicon glyphicon-chevron-right"></i> </a>';
-}elseif ($i >= $paginaActual && $i <= $paginaActual + 2) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
-}elseif ($i >= $paginaActual && $i <= $paginaActual + 3) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
-}elseif ($i >= $paginaActual && $i <= $paginaActual + 4) {
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'">'.$i.'</a>';
-}elseif ($i == $paginaActual - 1 ){
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-left"></i></a>';
-}elseif ($i == $paginaActual + 5 ){
-echo '<a class="btn btn-warning" rel="nofollow" href="publicaciones?page='.$i.'"><i class="glyphicon glyphicon-chevron-right"></i></a>';
-}
-}
-
-echo'
-</div>
-</div>
-';
-
+    echo'
+    </div>
+    </div>
+    ';
 }
 

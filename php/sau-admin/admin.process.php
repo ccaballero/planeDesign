@@ -133,6 +133,8 @@ if (isset($_POST['process'])) {
                                             <p></p>
                                             <label>Email:</label>
                                             <input type="text" name="email" class="form-control" value="'.$key['email'].'" >
+                                            <p></p>
+                                            <input type="hidden" name="idusuario" value="'.$key['idusuario'].'" />
                                         </form>
                                         <p></p>
                                         <button class="cambiaremailadmbutton btn btn-primary">
@@ -488,27 +490,24 @@ if (isset($_POST['process'])) {
 
         $email = $_POST['email'];
         $stripemail = strip_tags($email);
+        $idusuariodata = $_POST['idusuario'];
 
         $SQL = 'SELECT * FROM usuarios WHERE email = :email LIMIT 1';
         $sentence = $conexion -> prepare($SQL);
-        $sentence -> bindParam(':email', $stripemail , PDO::PARAM_STR);
+        $sentence -> bindParam(':email', $stripemail, PDO::PARAM_STR);
         $sentence -> execute();
         $resultados = $sentence -> fetchAll();
 
-var_dump($resultados);
-die;
-        if (empty($resultados)) {
+        if (!empty($resultados)) {
             return 1;
         } else {
-            foreach ($resultados as $keydata) {
-                $idusuariodata = $keydata['idusuario'];
-            }
-
-            $NewPassSQL = 'UPDATE usuarios SET email = :email, activo = 1 WHERE idusuario = :idusuario';
+            $NewPassSQL = 'UPDATE usuarios SET email = :email,
+                                activo = 1
+                            WHERE idusuario = :idusuario';
             $stnpass = $conexion -> prepare($NewPassSQL);
             $stnpass -> bindParam(':idusuario', $idusuariodata, PDO::PARAM_STR);
             $stnpass -> bindParam(':email', $stripemail, PDO::PARAM_STR);
-            $stnpass -> execute();
+            $res10=$stnpass -> execute();
 
             $fecha = date('Y-m-d');
 
@@ -522,16 +521,16 @@ die;
             $versentence -> execute();
 
             // Email
-            $dataexplode = congifurationmail();
-            $parsedata = explode("|", $dataexplode);
+            $dataexplode = configurationmail();
+            $parsedata = explode('|', $dataexplode);
 
             $htmlhead = '<!DOCTYPE html><html><body>';
             $htmlfooter = '</body></html>';
             $activationlink = '<p><label>Reactivar Mi Cuenta: </label><p></p><a href="'.$parsedata[5].'active?token='.$mailtoken.'&email='.$email.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$email.'</a></p>';;
 
             // Envio de Correo 
-            $mail = new PHPMailer;
-            $mail->isSMTP();                                      
+            $mail = new PHPMailer();
+            $mail->isSMTP();
             $mail->Host = $parsedata[0];   // especiificar el servidor smtp
             $mail->SMTPAuth = true;                           
             $mail->Username = $parsedata[3];   // correo desde el que se enviara
@@ -542,7 +541,7 @@ die;
             $mail->isHTML(true);    
             $mail->Subject = 'Cambio de Correo y Reactivacion de Cuenta - '.SITETITLE;   // Asunto
             $mail->Body    = $htmlhead.$activationlink.$htmlfooter;
-            $mail->send(); 
+            $mail->send();
         }
 
         echo $idusuariodata;

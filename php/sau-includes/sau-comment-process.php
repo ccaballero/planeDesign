@@ -56,7 +56,7 @@ if (isset($_POST['process'])) {
                         <div class="message-icon pull-left">';
 
         if ($profilepicture == 1) {
-            echo '<img src="sau-content/images/profile-small.png">';
+            echo '<img src="img/profile-small.png">';
         }else{
             $finalprofile = str_replace('normal-', 'small-', $profilepicture);
             echo'<img src="'.$finalprofile.'">';
@@ -176,20 +176,20 @@ if (isset($_POST['process'])) {
                 $messageone = '<p>'.$parsedata[6].'</p><p></p>';
                 $activationlink = '<p><label>'.SAULANG69.'</label><p></p><a href="'.$parsedata[5].'sauactive?token='.$mailtoken.'&email='.$stripemail.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$stripemail.'</a>';
 
-                 // Envio de Correo 
-                 $mail = new PHPMailer;
-                 $mail->isSMTP();
-                 $mail->Host = $parsedata[0];   // especiificar el servidor smtp
-                 $mail->SMTPAuth = true;
-                 $mail->Username = $parsedata[3];   // correo desde el que se enviara
-                 $mail->Password = $parsedata[4];  // password del correo
-                 $mail->Port = $parsedata[1];     // el puerto por defecto para SMTP es 587 pero puede ser otro
-                 $mail->setFrom($parsedata[3], $parsedata[2]);  // remitente, el segundo paramtero es el nombre
-                 $mail->addAddress($stripemail);   // destino
-                 $mail->isHTML(true);
-                 $mail->Subject = SAULANG68.' - '.SITETITLE;   // Asunto
-                 $mail->Body    = $htmlhead.$messageone.$activationlink.$htmlfooter;
-                 $mail->send(); 
+                // Envio de Correo 
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->Host = $parsedata[0];   // especiificar el servidor smtp
+                $mail->SMTPAuth = true;
+                $mail->Username = $parsedata[3];   // correo desde el que se enviara
+                $mail->Password = $parsedata[4];  // password del correo
+                $mail->Port = $parsedata[1];     // el puerto por defecto para SMTP es 587 pero puede ser otro
+                $mail->setFrom($parsedata[3], $parsedata[2]);  // remitente, el segundo paramtero es el nombre
+                $mail->addAddress($stripemail);   // destino
+                $mail->isHTML(true);
+                $mail->Subject = SAULANG68.' - '.SITETITLE;   // Asunto
+                $mail->Body    = $htmlhead.$messageone.$activationlink.$htmlfooter;
+                $mail->send();
             }else{
                 echo 666;
             }
