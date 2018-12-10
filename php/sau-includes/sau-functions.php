@@ -256,9 +256,22 @@ function fechastring($fecha){
     return $complete;
 }
 
-function getmyposts($iduser){
+function getmyposts($iduser) {
     $conexion = Conexion::singleton_conexion();
-    $SQL = "SELECT usuarios.permalink,publicaciones.idpublicacion,publicaciones.publicacion,publicaciones.fecha,publicaciones.usuario AS usuariopost, usuarios.nombre AS nombre,usuarios.apellido AS apellido,usuarios.profile AS picture, publicaciones.fecha FROM publicaciones INNER JOIN usuarios ON publicaciones.usuario = usuarios.idusuario WHERE publicaciones.usuario = :usuario ORDER BY publicaciones.idpublicacion DESC LIMIT 6";
+    $SQL = 'SELECT usuarios.permalink,
+                   publicaciones.idpublicacion,
+                   publicaciones.publicacion,
+                   publicaciones.fecha,
+                   publicaciones.usuario AS usuariopost,
+                   usuarios.nombre AS nombre,
+                   usuarios.apellido AS apellido,
+                   usuarios.profile AS picture,
+                   publicaciones.fecha
+            FROM publicaciones
+            INNER JOIN usuarios ON publicaciones.usuario = usuarios.idusuario
+            WHERE publicaciones.usuario = :usuario
+            ORDER BY publicaciones.idpublicacion
+            DESC LIMIT 6';
     $sentence = $conexion -> prepare($SQL);
     $sentence -> bindParam(':usuario',$iduser, PDO::PARAM_INT);
     $sentence ->execute();
@@ -266,16 +279,21 @@ function getmyposts($iduser){
 
     if (empty($results)) {
         echo '
-        <div id="noposts" class="alert alert-info alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <i class="fa fa-files-o"></i> <strong>'.SAULANG33.'</strong></div>
+        <div id="noposts" class="alert alert-info alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <i class="fa fa-files-o"></i>
+            <strong>'.SAULANG33.'</strong>
+        </div>
         ';
     }else{
         foreach ($results as $key){
-            echo'
-            <!-- time line -->
-            <div id="time-post-'.$key['idpublicacion'].'" class="message-item">	
-            <div class="message-inner">
-            <div class="message-head clearfix">
-            <div class="message-icon pull-left">';
+            echo '
+            <div id="time-post-'.$key['idpublicacion'].'" class="message-item">
+                <div class="message-inner">
+                    <div class="message-head clearfix">
+                        <div class="message-icon pull-left">';
 
             if ($key['picture'] == 1) {
                 echo '<img src="img/profile-small.png">';
@@ -284,12 +302,10 @@ function getmyposts($iduser){
                 echo'<img src="'.$finalprofile.'">';
             }
 
-            echo'</div>
-            <div class="user-detail">
-            <h5 class="handle"><a href="profile!'.$key['permalink'].'">'.$key['nombre'].' '.$key['apellido'].'</a></h5>
-            <div class="post-time">
-            '.fechastring($key['fecha']).'
-            </div>';
+            echo '      </div>
+                        <div class="user-detail">
+                            <h5 class="handle"><a href="profile!'.$key['permalink'].'">'.$key['nombre'].' '.$key['apellido'].'</a></h5>
+                            <div class="post-time">'.fechastring($key['fecha']).'</div>';
 
             if($_SESSION['ranker'] == 2){
                 echo '<a data-post="'.$key['idpublicacion'].'" class="deletepost pull-right" style="color: white;"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
@@ -297,51 +313,58 @@ function getmyposts($iduser){
                 echo '<a data-post="'.$key['idpublicacion'].'" class="deletepost pull-right" style="color: white;"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
             }
 
-            echo'</div>
-            </div>
-            <div class="qa-message-content">
-            <p>'.utf8_decode($key['publicacion']).'</p>
-            </div>
-            </div>  
-            <div class="col-sm-12 message-footer">
-            ';
+            echo '      </div>
+                    </div>
+                    <div class="qa-message-content">
+                        <p>'.utf8_decode($key['publicacion']).'</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 message-footer">';
 
             checklike($key['idpublicacion'],$_SESSION['idusuario']);
 
-            echo'
-            <a data-comment="'.$key['idpublicacion'].'" class="commentthis"><i class="fa fa-comment-o"></i> '.SAULANG11.'</a>
-            '.getthelikes($key['idpublicacion']).'
-            </div>
-            <div id="comment-'.$key['idpublicacion'].'" class="col-sm-12 comments-box">
-            <div id="commenterror'.$key['idpublicacion'].'"></div>
-            <div class="input-group">
-            <form id="commentfrm'.$key['idpublicacion'].'">
-            <input type="text" name="commentstext" class="form-control" placeholder="Comentarios...">
-            </form>
-            <span class="input-group-btn">
-            <button data-comment="'.$key['idpublicacion'].'" class="btncommentpost btn btn-default" type="button"><i class="fa fa-comment-o"></i> '.SAULANG11.'</button>
-            </span>
-            </div><!-- /input-group -->
-            </div>
-
-            <!-- comentarios -->
-            <div id="comment-box-real-'.$key['idpublicacion'].'">';
+            echo '
+                    <a data-comment="'.$key['idpublicacion'].'" class="commentthis"><i class="fa fa-comment-o"></i>&nbsp;'.SAULANG11.'</a>'.
+                    getthelikes($key['idpublicacion']).'
+                </div>
+                <div id="comment-'.$key['idpublicacion'].'" class="col-sm-12 comments-box">
+                    <form id="commentfrm'.$key['idpublicacion'].'">
+                        <div id="commenterror'.$key['idpublicacion'].'"></div>
+                        <div class="input-group">
+                            <input type="text" name="commentstext" class="form-control" placeholder="Comentarios...">
+                            <div class="input-group-append">
+                                <button data-comment="'.$key['idpublicacion'].'" class="btncommentpost btn btn-default" type="submit"><i class="fa fa-comment-o"></i>&nbsp;'.SAULANG11.'</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="comment-box-real-'.$key['idpublicacion'].'">';
 
             comments($key['idpublicacion']);
 
-            echo'
-            </div>
-            <!-- comentarios -->
-            </div>
-            <!-- time line -->
-            ';
+            echo '
+                </div>
+            </div>';
         }
     }
 }
 
-function comments($post){
+function comments($post) {
     $conexion = Conexion::singleton_conexion();
-    $SQL = "SELECT usuarios.permalink, publicaciones.usuario AS posteruser,comentarios.idcomentario,comentarios.fecha,comentarios.comentario, usuarios.idusuario, usuarios.nombre AS nombre, usuarios.apellido AS apellido,usuarios.profile AS picture FROM comentarios INNER JOIN usuarios ON usuarios.idusuario = comentarios.usuario INNER JOIN publicaciones ON publicaciones.idpublicacion = comentarios.publicacion WHERE comentarios.publicacion = :post ORDER BY comentarios.idcomentario DESC";
+    $SQL = 'SELECT usuarios.permalink,
+                   publicaciones.usuario AS posteruser,
+                   comentarios.idcomentario,
+                   comentarios.fecha,
+                   comentarios.comentario,
+                   usuarios.idusuario,
+                   usuarios.nombre AS nombre,
+                   usuarios.apellido AS apellido,
+                   usuarios.profile AS picture
+            FROM comentarios
+            INNER JOIN usuarios ON usuarios.idusuario = comentarios.usuario
+            INNER JOIN publicaciones ON publicaciones.idpublicacion = comentarios.publicacion
+            WHERE comentarios.publicacion = :post
+            ORDER BY comentarios.idcomentario DESC';
     $sentence = $conexion -> prepare($SQL);
     $sentence -> bindParam(':post',$post, PDO::PARAM_INT);
     $sentence ->execute();
@@ -349,12 +372,12 @@ function comments($post){
 
     if (!empty($results)) {
         foreach ($results as $key){
-            echo'
+            echo '
             <div id="time-comment-'.$key['idcomentario'].'" class="col-sm-12">
-            <div class="message-item" style="margin-top: 5px;margin-bottom: 5px;">
-            <div class="message-inner">
-            <div class="message-head clearfix">
-            <div class="message-icon pull-left">';
+                <div class="message-item" style="margin-top: 5px;margin-bottom: 5px;">
+                    <div class="message-inner">
+                        <div class="message-head clearfix">
+                            <div class="message-icon pull-left">';
 
             if ($key['picture'] == 1) {
                 echo '<img src="img/profile-small.png">';
@@ -363,32 +386,27 @@ function comments($post){
                 echo'<img src="'.$finalprofile.'">';
             }
 
-            echo'</div>
-            <div class="user-detail">
-            <h5 class="handle"><a href="profile!'.$key['permalink'].'">'.$key['nombre'].' '.$key['apellido'].'</a></h5>
-            <div class="post-time">
-            '.fechastring($key['fecha']).'
-            </div>
-            ';
+            echo '          </div>
+                            <div class="user-detail">
+                                <h5 class="handle"><a href="profile!'.$key['permalink'].'">'.$key['nombre'].' '.$key['apellido'].'</a></h5>
+                                <div class="post-time">'.fechastring($key['fecha']).'</div>';
 
             if ($_SESSION['ranker'] == 2){
-                echo'<a data-comment="'.$key['idcomentario'].'" class="deletecomment"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
+                echo '<a data-comment="'.$key['idcomentario'].'" class="deletecomment" style="color: white;"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
             }elseif($key['idusuario'] == $_SESSION['idusuario']) {
-                echo'<a data-comment="'.$key['idcomentario'].'" class="deletecomment"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
+                echo '<a data-comment="'.$key['idcomentario'].'" class="deletecomment" style="color: white;"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
             }elseif ($key['posteruser'] == $_SESSION['idusuario']){
-                echo'<a data-comment="'.$key['idcomentario'].'" class="deletecomment"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
+                echo '<a data-comment="'.$key['idcomentario'].'" class="deletecomment" style="color: white;"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
             }
 
-            echo'
-            </div>
-            </div>
-            <div class="qa-message-content">
-            <p>'.utf8_decode($key['comentario']).'</p>
-            </div>
-            </div>
-            </div>
-            </div>
-            ';
+            echo '          </div>
+                        </div>
+                        <div class="qa-message-content">
+                            <p>'.utf8_decode($key['comentario']).'</p>
+                        </div>
+                    </div>
+                </div>
+            </div>';
         }
     }
 }
@@ -400,7 +418,7 @@ function getthelikes($post){
     $stn -> bindParam(':post', $post, PDO::PARAM_INT);
     $stn -> execute();   
     $counter = $stn -> rowCount();
-    $data = '<a id="like-count-'.$post.'"class="pull-right">'.$counter.' Me gusta</a>';
+    $data = '<span id="like-count-'.$post.'"class="pull-right">'.$counter.' Me gusta</span>';
     return $data;
 }
 

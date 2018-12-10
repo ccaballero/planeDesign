@@ -588,77 +588,66 @@ function userstableadm($page){
 }
 
 function processfile($archive,$profile){
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+    $conexion = Conexion::singleton_conexion();
 
-// conexion de la base de datos
-$conexion = Conexion::singleton_conexion();
+    $sql = $conexion->prepare('SELECT * FROM usuarios WHERE idusuario = :idusuario');
+    $sql->execute(array('idusuario' => $profile));
+    $resultado = $sql->fetchAll();
 
-// Comprobamos si ya existe una foto de perfil
-$sql = $conexion->prepare('SELECT * FROM usuarios WHERE idusuario = :idusuario');
-$sql->execute(array('idusuario' => $profile));
-$resultado = $sql->fetchAll();
-if (empty($resultado)) {
-// En caso de no existir continua el script
-}else{
-foreach ($resultado as $row) {
+    if (empty($resultado)) {
+    }else{
+        foreach ($resultado as $row) {
+            if ($row["profile"] == 1) {
+            }else{
+                // En caso de Existir borramos el archivo
+                $twoimg = str_replace('normal-', 'small-', $row["profile"]);
+                unlink('../'.$row["profile"]);
+                unlink('../'.$twoimg);
+            }
+        }
+    }
 
-if ($row["profile"] == 1) {
-}else{
-// En caso de Existir borramos el archivo
-$twoimg = str_replace('normal-', 'small-', $row["profile"]);
-unlink('../'.$row["profile"]);
-unlink('../'.$twoimg);
-}
+    //comprobamos si el archivo ha subido y lo movemos a una ruta temporal
+    move_uploaded_file($_FILES['imageprofile']['tmp_name'],
+        realpath("../img/members").'/'.$archive);
 
-}
-}
+    // Creamos ruta del temporal
+    $temporal = '../img/members/'.$archive;
 
+    // Creamos un alfanumerico aleatorio.
+    $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    $string = '';
+    for ($i = 0; $i < 25; $i++) {
+        $string .= $characters[rand(0, strlen($characters) - 1)];
+    }
 
-//comprobamos si el archivo ha subido y lo movemos a una ruta temporal
-if ($archive && move_uploaded_file($_FILES['imageprofile']['tmp_name'],"img/members/".$archive)){
+    // Creamos una fecha para combinar con el string
+    $date = date("Y-m-d");
 
+    // Asignamos una ruta para el proceso de imagen
+    $ruta = '../img/members/'.$string.$date.'.jpg';
+    $rutasmall = '../img/members/small-'.$string.$date.'.jpg';
+    $small = '../img/members/normal-'.$string.$date.'.jpg';
 
-}  
+    // Asignamos una ruta para la base de datos
+    $finalruta = 'img/members/normal-'.$string.$date.'.jpg';
 
-// Creamos ruta del temporal
-$temporal = 'img/members/'.$archive;
+    // Procesamos archivo para redimensionar
+    smart_resize_image($temporal, null, 200, 200, false , $ruta, true , false ,100);
 
-// Creamos un alfanumerico aleatorio.
-$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-$string = '';
-for ($i = 0; $i < 25; $i++) {
-$string .= $characters[rand(0, strlen($characters) - 1)];
-}
+    // Cópiamos imagen
+    copy($ruta, $small);
 
-// Creamos una fecha para combinar con el string
-$date = date("Y-m-d");
+    smart_resize_image($ruta, null, 50, 50, false , $rutasmall, true , false ,100);
 
-// Asignamos una ruta para el proceso de imagen 
-$ruta = 'img/members/'.$string.$date.'.jpg';
-$rutasmall = 'img/members/small-'.$string.$date.'.jpg';
-$small = 'img/members/normal-'.$string.$date.'.jpg';
+    // Vaciamos todo a nuestra base de datos
+    $sql = "UPDATE usuarios SET profile = :profile WHERE idusuario = :idusuario";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bindParam(':profile', $finalruta, PDO::PARAM_STR);
+    $stmt->bindParam(':idusuario', $profile, PDO::PARAM_INT);
+    $stmt->execute();
 
-// Asignamos una ruta para la base de datos
-$finalruta = 'img/members/normal-'.$string.$date.'.jpg';
-
-// Procesamos archivo para redimensionar
-smart_resize_image($temporal, null, 200, 200, false , $ruta, true , false ,100);
-
-// Cópiamos imagen
-copy($ruta, $small);
-
-smart_resize_image($ruta, null, 50, 50, false , $rutasmall, true , false ,100);
-
-// Vaciamos todo a nuestra base de datos
-$sql = "UPDATE usuarios SET profile = :profile WHERE idusuario = :idusuario";
-$stmt = $conexion->prepare($sql);                                  
-$stmt->bindParam(':profile', $finalruta, PDO::PARAM_STR);       
-$stmt->bindParam(':idusuario', $profile, PDO::PARAM_INT);   
-$stmt->execute(); 
-
-echo '../'.$finalruta;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+    echo $finalruta;
 }
 
 

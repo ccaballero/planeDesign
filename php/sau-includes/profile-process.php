@@ -41,6 +41,7 @@ if ($process == 1) {
 
         // Creamos ruta del temporal
         $temporal = '../img/members/'.$archive;
+
         // Creamos un alfanumerico aleatorio.
         $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
         $string = '';

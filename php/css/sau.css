@@ -141,7 +141,7 @@ a,button{
     color: #fff;
     border-radius: 4px;
     font-size: 14px;
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 .deletecomment:hover,.deletecomment:focus,.deletecomment:active{

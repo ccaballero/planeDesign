@@ -71,9 +71,9 @@ if (isset($_POST['process'])) {
                         </div>';
 
         if ($_SESSION['ranker'] == 2){
-            echo'<a data-comment="'.$ultimoid.'" class="deletecomment"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
+            echo'<a data-comment="'.$ultimoid.'" class="deletecomment" style="color:white;"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
         }elseif ($posterusercomment == $_SESSION['idusuario']){
-            echo'<a data-comment="'.$ultimoid.'" class="deletecomment"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
+            echo'<a data-comment="'.$ultimoid.'" class="deletecomment" style="color:white;"><i class="fa fa-times"></i> '.SAULANG13.'</a>';
         }
 
         echo'

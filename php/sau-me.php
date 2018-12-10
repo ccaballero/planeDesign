@@ -158,8 +158,10 @@ if (!isset($_SESSION['idusuario'])){
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-unlock"></i> <?php echo SAULANG42; ?></h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-unlock"></i>&nbsp;<?php echo SAULANG42; ?></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div id="notactualpass" class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -186,8 +188,10 @@ if (!isset($_SESSION['idusuario'])){
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-envelope-o"></i> <?php echo SAULANG43; ?></h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-envelope-o"></i>&nbsp;<?php echo SAULANG43; ?></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div id="notactualemail" class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button> <strong><?php echo SAULANG71; ?></strong></div>
@@ -210,8 +214,10 @@ if (!isset($_SESSION['idusuario'])){
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-codepen"></i> <?php echo SAULANG44; ?></h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-codepen"></i>&nbsp;<?php echo SAULANG44; ?></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div id="notactualperma" class="alert alert-danger alert-dismissible fade in" role="alert">

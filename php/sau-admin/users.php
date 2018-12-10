@@ -110,8 +110,10 @@ if(isset($_SESSION['ranker'])){
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
-                                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user"></i> Nuevo Usuario</h4>
+                                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-user"></i>&nbsp;Nuevo Usuario</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                                    </button>
                                 </div>
                                 <div class="modal-body">
                                     <form id="newuseradminfrm">
