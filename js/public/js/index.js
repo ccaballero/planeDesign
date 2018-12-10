@@ -64,6 +64,8 @@ $(function(){
     $('#files').hide();
 
     $('.open').click(function(){
+        $('.close').trigger('click');
+
         if(show_controls){
             $('.controls').trigger('click');
         }
