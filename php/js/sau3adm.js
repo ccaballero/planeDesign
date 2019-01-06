@@ -42,7 +42,7 @@ $('.edituser').on('click',function(){
                       , beforeSend:function(){
                             d.hide();
                             b.hide();
-                            d.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
+                            d.parent().append('<p>Procesando petición...</p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
                         }
                       , success:function(){
                             /*$('#loadingloader').remove();
@@ -64,7 +64,7 @@ $('.edituser').on('click',function(){
                   , data:'process=3&usuario='+a
                   , beforeSend:function(){
                         $('#imageprofilechange').addClass('opacityimgload');
-                        $('#imageprofilechange').parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
+                        $('#imageprofilechange').parent().append('<p>Procesando petición...</p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
                     }
                   , success:function(a){
                         /*$('#loadingloader').remove();
@@ -97,7 +97,7 @@ $('.edituser').on('click',function(){
                       , processData:!1
                       , beforeSend:function(){
                             $('#imageprofilechange').addClass('opacityimg');
-                            $('#imageprofilechange').parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
+                            $('#imageprofilechange').parent().append('<p>Procesando petición...</p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
                         }
                       , success:function(a){
                             /*1 == a ? ($('#alertimg').show(), setTimeout(function() {
@@ -140,7 +140,7 @@ $('.edituser').on('click',function(){
                       , beforeSend:function(){
                             a.hide();
                             c.hide();
-                            a.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
+                            a.parent().append('<p>Procesando petición...</p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>');
                         }
                       , success:function(b){
                             /*$('#loadingloader').remove();
@@ -183,7 +183,7 @@ $('.edituser').on('click',function(){
                       , beforeSend:function(){
                             b.hide();
                             c.hide();
-                            b.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
+                            b.parent().append('<p>Procesando petición...</p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
                         }
                       , success:function(a){
                             /*$('#loadingloader').remove();
@@ -231,7 +231,7 @@ $('.crearnuevousuario').on('click',function(){
           , beforeSend:function(){
                 b.hide();
                 e.hide();
-                b.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
+                b.parent().append('<p>Procesando petición...</p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
             }
           , success:function(){
                 /*$('#loadingloader').remove();
@@ -308,7 +308,7 @@ $('.editpublicacion').on('click',function(){
                       , beforeSend:function(){
                             b.hide();
                             c.hide();
-                            b.parent().append('<p></p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
+                            b.parent().append('<p>Procesando petición...</p><div id="loadingloader" class="loader-inner line-scale"><div></div><div></div><div></div><div></div><div></div></div><p></p>')
                         }
                       , success:function(){
                             /*$('#loadingloader').remove();

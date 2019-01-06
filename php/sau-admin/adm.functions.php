@@ -185,7 +185,23 @@ function seisultimosactivos(){
     // conexion de base de datos
     $conexion = Conexion::singleton_conexion();
 
-    $SQL = 'SELECT * FROM usuarios WHERE activo = 2 ORDER BY idusuario DESC LIMIT 6';
+    //$SQL = 'SELECT * FROM usuarios WHERE activo = 2 ORDER BY idusuario DESC LIMIT 6';
+    $SQL = 'SELECT usuarios.registro,
+                    usuarios.nombre,
+                    usuarios.apellido,
+                    usuarios.email,
+                    draws.count
+            FROM usuarios
+            LEFT JOIN (
+                SELECT usuario,
+                        count(usuario) AS count
+                FROM draw
+                GROUP BY draw.usuario) AS draws
+            ON usuarios.idusuario = draws.usuario
+            WHERE usuarios.activo = 2
+            ORDER BY usuarios.idusuario
+            DESC LIMIT 6';
+
     $sentence = $conexion -> prepare($SQL);
     $sentence -> execute();
     $resultados = $sentence -> fetchAll();
@@ -196,9 +212,10 @@ function seisultimosactivos(){
             $fecha = str_replace('-', '/', date("d-m-Y", strtotime($key['registro'])));
             echo'
             <tr>
-            <td>'.$key['nombre'].'</td>
+            <td>'.$key['nombre'].' '.$key['apellido'].'</td>
             <td>'.$fecha.'</td>
             <td>'.$key['email'].'</td>
+            <td>'.$key['count'].'</td>
             </tr>
             ';
         }

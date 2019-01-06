@@ -153,6 +153,7 @@ if(isset($_SESSION['ranker'])){
                                         <th>Usuario</th>
                                         <th>Fecha</th>
                                         <th>Email</th>
+                                        <th>Planos</th>
                                     </thead>
                                     <tbody>
                                         <?php seisultimosactivos(); ?>
