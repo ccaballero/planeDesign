@@ -4,16 +4,6 @@ require_once __DIR__.'/sau-includes/sau-functions.php';
 if (!isset($_SESSION['idusuario'])){
     header("Location: logout");
 }
-
-if(isset($_GET['search'])){
-    $finder = $_GET['search'];
-
-    if (empty($_GET['search'])) {
-        header('Location: escritorio');
-    }
-}else{
-    header('Location: escritorio');
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -48,7 +38,7 @@ if(isset($_GET['search'])){
                                 </button>
                                 <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
                                     <ul class="navbar-nav animated" id="nav">
-                                        <li class="nav-item active"><a class="nav-link" href="escritorio"><?php echo SAULANG1; ?></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="escritorio"><?php echo SAULANG1; ?></a></li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle"
                                                href="#"
@@ -76,7 +66,7 @@ if(isset($_GET['search'])){
                                         </li>
                                     <?php } ?>
                                         <li class="nav-item"><a class="nav-link" href="config"><?php echo SAULANG4; ?></a></li>
-                                        <li class="nav-item"><a class="nav-link" href="plane">Planos</a></li>
+                                        <li class="nav-item active"><a class="nav-link" href="plane">Planos</a></li>
                                     </ul>
                                     <div class="search-form-area animated">
                                         <form role="search" action="search" method="get">
@@ -106,11 +96,7 @@ if(isset($_GET['search'])){
         <div class="container">
             <div id="leftbar" class="col-sm-3">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-user"></i>
-                        <?php thename($_SESSION['idusuario']); ?>
-                        <a class="collapse-block"><i class="fa fa-chevron-up"></i></a>
-                    </div>
+                    <div class="panel-heading"><i class="fa fa-user"></i> <?php thename($_SESSION['idusuario']); ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
                     <div class="panel-body text-center">
                         <div id="alertimg"><i class="fa fa-times"></i> <?php echo SAULANG22; ?></div>
                         <?php getprofileimg($_SESSION['idusuario']); ?>
@@ -127,31 +113,55 @@ if(isset($_GET['search'])){
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-users"></i> <?php echo SAULANG8; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
-                    <div id="contactos" class="panel-body">
-                        <?php mycontacs($_SESSION['idusuario']); ?>
+                        <div id="contactos" class="panel-body">
+                            <?php mycontacs($_SESSION['idusuario']); ?>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><i class="fa fa-calendar"></i> <?php echo SAULANG9; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
+                        <div class="panel-body nopadding">
+                            <p></p>
+                            <div id="calendar-now"></div>
+                        </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-calendar"></i> <?php echo SAULANG9; ?> <a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
-                    <div class="panel-body nopadding">
-                        <p></p>
-                        <div id="calendar-now"></div>
+                <div id="sidebar" class="col-sm-9">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='graficar';">
+                        <i class="fa fa-file"></i>&nbsp;Diseñar Planos
+                    </button>
+                    <br />
+                    <br />
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><i class="fa fa-map"></i>&nbsp;Planos<a class="collapse-block"><i class="fa fa-chevron-up"></i></a></div>
+                        <div class="panel-body messagesbox">
+                            <table class="table table-striped">
+                                <thead class="messages-table-header">
+                                    <tr>
+                                    <th><i class="fa fa-thumb-tack"></i>&nbsp;Nombre</th>
+                                    <th><i class="fa fa-calendar"></i>&nbsp;Creado en</th>
+                                    <th><i class="fa fa-calendar"></i>&nbsp;Ultima modificación</th>
+                                    <th><i class="fa fa-cog"></i>&nbsp;Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="mesages-body">
+                                    <?php planestable(); ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="sidebar" class="col-sm-9">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-comment-o"></i>
-                        <?php echo SAULANG63.' '.'<strong>'.$finder.'</strong>'; ?>
-                        <a class="collapse-block"><i class="fa fa-chevron-up"></i></a>
-                    </div>
-                    <div class="panel-body busqueda">
-                    <?php
-                    if (isset($_GET['page'])) {
-                        finder($finder,$_GET['page']);
-                    }else{
-                        finder($finder,1);
-                    } ?>
+            <div class="modal fade animated fadeInLeftBig" id="ReadMessagesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <?php echo SAULANG32; ?></button>
+                        </div>
                     </div>
                 </div>
             </div>

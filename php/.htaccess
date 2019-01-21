@@ -23,7 +23,8 @@
     RewriteRule ^postpub(.*)?$ sau-includes/sau-post-process.php
 
     # Graficador
-    RewriteRule ^plane(.*)?$ sau-graficar.php
+    RewriteRule ^plane(.*)?$ sau-planos.php
+    RewriteRule ^graficar(.*)?$ sau-graficar.php
 
     # Administracion
     RewriteRule ^admin/reportes(.*)?$ sau-admin/index.php

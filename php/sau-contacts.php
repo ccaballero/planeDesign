@@ -66,7 +66,7 @@ if (!isset($_SESSION['idusuario'])){
                                         </li>
                                     <?php } ?>
                                         <li class="nav-item"><a class="nav-link" href="config"><?php echo SAULANG4; ?></a></li>
-                                        <li class="nav-item"><a class="nav-link" href="plane">Graficar Plano</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="plane">Planos</a></li>
                                     </ul>
                                     <div class="search-form-area animated">
                                         <form role="search" action="search" method="get">

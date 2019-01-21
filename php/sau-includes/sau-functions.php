@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__.'/../sau-admin/sau-login.php';
 require_once __DIR__.'/../sau-admin/phpmailer/PHPMailerAutoload.php'; 
 
@@ -606,8 +607,18 @@ function messagelistli(){
 }
 
 function messagestable(){
-    $conexion = Conexion::singleton_conexion();  
-    $SQL = 'SELECT messages.leido,messages.idmessage,usuarios.permalink,usuarios.nombre,usuarios.apellido,messages.asunto,messages.fecha AS fecha FROM messages INNER JOIN usuarios ON usuarios.idusuario = messages.de WHERE messages.para = :para';
+    $conexion = Conexion::singleton_conexion();
+    $SQL = 'SELECT messages.leido,
+            messages.idmessage,
+            usuarios.permalink,
+            usuarios.nombre,
+            usuarios.apellido,
+            messages.asunto,
+            messages.fecha AS fecha
+        FROM messages
+        INNER JOIN usuarios
+        ON usuarios.idusuario = messages.de
+        WHERE messages.para = :para';
     $sentence = $conexion -> prepare($SQL);
     $sentence -> bindParam(':para',$_SESSION['idusuario'], PDO::PARAM_INT);
     $sentence -> execute();
@@ -640,6 +651,37 @@ function messagestable(){
             </tr>
             ';
         }
+    }
+}
+
+function planestable(){
+    $conexion = Conexion::singleton_conexion();
+    $SQL = 'SELECT ident,name,ts_created,ts_modified,usuario
+        FROM draw
+        WHERE usuario = :usuario';
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> bindParam(':usuario',$_SESSION['idusuario'], PDO::PARAM_INT);
+    $sentence -> execute();
+    $resultados = $sentence -> fetchAll();
+
+    if(!empty($resultados)){
+        foreach($resultados as $key){
+            $created = date('d/m/Y h:i.s',$key['ts_created']);
+            $modified = date('d/m/Y h:i.s',$key['ts_modified']);
+            $urlencode=urlencode($key['name']);
+
+            echo '
+                <tr>
+                <td>'.$key['name'].'</td>
+                <td>'.$created.'</td>
+                <td>'.$modified.'</td>
+                <td><a href="draft/rest/svg.php?file='.$urlencode.'"
+                    onclick="window.open(\'draft/rest/svg.php?file='.$urlencode.'\',\'name\',\'width=800,height=600\'); return false;">Vista Previa</a></td>
+                </tr>';
+        }
+    }else{
+        echo '
+        <tr><td colspan="4">No hay planos registrados.</td></tr>';
     }
 }
 

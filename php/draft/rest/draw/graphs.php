@@ -21,7 +21,7 @@ class Graphs {
         if($type=='png'){
             $g->addAttribute('xlink:href','../svg/obj/' . $obj . '.svg','http://www.w3.org/1999/xlink');
         }else{
-            $g->addAttribute('xlink:href','/svg/obj/' . $obj . '.svg','http://www.w3.org/1999/xlink');
+            $g->addAttribute('xlink:href','../svg/obj/' . $obj . '.svg','http://www.w3.org/1999/xlink');
         }
     }
 }

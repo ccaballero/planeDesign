@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `draw`;
 DROP TABLE `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `idusuario` int(11) NOT NULL,

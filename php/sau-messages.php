@@ -66,7 +66,7 @@ if (!isset($_SESSION['idusuario'])){
                                         </li>
                                     <?php } ?>
                                         <li class="nav-item"><a class="nav-link" href="config"><?php echo SAULANG4; ?></a></li>
-                                        <li class="nav-item"><a class="nav-link" href="plane">Graficar Plano</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="plane">Planos</a></li>
                                     </ul>
                                     <div class="search-form-area animated">
                                         <form role="search" action="search" method="get">
@@ -166,10 +166,10 @@ if (!isset($_SESSION['idusuario'])){
         <script src="js/bootstrap.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/active.js"></script>
-        <script src="js/sau//jquery.validate.min.js"></script>
-        <script src="js/sau//moment-with-locales.js"></script>
-        <script src="js/sau//bootstrap-datetimepicker.js"></script>
-        <script src="js/sau//additional-methods.min.js"></script>
+        <script src="js/sau/jquery.validate.min.js"></script>
+        <script src="js/sau/moment-with-locales.js"></script>
+        <script src="js/sau/bootstrap-datetimepicker.js"></script>
+        <script src="js/sau/additional-methods.min.js"></script>
 
         <script type="text/javascript">
             var messageerror1 = "<?php echo SAULANG15;?>";

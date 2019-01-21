@@ -16,7 +16,10 @@ class CRUD {
     }
 
     public function index() {
-        $sql = 'SELECT name,data FROM draw WHERE usuario='.$_SESSION['idusuario'].' ORDER BY name ASC';
+        $sql = 'SELECT name,data
+            FROM draw
+            WHERE usuario='.$_SESSION['idusuario'].'
+            ORDER BY name ASC';
         $q = $this->conn->query($sql) or die('failed!');
         $data = array();
 
@@ -44,24 +47,30 @@ class CRUD {
     }
 
     public function update($name, $data) {
-        $sql = 'UPDATE draw SET data=:data WHERE usuario=:usuario AND name=:name';
+        $sql = 'UPDATE draw SET data=:data,ts_modified=:ts_modified
+            WHERE usuario=:usuario
+            AND name=:name';
         $q = $this->conn->prepare($sql);
         $q->execute(array(
             ':usuario'=>$_SESSION['idusuario'],
             ':name'=>$name,
-            ':data'=>$data
+            ':data'=>$data,
+            ':ts_modified'=>time(),
         ));
 
         return true;
     }
 
     public function create($name, $data){
-        $sql = 'INSERT INTO draw (usuario,name,data) VALUE (:usuario,:name,:data)';
+        $sql = 'INSERT INTO draw (usuario,name,data,ts_created,ts_modified)
+            VALUE (:usuario,:name,:data,:ts_register,:ts_modified)';
         $q = $this->conn->prepare($sql);
         $q->execute(array(
             ':usuario'=>$_SESSION['idusuario'],
             ':name'=>$name,
-            ':data'=>$data
+            ':data'=>$data,
+            ':ts_register'=>time(),
+            ':ts_modified'=>time(),
         ));
 
         return true;
