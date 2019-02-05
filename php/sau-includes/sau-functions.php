@@ -675,7 +675,7 @@ function planestable(){
                 <td>'.$key['name'].'</td>
                 <td>'.$created.'</td>
                 <td>'.$modified.'</td>
-                <td><a href="draft/rest/svg.php?file='.$urlencode.'"
+                <td><a class="btn btn-primary btn-sm" href="draft/rest/svg.php?file='.$urlencode.'"
                     onclick="window.open(\'draft/rest/svg.php?file='.$urlencode.'\',\'name\',\'width=800,height=600\'); return false;">Vista Previa</a></td>
                 </tr>';
         }

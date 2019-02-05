@@ -126,24 +126,30 @@ if(isset($_SESSION['ranker'])){
                             <div class="col-sm-6"><h1><?php cuantoscontact(); ?></h1><small>Registros Seguidores</small></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 nopadding" style="margin-top: 15px;">
-                        <div class="col-sm-6 nopadding" style=" padding-right: 15px;">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">Estadisticas</div>
-                                <div class="panel-body minimalpadding">
-                                    <div id="donut-example"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 nopadding" style=" padding-left: 15px;">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">Estadisticas</div>
-                                <div class="panel-body minimalpadding">
-                                    <div id="bar-example"></div>
-                                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 nopadding" style="margin-top: 15px;">
+                    <div class="col-sm-6 nopadding" style=" padding-left: 15px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Planos</div>
+                            <div class="panel-body minimalpadding">
+                                <div id="planes"></div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-6 nopadding" style=" padding-left: 15px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Registrados</div>
+                            <div class="panel-body minimalpadding">
+                                <div id="registered"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 nopadding" style="margin-top: 15px;">
                     <div class="col-sm-6">
                         <div class="panel panel-success">
                             <div class="panel-heading"><i class="fa fa-users"></i> Ultimos Registrados</div>
@@ -161,27 +167,27 @@ if(isset($_SESSION['ranker'])){
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="panel panel-info">
-                        <div class="panel-heading"><i class="fa fa-comment-o"></i> Ultimas Publicaciones</div>
-                        <div class="panel-body nopadding">
-                            <table class="table">
-                                <thead class="blackthead">
-                                    <th>Usuario</th>
-                                    <th>Fecha</th>
-                                    <th>Pulicación</th>
-                                </thead>
-                                <tbody>
-                                    <?php seisultimaspublicaciones(); ?>
-                                </tbody>
-                            </table>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <i class="fa fa-comment-o"></i> Ultimas Publicaciones
+                            </div>
+                            <div class="panel-body nopadding">
+                                <table class="table">
+                                    <thead class="blackthead">
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                        <th>Pulicación</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php seisultimaspublicaciones(); ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading"><i class="fa fa-comments-o"></i> Ultimos Comentarios</div>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <i class="fa fa-comments-o"></i> Ultimos Comentarios
+                            </div>
                             <div class="panel-body nopadding">
                                 <table class="table">
                                     <thead class="blackthead">
@@ -196,13 +202,23 @@ if(isset($_SESSION['ranker'])){
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="panel panel-danger">
-                            <div class="panel-heading"><i class="fa fa-database" aria-hidden="true"></i> Base de Datos</div>
+                    <div class="col-sm-6 nopadding" style=" padding-right: 15px;">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Usuarios del Sistema</div>
                             <div class="panel-body minimalpadding">
-                                <label class="text-center" style="display: block; width: 100%;">Función para borrar los usuarios que no se han activado</label>
-                                <button class="deleteusuariosnoactivos btn btn-block btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Usuarios No Activados</button>
+                                <div id="users"></div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading"><i class="fa fa-database" aria-hidden="true"></i> Base de Datos</div>
+                        <div class="panel-body minimalpadding">
+                            <label class="text-center" style="display: block; width: 100%;">Función para borrar los usuarios que no se han activado</label>
+                            <button class="deleteusuariosnoactivos btn btn-block btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Usuarios No Activados</button>
                         </div>
                     </div>
                 </div>
@@ -215,7 +231,7 @@ if(isset($_SESSION['ranker'])){
         <script src="js/sau3adm.js"></script>    
         <script type="text/javascript">
             Morris.Donut({
-                element:'donut-example'
+                element:'users'
               , data:[{
                     label:'Total Usuarios Registrados',value:<?php cuantosusers(); ?>
                 },{
@@ -229,7 +245,7 @@ if(isset($_SESSION['ranker'])){
         </script>
         <script type="text/javascript">
             Morris.Bar({
-                element:'bar-example'
+                element:'registered'
               , data:[{
                     y:'Registrados'
                   , a:<?php cuantosusers(); ?>
@@ -246,6 +262,20 @@ if(isset($_SESSION['ranker'])){
               , xkey:'y'
               , ykeys:['a']
               , labels:['Cantidad']
+            });
+        </script>
+        <script type="text/javascript">
+            var colors=['FireBrick','Gold','Navy','DarkGreen','DarkMagenta','Indigo'];
+
+            Morris.Bar({
+                element:'planes'
+              , data:<?php seisMaxUsers(); ?>
+              , xkey:'y'
+              , ykeys:['a']
+              , labels:['Cantidad']
+              , barColors:function(row,series,type){
+                    return colors[row.x];
+                }
             });
         </script>
     </body>

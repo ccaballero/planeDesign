@@ -222,6 +222,40 @@ function seisultimosactivos(){
     }
 }
 
+function seisMaxUsers(){
+    $conexion = Conexion::singleton_conexion();
+
+    $SQL = 'SELECT CONCAT(usuarios.nombre,\' \',usuarios.apellido) as completo,
+                    draws.count as planos
+            FROM usuarios
+            LEFT JOIN (
+                SELECT usuario,
+                        count(usuario) AS count
+                FROM draw
+                GROUP BY draw.usuario) AS draws
+            ON usuarios.idusuario=draws.usuario
+            ORDER BY draws.count DESC';
+
+    $sentence = $conexion -> prepare($SQL);
+    $sentence -> execute();
+    $resultados = $sentence -> fetchAll();
+    $usuarios = array();
+
+    foreach($resultados as $key){
+        $stdclass = new StdClass();
+
+        $stdclass->y = $key['completo'];
+        $stdclass->a = $key['planos'];
+
+
+        $usuarios[] = $stdclass;
+    }
+
+    array_slice($usuarios,0,5);
+
+    echo json_encode($usuarios);
+}
+
 function seisultimaspublicaciones(){
     // conexion de base de datos
     $conexion = Conexion::singleton_conexion();
