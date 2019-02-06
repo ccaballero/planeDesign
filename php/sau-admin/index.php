@@ -27,7 +27,7 @@ if(isset($_SESSION['ranker'])){
         <link rel="stylesheet" href="css/custom/admin.css" />
     </head>
     <body>
-        <header class="header_area">
+        <header class="header_area no-print">
             <div class="container-fluid h-100">
                 <div class="row h-100">
                     <div class="col-12 h-100">
@@ -93,7 +93,7 @@ if(isset($_SESSION['ranker'])){
                 </div>
             </div>
         </header>
-        <div class="mosh-breadcumb-area" style="background-image: url(img/core-img/breadcrumb.svg);">
+        <div class="mosh-breadcumb-area no-print" style="background-image: url(img/core-img/breadcrumb.svg);">
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
                 </div>
@@ -126,6 +126,11 @@ if(isset($_SESSION['ranker'])){
                             <div class="col-sm-6"><h1><?php cuantoscontact(); ?></h1><small>Registros Seguidores</small></div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row no-print">
+                <div class="col-sm-12">
+                    <button class="btn btn-primary" onclick="window.print()">Imprimir PDF</button>
                 </div>
             </div>
             <div class="row">
@@ -212,7 +217,7 @@ if(isset($_SESSION['ranker'])){
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row no-print">
                 <div class="col-sm-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading"><i class="fa fa-database" aria-hidden="true"></i> Base de Datos</div>
