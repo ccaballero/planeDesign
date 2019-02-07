@@ -50,7 +50,7 @@ if (isset($_POST['process'])) {
                                 <ul id="tabsnav" class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="active">
                                         <a href="#basicosu" aria-controls="basicosu" role="tab" data-toggle="tab">
-                                            <i class="glyphicon glyphicon-chevron-right"></i>&nbsp;Datos Basicos
+                                            <i class="glyphicon glyphicon-chevron-right"></i>&nbsp;Datos Básicos
                                         </a>
                                     </li>
                                     <li role="presentation">

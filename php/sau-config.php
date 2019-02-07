@@ -18,8 +18,8 @@
 // Datos del Hosting para la conexion a la base de datos
 define('HOST', '127.0.0.1');
 define('DBUSER', 'root');
-define('DBPASSWORD', 'asdf');
-define('DBNAME', 'mydatabase');
+define('DBPASSWORD', '');
+define('DBNAME', 'draft');
 
 
 // Nota: Debes de cambiar estos dos, ya que con estos dos generas
@@ -65,5 +65,7 @@ define('SAULANGDEF','1');
 // 5 = SAU Red
 define('SAUSTYLE','1');
 
-define('BASE','http://localhost/php/');
+define('BASE','http://localhost/planeDesign/php/');
+
+
 
