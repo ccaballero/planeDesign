@@ -145,7 +145,7 @@ if(isset($_SESSION['ranker'])){
                     </div>
                     <div class="col-sm-6 nopadding" style=" padding-left: 15px;">
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Registrados</div>
+                            <div class="panel-heading">Registros</div>
                             <div class="panel-body minimalpadding">
                                 <div id="registered"></div>
                             </div>

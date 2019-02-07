@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `config` (
 --
 
 INSERT INTO `config` (`idconfig`, `login`, `register`, `forgot`, `smtp`, `port`, `fromname`, `mail`, `password`, `url`, `messagemail`, `messagechange`, `renewmessage`) VALUES
-(1, 1, 1, 1, 'smtp.gmail.com',587,'Webmaster SAU','pruebaplanoalcanos@gmail.com','carlos1A','http://localhost','Hola! muchas gracias por registrarte, ahora solo debes de registrar tu cuenta usando el siguiente link', 'Has cambiado de correo electronico! usa el siguiente link para confirmar tu correo electronico', 'Has pedido recuperar tu cuenta, tu nueva contraseña es:');
+(1, 1, 1, 1, 'smtp.gmail.com',587,'Plane Design','pruebaplanoalcanos@gmail.com','carlos1A','http://localhost/planeDesign/php/','Hola! muchas gracias por registrarte, ahora solo debes de registrar tu cuenta usando el siguiente link', 'Has cambiado de correo electronico! usa el siguiente link para confirmar tu correo electronico', 'Has pedido recuperar tu cuenta, tu nueva contraseña es:');
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nombre`, `apellido`, `profile`, `email`, `password`, `registro`, `permalink`, `activo`, `ranker`) VALUES
-(2, 'Administrador', 'SAUv3', '1', 'admin@jhcodes.com', '58d0aff38247e1e3862a2adb46b668afe9e6433b', '2016-06-29', 'ad1c1e268f', 2, 2);
+(2, 'Administrador', '', '1', 'admin@jhcodes.com', '58d0aff38247e1e3862a2adb46b668afe9e6433b', '2016-06-29', 'ad1c1e268f', 2, 2);
 
 -- --------------------------------------------------------
 
