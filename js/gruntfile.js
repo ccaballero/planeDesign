@@ -157,8 +157,15 @@ module.exports=function(grunt){
       , cssmin:{
             dist:{
                 files:{
-                    '../php/draft/style.css':['.tmp/style.css']
-                  , '../php/draft/leaflet.css':['bower_components/leaflet/dist/leaflet.css']
+                    '../php/draft/style.css':[
+                        '.tmp/style.css'
+                    ]
+                  , '../php/draft/leaflet.css':[
+                        'bower_components/leaflet/dist/leaflet.css'
+                    ]
+                  , '../php/draft/leaflet-search.css':[
+                        'bower_components/leaflet-search/dist/leaflet-search.min.css'
+                    ]
                 }
             }
         }
@@ -196,6 +203,9 @@ module.exports=function(grunt){
                 },{
                     src:'bower_components/leaflet/dist/leaflet.js'
                   , dest:'../php/draft/js/leaflet.min.js'
+                },{
+                    src:'bower_components/leaflet-search/dist/leaflet-search.min.js'
+                  , dest:'../php/draft/js/leaflet-search.min.js'
                 },{
                     src:'bower_components/jquery/dist/jquery.min.js'
                   , dest:'../php/draft/js/jquery.min.js'
