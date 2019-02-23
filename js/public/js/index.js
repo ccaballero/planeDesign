@@ -29,6 +29,25 @@ var set_view=false
         zoomControl:true
     })
   , marker=L.marker().addTo(map)
+  , search=new L.control.search({
+        url:'https://nominatim.openstreetmap.org/search?format=json&q={s}'
+      , propertyName:'display_name'
+      , jsonpParam:'json_callback'
+      , propertyLoc:['lat','lon']
+      , autoCollapse:true
+      , autoType:false
+      , position:'topright'
+      , minLength:2
+      , moveToLocation:function(latlng, title, map) {
+            var url=L.Util.template('http://osm.org/?mlat={lat}&amp;mlon={lon}#map={zoom}/{lat}/{lon}', {
+                lat:latlng.lat,
+                lon:latlng.lng,
+                zoom:map.getZoom()
+            });
+
+            map.setView(latlng,zoom);
+        }
+    })
   , zoom=16
   , rest={
         list:   'rest/list.php'
@@ -52,6 +71,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?'
   , accessToken:'pk.eyJ1IjoiamFjb2JpYW4iLCJhIjoiQWFfMjJxYyJ9.'
         +'O50MgJ-QqbTAQjn6bIstfg'
 }).addTo(map);
+
+map.addControl(search);
 map.doubleClickZoom.disable();
 
 $(function(){
@@ -290,36 +311,65 @@ $(function(){
         return false;
     });
 
-    $(window).on('keypress',function(e){
+    document.onkeydown = function(event){
+        event=event||window.event;
+
+        var isEscape=false;
+
+        console.log('~>',event.key,event.keyCode);
+
+        if('key' in event){
+            isEscape=(event.key==='Escape'||event.key==='Escape');
+        }else{
+            isEscape=(event.keyCode===27);
+        }
+
+        if(isEscape){
+            blueprint.keydown(event);
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
+
+        var isF1=false;
+
+        if ('key' in event){
+            isF1=(event.key==='F1'||event.key==='F1');
+        }else{
+            isF1=(event.keyCode===112);
+        }
+
+        if(isF1){
+            $('button.selector').trigger('click');
+
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
+    };
+
+    $(window).on('keypress',function(event){
         var stop=function(){
-                e.preventDefault();
-                e.stopPropagation();
+                event.preventDefault();
+                event.stopPropagation();
             }
           , list={
-                'F1':'button.selector'
-              , 'Home':'button.order.first'
+                'Home':'button.order.first'
               , 'End':'button.order.last'
               , 'PageDown':'button.order.down'
               , 'PageUp':'button.order.up'
-              , 't':'button.draw.text1'
-              , 'l':'button.draw.line1'
-              , 'L':'button.draw.polyline1'
-              , 'r':'button.draw.rect1'
-              , 'p':'button.draw.polygon1'
-              , 'a':'button.draw.arc1'
               , 'Delete':'button.remove'
             }
 
-        console.log('~>',e.key);
-        if(e.key in list){
-            $(list[e.key]).trigger('click');
+        if(event.key in list){
+            $(list[event.key]).trigger('click');
+
             stop();
         }else{
-            var res=blueprint.keydown(e);
+            var res=blueprint.keydown(event);
+
             if(res){
                 stop();
-            }else{
-                console.log(e.key);
             }
         }
     });

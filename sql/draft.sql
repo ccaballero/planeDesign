@@ -5,7 +5,7 @@
 /*============================================================================*/
 /* Tablas requeridas para el registro de graficas                             */
 /*============================================================================*/
-DROP TABLE `draw`;
+DROP TABLE IF EXISTS `draw`;
 CREATE TABLE IF NOT EXISTS `draw` (
     `ident`       int unsigned                          NOT NULL auto_increment,
     `name`        varchar(128)                          NOT NULL,

@@ -2,8 +2,10 @@ extends ./index
 
 block link
     link(rel='stylesheet',href='vendor/leaflet/dist/leaflet.css')
-    script(src='vendor/leaflet/dist/leaflet.js')
+    link(rel='stylesheet',href='vendor/leaflet-search/dist/leaflet-search.min.css')
     link(rel='stylesheet',href='/style.css')
+    script(src='vendor/leaflet/dist/leaflet.js')
+    script(src='vendor/leaflet-search/dist/leaflet-search.min.js')
 block script
     script(src='vendor/jquery/dist/jquery.js')
     script(src='vendor/d3/d3.js')

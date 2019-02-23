@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "normalize-less": "*",
     "d3": "^5.7.0",
     "jquery": "^3.3.1",
-    "leaflet": "^1.3.4"
+    "leaflet": "^1.3.4",
+    "leaflet-search": "^2.9.8",
+    "normalize-less": "*"
   },
   "devDependencies": {}
 }
