@@ -67,5 +67,3 @@ define('SAUSTYLE','1');
 
 define('BASE','http://localhost/php/');
 
-
-

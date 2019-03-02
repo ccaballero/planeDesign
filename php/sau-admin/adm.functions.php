@@ -199,8 +199,8 @@ function seisultimosactivos(){
                 GROUP BY draw.usuario) AS draws
             ON usuarios.idusuario = draws.usuario
             WHERE usuarios.activo = 2
-            ORDER BY usuarios.idusuario
-            DESC LIMIT 6';
+            ORDER BY usuarios.idusuario DESC
+            LIMIT 6';
 
     $sentence = $conexion -> prepare($SQL);
     $sentence -> execute();
@@ -234,7 +234,8 @@ function seisMaxUsers(){
                 FROM draw
                 GROUP BY draw.usuario) AS draws
             ON usuarios.idusuario=draws.usuario
-            ORDER BY draws.count DESC';
+            ORDER BY draws.count DESC
+            LIMIT 6';
 
     $sentence = $conexion -> prepare($SQL);
     $sentence -> execute();
@@ -250,8 +251,6 @@ function seisMaxUsers(){
 
         $usuarios[] = $stdclass;
     }
-
-    array_slice($usuarios,0,5);
 
     echo json_encode($usuarios);
 }

@@ -897,7 +897,7 @@ function register($nombre,$apellido,$email,$password){
         $htmlhead = '<!DOCTYPE html><html><body>';
         $htmlfooter = '</body></html>';
         $messageone = '<p>'.$parsedata[6].'</p></p><p></p>';
-        $activationlink = '<p><label>'.SAULANG69.'</label><p></p><a href="'.$parsedata[5].'sauactive?token='.$mailtoken.'&email='.$regemail.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$regemail.'</a></p>';
+        $activationlink = '<p><label>'.SAULANG69.'</label><p></p><a href="'.$parsedata[5].'/sauactive?token='.$mailtoken.'&email='.$regemail.'">'.$parsedata[5].'/activate?token='.$mailtoken.'&email='.$regemail.'</a></p>';
 
         // Envio de Correo 
         $mail = new PHPMailer();

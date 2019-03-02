@@ -526,7 +526,7 @@ if (isset($_POST['process'])) {
 
             $htmlhead = '<!DOCTYPE html><html><body>';
             $htmlfooter = '</body></html>';
-            $activationlink = '<p><label>Reactivar Mi Cuenta: </label><p></p><a href="'.$parsedata[5].'active?token='.$mailtoken.'&email='.$email.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$email.'</a></p>';;
+            $activationlink = '<p><label>Reactivar Mi Cuenta: </label><p></p><a href="'.$parsedata[5].'/active?token='.$mailtoken.'&email='.$email.'">'.$parsedata[5].'/activate?token='.$mailtoken.'&email='.$email.'</a></p>';;
 
             // Envio de Correo 
             $mail = new PHPMailer();

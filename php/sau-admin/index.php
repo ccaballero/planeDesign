@@ -105,25 +105,25 @@ if(isset($_SESSION['ranker'])){
                     <div class="col-sm-3 col-xs-6 paddingone">
                         <div class="data-cubes data-cubes-1">
                             <div class="col-sm-6"><i class="fa fa-users fa-4x"></i></div>
-                            <div class="col-sm-6"><h1><?php cuantosusers(); ?></h1><small>Usuarios Registrados</small></div>
+                            <div class="col-sm-6"><h1 style="color:white"><?php cuantosusers(); ?></h1><small>Usuarios Registrados</small></div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6 paddingone">
                         <div class="data-cubes data-cubes-2">
                             <div class="col-sm-6"><i class="fa fa-files-o fa-4x"></i></div>
-                            <div class="col-sm-6"><h1><?php cuantospublic(); ?></h1><small>Publicaciones Totales</small></div>
+                            <div class="col-sm-6"><h1 style="color:white"><?php cuantospublic(); ?></h1><small>Publicaciones Totales</small></div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6 paddingone">
                         <div class="data-cubes data-cubes-3">
                             <div class="col-sm-6"><i class="fa fa-commenting fa-4x"></i></div>
-                            <div class="col-sm-6"><h1><?php cuantoscomment(); ?></h1><small>Comentarios Totales&nbsp;</small></div>
+                            <div class="col-sm-6"><h1 style="color:white"><?php cuantoscomment(); ?></h1><small>Comentarios Totales&nbsp;</small></div>
                         </div>
                     </div>
                     <div class="col-sm-3 col-xs-6 paddingone">
                         <div class="data-cubes data-cubes-4">
                             <div class="col-sm-6"><i class="fa fa-comments-o fa-4x"></i></div>
-                            <div class="col-sm-6"><h1><?php cuantoscontact(); ?></h1><small>Registros Seguidores</small></div>
+                            <div class="col-sm-6"><h1 style="color:white"><?php cuantoscontact(); ?></h1><small>Registros Seguidores</small></div>
                         </div>
                     </div>
                 </div>
@@ -235,6 +235,8 @@ if(isset($_SESSION['ranker'])){
         <script src="js/sau/morris.min.js"></script>
         <script src="js/sau3adm.js"></script>    
         <script type="text/javascript">
+            var colors=['FireBrick','Gold','Navy','DarkGreen','DarkMagenta','Indigo'];
+
             Morris.Donut({
                 element:'users'
               , data:[{
@@ -267,17 +269,20 @@ if(isset($_SESSION['ranker'])){
               , xkey:'y'
               , ykeys:['a']
               , labels:['Cantidad']
+              , xLabelAngle: 30
+              , barColors:function(row,series,type){
+                    return colors[row.x];
+                }
             });
         </script>
         <script type="text/javascript">
-            var colors=['FireBrick','Gold','Navy','DarkGreen','DarkMagenta','Indigo'];
-
             Morris.Bar({
                 element:'planes'
               , data:<?php seisMaxUsers(); ?>
               , xkey:'y'
               , ykeys:['a']
               , labels:['Cantidad']
+              , xLabelAngle: 30
               , barColors:function(row,series,type){
                     return colors[row.x];
                 }

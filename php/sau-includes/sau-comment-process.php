@@ -174,7 +174,7 @@ if (isset($_POST['process'])) {
                 $htmlhead = '<!DOCTYPE html><html><body>';
                 $htmlfooter = '</body></html>';
                 $messageone = '<p>'.$parsedata[6].'</p><p></p>';
-                $activationlink = '<p><label>'.SAULANG69.'</label><p></p><a href="'.$parsedata[5].'sauactive?token='.$mailtoken.'&email='.$stripemail.'">'.$parsedata[5].'activate?token='.$mailtoken.'&email='.$stripemail.'</a>';
+                $activationlink = '<p><label>'.SAULANG69.'</label><p></p><a href="'.$parsedata[5].'/sauactive?token='.$mailtoken.'&email='.$stripemail.'">'.$parsedata[5].'/activate?token='.$mailtoken.'&email='.$stripemail.'</a>';
 
                 // Envio de Correo 
                 $mail = new PHPMailer();
