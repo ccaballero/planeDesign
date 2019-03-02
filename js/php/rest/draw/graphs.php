@@ -18,8 +18,10 @@ class Graphs {
         $g->addAttribute('height',$list[3]);
         $g->addAttribute('transform',$list[4]);
 
+        $base = realpath(dirname(__FILE__).'/../../svg/obj/'.$obj.'.svg');
+
         if($type=='png'){
-            $g->addAttribute('xlink:href','../svg/obj/' . $obj . '.svg','http://www.w3.org/1999/xlink');
+            $g->addAttribute('xlink:href',$base,'http://www.w3.org/1999/xlink');
         }else{
             $g->addAttribute('xlink:href','../svg/obj/' . $obj . '.svg','http://www.w3.org/1999/xlink');
         }

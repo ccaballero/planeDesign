@@ -18,7 +18,7 @@
 // Datos del Hosting para la conexion a la base de datos
 define('HOST', '127.0.0.1');
 define('DBUSER', 'root');
-define('DBPASSWORD', 'asdf');
+define('DBPASSWORD', '');
 define('DBNAME', 'mydatabase');
 
 

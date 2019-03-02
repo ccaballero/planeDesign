@@ -6,7 +6,7 @@ class CRUD {
     private $host = '127.0.0.1';
     private $user = 'root';
     private $db = 'mydatabase';
-    private $pass = 'asdf';
+    private $pass = '';
     private $conn;
 
     public function __construct() {
