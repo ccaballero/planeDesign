@@ -148,8 +148,8 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `draw`;
 DROP TABLE IF EXISTS `usuarios`;
-DROP TABLE `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `idusuario` int(11) NOT NULL,
   `nombre` varchar(250) DEFAULT NULL,
