@@ -29,25 +29,6 @@ var set_view=false
         zoomControl:true
     })
   , marker=L.marker().addTo(map)
-  , search=new L.control.search({
-        url:'https://nominatim.openstreetmap.org/search?format=json&q={s}'
-      , propertyName:'display_name'
-      , jsonpParam:'json_callback'
-      , propertyLoc:['lat','lon']
-      , autoCollapse:true
-      , autoType:false
-      , position:'topright'
-      , minLength:2
-      , moveToLocation:function(latlng, title, map) {
-            var url=L.Util.template('http://osm.org/?mlat={lat}&amp;mlon={lon}#map={zoom}/{lat}/{lon}', {
-                lat:latlng.lat,
-                lon:latlng.lng,
-                zoom:map.getZoom()
-            });
-
-            map.setView(latlng,zoom);
-        }
-    })
   , zoom=16
   , rest={
         list:   'rest/list.php'
@@ -72,8 +53,25 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?'
         +'O50MgJ-QqbTAQjn6bIstfg'
 }).addTo(map);
 
-map.addControl(search);
 map.doubleClickZoom.disable();
+
+var change_location=function(lat1,lng1,lat2,lng2,osm_type){
+    var loc1=new L.LatLng(lat1,lng1);
+    var loc2=new L.LatLng(lat2,lng2);
+    var bounds=new L.LatLngBounds(loc1,loc2);
+
+    if(osm_type=='node'){
+        map.fitBounds(bounds);
+        map.setZoom(18);
+    }else{
+        var loc3=new L.LatLng(lat1,lng2);
+        var loc4=new L.LatLng(lat2,lng1);
+
+        map.fitBounds(bounds);
+    }
+
+    $('#results').empty();
+};
 
 $(function(){
     var file=null
@@ -254,11 +252,19 @@ $(function(){
     });
 
     $('.svg').click(function(){
-        window.open(rest.svg+'?file='+file,'_blank');
+        if(!file){
+            $('.save').trigger('click');
+        }else{
+            window.open(rest.svg+'?file='+file,'_blank');
+        }
     });
 
     $('.png').click(function(){
-        window.open(rest.png+'?file='+file,'_blank');
+        if(!file){
+            $('.save').trigger('click');
+        }else{
+            window.open(rest.png+'?file='+file,'_blank');
+        }
     });
 
     $('.selector').click(function(){
@@ -311,68 +317,80 @@ $(function(){
         return false;
     });
 
-    document.onkeydown = function(event){
+    document.onkeydown=function(event){
         event=event||window.event;
 
-        var isEscape=false;
+        console.log('0 ~>',event.key,event.keyCode);
 
-        console.log('~>',event.key,event.keyCode);
-
-        if('key' in event){
-            isEscape=(event.key==='Escape'||event.key==='Escape');
-        }else{
-            isEscape=(event.keyCode===27);
-        }
-
-        if(isEscape){
-            blueprint.keydown(event);
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-        }
-
-        var isF1=false;
-
-        if ('key' in event){
-            isF1=(event.key==='F1'||event.key==='F1');
-        }else{
-            isF1=(event.keyCode===112);
-        }
-
-        if(isF1){
-            $('button.selector').trigger('click');
-
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-        }
-    };
-
-    $(window).on('keypress',function(event){
         var stop=function(){
                 event.preventDefault();
                 event.stopPropagation();
             }
-          , list={
-                'Home':'button.order.first'
-              , 'End':'button.order.last'
-              , 'PageDown':'button.order.down'
-              , 'PageUp':'button.order.up'
-              , 'Delete':'button.remove'
+          , keys=[{
+                key:'Escape'
+              , code:27
+              , funct:function(){
+                    blueprint.keydown(event);
+                }
+            },{
+                key:'PageUp'
+              , code:33
+              , funct:function(){
+                    $('button.order.up').trigger('click');
+                }
+            },{
+                key:'PageDown'
+              , code:34
+              , funct:function(){
+                    $('button.order.down').trigger('click');
+                }
+            },{
+                key:'End'
+              , code:35
+              , funct:function(){
+                    $('button.order.last').trigger('click');
+                }
+            },{
+                key:'Home'
+              , code:36
+              , funct:function(){
+                    $('button.order.first').trigger('click');
+                }
+            },{
+                key:'Delete'
+              , code:46
+              , funct:function(){
+                    $('button.remove').trigger('click');
+                }
+            },{
+                key:'F1'
+              , code:112
+              , funct:function(){
+                    $('button.selector').trigger('click');
+                }
+            }];
+
+        for(var i=0;i<keys.length;i++){
+            var keyFound=false;
+
+            if('key' in event){
+                keyFound=(event.key===keys[i].key);
+            }else{
+                keyFound=(event.keyCode===keys[i].code);
             }
 
-        if(event.key in list){
-            $(list[event.key]).trigger('click');
-
-            stop();
-        }else{
-            var res=blueprint.keydown(event);
-
-            if(res){
+            if(keyFound){
+                keys[i].funct();
                 stop();
+                return;
             }
         }
-    });
+
+        var res=blueprint.keydown(event);
+        if(res){
+            stop();
+        }
+    };
 
     $('.map').click(function(){
         if(!show_map){
@@ -414,6 +432,8 @@ $(function(){
             $('.controls').removeClass('picked');
             $('#map').css('z-index','-1');
             show_controls=false;
+
+            $('#search').addClass('disabled');
         }
     });
 
@@ -423,10 +443,14 @@ $(function(){
                 $(this).addClass('picked');
                 $('#map').css('z-index','1');
                 show_controls=true;
+
+                $('#search').removeClass('disabled');
             }else{
                 $(this).removeClass('picked');
                 $('#map').css('z-index','-1');
                 show_controls=false;
+
+                $('#search').addClass('disabled');
             }
         }
     });
@@ -458,6 +482,38 @@ $(function(){
         var pane=map.getCenter();
         pane.lng-=zoomLng[map.getZoom()-16];
         map.setView([pane.lat,pane.lng]);
+    });
+
+    $('#search>form').submit(function(e){
+         var field=document.getElementById('address');
+
+        $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q='+field.value,function(data){
+            var items=[];
+
+            $.each(data,function(key,value){
+                var boundingbox=value.boundingbox;
+                items.push('<li><a href="#" onclick="change_location('+boundingbox[0]+','+boundingbox[2]+','+boundingbox[1]+','+boundingbox[3]+',\''+value.osm_type+'\')">'+value.display_name+'</a></li>');
+            });
+
+            $('#results').empty();
+
+            if(items.length!=0){
+                $('<p>',{
+                    html:'Search results:'
+                }).appendTo('#results');
+
+                $('<ul/>',{
+                    'class':'search-list'
+                  , html:items.join('')
+                }).appendTo('#results');
+            }else{
+                $('<p>',{
+                    html:'No results found'
+                }).appendTo('#results');
+            }
+        });
+
+        e.preventDefault();
     });
 });
 

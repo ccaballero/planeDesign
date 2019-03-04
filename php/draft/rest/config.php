@@ -76,12 +76,12 @@ class CRUD {
         return true;
     }
 
-    public function delete($name) {
-        $sql='DELETE FROM draw WHERE usuario=:usuario AND name=:name';
+    public function delete($ident) {
+        $sql='DELETE FROM draw WHERE usuario=:usuario AND ident=:ident';
         $q = $this->conn->prepare($sql);
         $q->execute(array(
             ':usuario'=>$_SESSION['idusuario'],
-            ':name'=>$name
+            ':ident'=>$ident
         ));
 
         return true;

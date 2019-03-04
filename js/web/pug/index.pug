@@ -125,6 +125,11 @@ html(lang='en')
                     ul.list
                     a.cancel(title='Cancelar') Cerrar
                     .clearfix
+            #search.disabled
+                form
+                    input(type='text',id='address',name='address',value='',size='10')
+                    button(type='submit') Buscar
+                    div#results
             #map
             #canvas.nogrid
         block script

@@ -25,8 +25,8 @@ var blueprint=new(function(){
     this.init=function(container){
         this.base=d3.select(container)
             .append('svg:svg')
-            .attr('width','100%')
-            .attr('height','100%')
+            .attr('width','1000%')
+            .attr('height','1000%')
             .attr('preserveAspectRatio','xMidYMid meet')
             .attr('pointer-events','all')
             .attr('transform','matrix(1 0 0 1 0 0)');
@@ -152,7 +152,7 @@ var blueprint=new(function(){
     };
 
     this.keydown=function(e){
-        console.log('=>',e.key);
+        console.log('1 ~>',e.key);
 
         switch(e.key){
             case 'Escape':
@@ -181,12 +181,12 @@ var blueprint=new(function(){
             case 'ArrowDown':
                 blueprint.nav.down(30);
                 return true;
-            case '-':
+            /*case '-':
                 blueprint.nav.zoomout();
                 return true;
             case '+':
                 blueprint.nav.zoomin();
-                return true;
+                return true;*/
         }
 
         return false;
@@ -207,8 +207,11 @@ var blueprint=new(function(){
         }
       , left:function(d){
             blueprint.nav.generic(d,function(e,d){
-                e[4]=+e[4]+d;
-                d3.selectAll('.base').attr('x',-1*e[4]);
+                if(e[4]<0){
+                    e[4]=+e[4]+d;
+                    d3.selectAll('.base').attr('x',-1*e[4]);
+                }
+
                 return e;
             });
         }
@@ -216,13 +219,17 @@ var blueprint=new(function(){
             blueprint.nav.generic(d,function(e,d){
                 e[4]=+e[4]-d;
                 d3.selectAll('.base').attr('x',-1*e[4]);
+
                 return e;
             });
         }
       , up:function(d){
             blueprint.nav.generic(d,function(e,d){
-                e[5]=+e[5]+d;
-                d3.selectAll('.base').attr('y',-1*e[5]);
+                if(e[5]<0){
+                    e[5]=+e[5]+d;
+                    d3.selectAll('.base').attr('y',-1*e[5]);
+                }
+
                 return e;
             });
         }
@@ -230,6 +237,7 @@ var blueprint=new(function(){
             blueprint.nav.generic(d,function(e,d){
                 e[5]=+e[5]-d;
                 d3.selectAll('.base').attr('y',-1*e[5]);
+
                 return e;
             });
         }

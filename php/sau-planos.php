@@ -183,6 +183,18 @@ if (!isset($_SESSION['idusuario'])){
         <script src="js/sau/sau3.js"></script>
         <script src="js/sau/sau3member.js"></script>
 
+        <script type="text/javascript">
+            function eliminar_plano(ident){
+                if(window.confirm('¿Esta seguro que desea eliminar el plano?')){
+                    $.post('draft/rest/delete.php?ident='+ident,function(){
+                        location.reload();
+                    });
+                }else{
+                    return false;
+                }
+            }
+        </script>
+
         <?php sau3token(); ?>
     </body>
 </html>

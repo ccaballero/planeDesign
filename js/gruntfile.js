@@ -11,15 +11,15 @@ module.exports=function(grunt){
         }
       , concurrent:{
             devel:[
-                'jade:devel'
+                'pug:devel'
               , 'less:devel'
             ]
           , dist:[
-                'jade:dist'
+                'pug:dist'
               , 'less:dist'
             ]
         }
-      , jade:{
+      , pug:{
             devel:{
                 options:{
                     pretty:true
@@ -28,8 +28,8 @@ module.exports=function(grunt){
                     }
                 }
               , files:{
-                    '.tmp/index.html':'web/jade/index-dev.jade'
-                  , '.tmp/map.html':'web/jade/map.jade'
+                    '.tmp/index.html':'web/pug/index-dev.pug'
+                  , '.tmp/map.html':'web/pug/map.pug'
                 }
             }
           , dist:{
@@ -37,7 +37,7 @@ module.exports=function(grunt){
                     pretty:false
                 }
               , files:{
-                    '.tmp/index.html':'web/jade/index-prod.jade'
+                    '.tmp/index.html':'web/pug/index-prod.pug'
                 }
             }
         }
@@ -82,9 +82,9 @@ module.exports=function(grunt){
             }
         }
       , watch:{
-            jade:{
-                files:['web/jade/**/*.jade']
-              , tasks:['jade:devel']
+            pug:{
+                files:['web/pug/**/*.pug']
+              , tasks:['pug:devel']
             }
           , less:{
                 files:['web/less/**/*.less']

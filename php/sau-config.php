@@ -65,5 +65,5 @@ define('SAULANGDEF','1');
 // 5 = SAU Red
 define('SAUSTYLE','1');
 
-define('BASE','http://localhost/');
+define('BASE','http://localhost/php/');
 

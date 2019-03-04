@@ -21,11 +21,13 @@
 
 #menu {
     background-color: lighten(@color1,90%);
+    height: 100vh;
 }
 
 #files {
     background-color: lighten(@color1,95%);
     transition: all 1s ease 0s;
+    height: 100vh;
 }
 
 #menu,#files,#controls {
@@ -251,6 +253,60 @@
             &.north   { top: 10px; left: 220px; }
             &.south   { top: 68px; left: 220px; }
             &.east    { top: 39px; left: 190px; }
+        }
+    }
+}
+
+#search {
+    &.disabled {
+        display: none;
+    }
+
+    position: absolute;
+    top: 11px;
+    left: 238px;
+    z-index: 2;
+
+    input[type='text'] {
+        width: 250px;
+        font-size: 12pt;
+        padding: 4px 12px;
+        margin: 0;
+        border: 2px solid #ccc;
+        border-radius: 2px;
+    }
+
+    button[type='submit'] {
+        font-size: 12pt;
+        padding: 4px 12px;
+        margin: 0 0 0 -7px;
+        border: 2px solid #ccc;
+        border-radius: 2px;
+    }
+}
+
+#results {
+    background-color: white;
+
+    &>p {
+        font-size: 11pt;
+        padding: 4px 12px;
+        margin: 4px 0;
+    }
+
+    &>ul {
+        list-style: none;
+        padding: 4px 12px 4px 24px;
+        margin: 4px 0;
+
+        &>li>a {
+            color: #303030;
+            font-size: 12pt;
+            text-decoration: none;
+
+            &:hover {
+                color: blue;
+            }
         }
     }
 }

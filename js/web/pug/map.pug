@@ -1,0 +1,128 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport',content='width=device-width,initial-scale=1,maximum-scale=1')
+        link(rel='stylesheet',href='vendor/leaflet/dist/leaflet.css')
+        script(src='vendor/leaflet/dist/leaflet.js')
+        style.
+            #map {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                left: 185px;
+                right: 0px;
+                z-index: -1;
+                background-color: white;
+                cursor: pointer;
+            }
+            #search {
+                position: absolute;
+                top: 11px;
+                left: 238px;
+            }
+            input[type='text'] {
+                width: 250px;
+                font-size: 12pt;
+                padding: 4px 12px;
+                margin: 0;
+                border: 2px solid #ccc;
+                border-radius: 2px;
+            }
+            button[type='submit'] {
+                font-size: 12pt;
+                padding: 4px 12px;
+                margin: 0 0 0 -7px;
+                border: 2px solid #ccc;
+                border-radius: 2px;
+            }
+            #results {
+                background-color: white;
+            }
+            #results>p {
+                font-size: 11pt;
+                padding: 4px 12px;
+                margin: 4px 0;
+            }
+            #results>ul {
+                list-style: none;
+                padding: 4px 12px 4px 24px;
+                margin: 4px 0;
+            }
+            #results>ul>li>a {
+                color: #303030;
+                font-size: 12pt;
+                text-decoration: none;
+            }
+            #results>ul>li>a:hover {
+                color: blue;
+            }
+    body
+        #map
+        #search
+            form
+                input(type='text',id='address',name='address',value='',size='10')
+                button(type='submit') Buscar
+                div#results
+        script(src='vendor/jquery/dist/jquery.js')
+        script.
+            var mymap=L.map('map').setView([51.505,-0.09],13);
+
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
+                attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+              , maxZoom:18
+              , id:'mapbox.streets'
+              , accessToken:'pk.eyJ1IjoiamFjb2JpYW4iLCJhIjoiQWFfMjJxYyJ9.O50MgJ-QqbTAQjn6bIstfg'
+            }).addTo(mymap);
+
+            function change_location(lat1,lng1,lat2,lng2,osm_type){
+                var loc1=new L.LatLng(lat1,lng1);
+                var loc2=new L.LatLng(lat2,lng2);
+                var bounds=new L.LatLngBounds(loc1,loc2);
+
+                if(osm_type=='node'){
+                    mymap.fitBounds(bounds);
+                    mymap.setZoom(18);
+                }else{
+                    var loc3=new L.LatLng(lat1,lng2);
+                    var loc4=new L.LatLng(lat2,lng1);
+
+                    mymap.fitBounds(bounds);
+                }
+
+                $('#results').empty();
+            }
+
+            $('#search>form').submit(function(e){
+                 var field=document.getElementById('address');
+
+                $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q='+field.value,function(data){
+                    var items=[];
+
+                    $.each(data,function(key,value){
+                        boundingbox=value.boundingbox;
+                        items.push('<li><a href="#" onclick="change_location('+boundingbox[0]+','+boundingbox[2]+','+boundingbox[1]+','+boundingbox[3]+',\''+value.osm_type+'\')">'+value.display_name+'</a></li>');
+                    });
+
+                    $('#results').empty();
+
+                    if(items.length!=0){
+                        $('<p>',{
+                            html:'Search results:'
+                        }).appendTo('#results');
+
+                        $('<ul/>',{
+                            'class':'search-list'
+                          , html:items.join('')
+                        }).appendTo('#results');
+                    }else{
+                        $('<p>',{
+                            html:'No results found'
+                        }).appendTo('#results');
+                    }
+                });
+
+                e.preventDefault();
+            });
+        script(src='http://localhost:35729/livereload.js')
+
